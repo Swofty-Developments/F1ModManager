@@ -65,6 +65,10 @@ import json, sys
 doc = json.load(open(sys.argv[1]))
 if sys.argv[3] == 'settings':
     doc['requests'] = sys.argv[4]
+else:
+    doc['mods'] = doc.pop('addons')
+    for item in doc['owned_items']:
+        item['mod'] = item.pop('addon')
 json.dump(doc, open(sys.argv[2], 'w'), indent=1)
 EOF
     gl_level=; gl_rate=
@@ -133,7 +137,7 @@ EOF
         continue
     fi
     [[ $mode == settings ]] && where='Z:.*[\]state[\]requests[\]wine-test\.json' || where='Z:.*[\]game[\]swofty[\]requests\.json'
-    check "$mode: settings.json parsed" "\[settings\] Z:.*settings\.json: profile 'wine-test', 4 mod\(s\), 8 option\(s\), 46 command\(s\); requests file $where[[:space:]]*\$"
+    check "$mode: settings.json parsed" "\[settings\] Z:.*settings\.json: profile 'wine-test', 4 addon\(s\), 8 option\(s\), 46 command\(s\); requests file $where[[:space:]]*\$"
     check "$mode: core's wrap sits in the FeHome_Handle_Command chain" 'wrap FeHome_Handle_Command at .* installed: t_chain_c\.dll\(10\) > swofty_core\.dll\(0\) > t_chain_a\.dll\(0\) > t_chain_b\.dll\(0\)[[:space:]]*$'
     for re in 'example\.sample-mod\.verbose = ON' 'example\.sample-mod\.greeting_count = 9' 'example\.sample-mod\.offset = 0\.75' \
         'example\.sample-mod\.flavour = Replica' 'example\.sample-mod\.mismatched = 4' 'community\.grid-2026\.team_livery = Tier 1 sponsor' \
