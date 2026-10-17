@@ -138,6 +138,10 @@ fn main() -> ExitCode {
 
 fn dispatch(cli: Cli) -> Result<ExitCode> {
     let store = cli.data_dir.map(Store::new).unwrap_or_else(Store::open_default);
+    match store.migrate() {
+        Ok(notes) => notes.iter().for_each(|n| eprintln!("swofty: {n}")),
+        Err(e) => eprintln!("swofty: data migration failed: {e}"),
+    }
     let profile = cli.profile.unwrap_or_else(|| store.active_profile());
     match cli.command {
         Command::Run(args) => run::run(&store, &profile, args),

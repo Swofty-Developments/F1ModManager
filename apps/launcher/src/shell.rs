@@ -184,6 +184,7 @@ fn offline_terms(p: Palette) -> impl IntoElement {
 impl Shell {
     pub fn new(cx: &mut Context<Self>) -> Self {
         let store = Store::open_default();
+        let migrated = store.migrate();
         let poll = cx.spawn(async move |this, cx| {
             loop {
                 let Ok((store, rediscover, seen)) = this.update(cx, |s, _| {
@@ -215,8 +216,13 @@ impl Shell {
         let console_closed = cx.on_window_closed(move |cx, id| {
             shell.update(cx, |s, cx| s.console_closed(id, cx)).ok();
         });
+        let mut library = Library::load(&store);
+        match migrated {
+            Ok(notes) => notes.iter().for_each(|n| eprintln!("swofty-launcher: {n}")),
+            Err(e) => library.error = Some(e.to_string()),
+        }
         Self {
-            library: Library::load(&store),
+            library,
             store,
             page: Page::Addons,
             open_addon: None,

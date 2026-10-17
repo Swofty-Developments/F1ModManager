@@ -6,6 +6,7 @@ use crate::builtin::CORE_ID;
 use crate::manifest::{AddonManifest, AddonOption, Binds};
 
 pub const VANILLA: &str = "vanilla";
+pub const SCHEMA_VERSION: u32 = 2;
 
 pub fn valid_name(name: &str) -> bool {
     !name.is_empty()
@@ -46,7 +47,7 @@ fn enabled() -> bool {
 impl Profile {
     pub fn new(name: &str) -> Self {
         let mut p = Self {
-            schema_version: 1,
+            schema_version: SCHEMA_VERSION,
             name: name.into(),
             addons: Vec::new(),
             maps: Vec::new(),
@@ -59,7 +60,7 @@ impl Profile {
 
     pub fn vanilla() -> Self {
         Self {
-            schema_version: 1,
+            schema_version: SCHEMA_VERSION,
             name: VANILLA.into(),
             addons: Vec::new(),
             maps: Vec::new(),
@@ -81,6 +82,7 @@ impl Profile {
             *self = Self::vanilla();
             return;
         }
+        self.schema_version = SCHEMA_VERSION;
         self.addons.retain(|m| m.id != CORE_ID);
         self.addons.insert(
             0,

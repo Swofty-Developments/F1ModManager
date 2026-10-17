@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 use crate::builtin::{CORE_ID, core_manifest};
@@ -10,6 +10,8 @@ use crate::settings::{self, Merge, Requests, SessionSettings};
 use crate::{Error, Result, io_err};
 
 pub const DEFAULT_PROFILE: &str = "default";
+pub const DATA_VERSION: u32 = 2;
+const LEGACY_ADDONS_DIR: &str = "mods";
 
 #[derive(Debug, Clone)]
 pub struct Store {
@@ -26,7 +28,7 @@ impl Store {
     }
 
     pub fn addons_dir(&self) -> PathBuf {
-        self.root.join("mods")
+        self.root.join("addons")
     }
 
     pub fn maps_dir(&self) -> PathBuf {
@@ -67,6 +69,59 @@ impl Store {
 
     pub fn bin_dir(&self) -> PathBuf {
         self.root.join("bin")
+    }
+
+    pub fn migrate(&self) -> Result<Vec<String>> {
+        let mut notes = Vec::new();
+        if !self.root.is_dir() {
+            return Ok(notes);
+        }
+        let path = self.config_path();
+        let config: Result<Config> = if path.is_file() {
+            crate::read_json(&path)
+        } else {
+            Ok(Config::default())
+        };
+        if config.as_ref().is_ok_and(|c| c.data_version >= DATA_VERSION) {
+            return Ok(notes);
+        }
+        let old = self.root.join(LEGACY_ADDONS_DIR);
+        let new = self.addons_dir();
+        if old.is_dir() && !new.exists() {
+            std::fs::rename(&old, &new).map_err(io_err(&old))?;
+            notes.push(format!("moved {} to {}", old.display(), new.display()));
+        } else if old.is_dir() {
+            let taken: BTreeSet<String> = subdirs(&new)?.iter().filter_map(|d| manifest_id(d)).collect();
+            for dir in subdirs(&old)? {
+                let to = new.join(dir.file_name().expect("has a name"));
+                match manifest_id(&dir) {
+                    Some(id) if !taken.contains(&id) && !to.exists() => {
+                        std::fs::rename(&dir, &to).map_err(io_err(&dir))?;
+                        notes.push(format!("moved {} to {}", dir.display(), to.display()));
+                    }
+                    Some(id) => notes.push(format!(
+                        "kept {}: {} already has {id}",
+                        dir.display(),
+                        new.display()
+                    )),
+                    None => notes.push(format!(
+                        "kept {}: no addon id in its {MANIFEST_FILE}",
+                        dir.display()
+                    )),
+                }
+            }
+            if std::fs::remove_dir(&old).is_ok() {
+                notes.push(format!("removed the empty {}", old.display()));
+            }
+        }
+        match config {
+            Ok(mut config) => {
+                config.data_version = DATA_VERSION;
+                self.save_config(&config)?;
+            }
+            Err(e) => notes.push(format!("data_version not recorded: {e}")),
+        }
+        Ok(notes)
     }
 
     pub fn addons(&self) -> Result<BTreeMap<String, AddonManifest>> {
@@ -297,6 +352,11 @@ impl Store {
     }
 }
 
+fn manifest_id(dir: &Path) -> Option<String> {
+    let doc: serde_json::Value = crate::read_json(&dir.join(MANIFEST_FILE)).ok()?;
+    Some(doc.get("id")?.as_str()?.to_owned())
+}
+
 fn subdirs(dir: &Path) -> Result<Vec<PathBuf>> {
     let rd = match std::fs::read_dir(dir) {
         Ok(rd) => rd,
@@ -384,6 +444,7 @@ mod tests {
         let store = Store::new(&root);
         let template = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../templates/addon");
         let m = store.install_addon(&template).unwrap();
+        assert!(store.addons_dir().join(&m.id).join(MANIFEST_FILE).is_file());
         let addons = store.addons().unwrap();
         assert!(addons.contains_key(CORE_ID));
         assert!(addons.contains_key(&m.id));
@@ -392,6 +453,98 @@ mod tests {
         store.save_profile(&p).unwrap();
         let plan = crate::resolver::resolve(&store.profile(DEFAULT_PROFILE).unwrap(), &addons).unwrap();
         assert_eq!(plan.order, [CORE_ID, m.id.as_str()]);
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    fn write_addon(dir: &Path, id: &str) {
+        std::fs::create_dir_all(dir).unwrap();
+        std::fs::write(
+            dir.join(MANIFEST_FILE),
+            format!(
+                r#"{{"schema_version":1,"id":"{id}","name":"{id}","version":"1.0.0","author":"t","compat":{{"game":"f1_25"}}}}"#
+            ),
+        )
+        .unwrap();
+    }
+
+    #[test]
+    fn migrate_renames_the_mods_dir() {
+        let root = tmp("migrate-rename");
+        let store = Store::new(&root);
+        write_addon(&root.join("mods/a.one"), "a.one");
+        std::fs::write(store.config_path(), r#"{"active_profile":"grid"}"#).unwrap();
+        assert_eq!(store.migrate().unwrap().len(), 1);
+        assert!(!root.join("mods").exists());
+        assert!(store.addons().unwrap().contains_key("a.one"));
+        let config = store.config();
+        assert_eq!(config.data_version, DATA_VERSION);
+        assert_eq!(config.active_profile.as_deref(), Some("grid"));
+        write_addon(&root.join("mods/a.late"), "a.late");
+        assert!(store.migrate().unwrap().is_empty());
+        assert!(root.join("mods/a.late").is_dir());
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn migrate_merges_into_an_existing_addons_dir() {
+        let root = tmp("migrate-merge");
+        let store = Store::new(&root);
+        write_addon(&root.join("addons/a.one"), "a.one");
+        write_addon(&root.join("mods/one-copy"), "a.one");
+        write_addon(&root.join("mods/a.two"), "a.two");
+        std::fs::create_dir_all(root.join("mods/stray")).unwrap();
+        std::fs::write(store.config_path(), "{").unwrap();
+        let notes = store.migrate().unwrap();
+        assert_eq!(notes.len(), 4, "{notes:?}");
+        assert!(notes[3].starts_with("data_version not recorded"));
+        assert!(root.join("addons/a.two").join(MANIFEST_FILE).is_file());
+        assert!(root.join("mods/one-copy").is_dir() && root.join("mods/stray").is_dir());
+        assert_eq!(
+            store.addons().unwrap().keys().collect::<Vec<_>>(),
+            ["a.one", "a.two", CORE_ID]
+        );
+
+        std::fs::remove_dir_all(root.join("mods/one-copy")).unwrap();
+        std::fs::remove_dir_all(root.join("mods/stray")).unwrap();
+        write_addon(&root.join("mods/a.three"), "a.three");
+        std::fs::remove_file(store.config_path()).unwrap();
+        assert_eq!(store.migrate().unwrap().len(), 2);
+        assert!(!root.join("mods").exists());
+        assert!(root.join("addons/a.three").is_dir());
+        assert_eq!(store.config().data_version, DATA_VERSION);
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn migrate_leaves_a_missing_data_dir_alone() {
+        let root = tmp("migrate-missing").join("data");
+        assert!(Store::new(&root).migrate().unwrap().is_empty());
+        assert!(!root.exists());
+    }
+
+    #[test]
+    fn reads_profiles_that_list_mods_and_writes_addons() {
+        let root = tmp("old-profile");
+        let store = Store::new(&root);
+        let path = store.profiles_dir().join("grid.json");
+        std::fs::create_dir_all(store.profiles_dir()).unwrap();
+        std::fs::write(
+            &path,
+            r#"{"schema_version":1,"name":"grid","mods":[{"id":"swofty.core"},{"id":"a.b","enabled":false},{"id":"c.d"}],"options":{"c.d":{"x":1}}}"#,
+        )
+        .unwrap();
+        let p = store.profile("grid").unwrap();
+        assert_eq!(p.enabled().collect::<Vec<_>>(), [CORE_ID, "c.d"]);
+        store.save_profile(&p).unwrap();
+        let saved: serde_json::Value = crate::read_json(&path).unwrap();
+        assert_eq!(saved["schema_version"], profile::SCHEMA_VERSION);
+        assert_eq!(
+            saved["addons"][1],
+            serde_json::json!({"id": "a.b", "enabled": false})
+        );
+        assert!(saved.get("mods").is_none());
+        assert_eq!(saved["options"]["c.d"]["x"], 1);
+        assert_eq!(store.profile("grid").unwrap(), p);
         std::fs::remove_dir_all(&root).ok();
     }
 
