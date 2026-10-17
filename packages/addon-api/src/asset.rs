@@ -246,17 +246,7 @@ pub struct AssetBatch {
     pub warnings: Vec<String>,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
-#[serde(rename_all = "lowercase")]
-pub enum Kind {
-    Group,
-    Erp,
-    Db,
-    Lang,
-    File,
-}
-
-#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Features {
     pub stable: BTreeSet<Kind>,
     pub experimental: BTreeSet<Kind>,
