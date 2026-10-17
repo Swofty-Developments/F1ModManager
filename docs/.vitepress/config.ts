@@ -12,6 +12,8 @@ const fonts =
 
 const pickTheme = `try{var t=localStorage.getItem("f1mm-docs-theme");if(t==="dark"||t==="ocean"||t==="peach")document.documentElement.classList.add("flash-theme-"+t)}catch(e){}`;
 
+const pickSidebar = `try{if(localStorage.getItem("f1mm-docs-sidebar")==="closed")document.documentElement.classList.add("flash-sidebar-closed")}catch(e){}`;
+
 const gameApiItems = gameApi.subsystems.map((s) => ({
   text: s.name,
   link: s.link,
@@ -37,6 +39,7 @@ export default defineConfigWithTheme<DocsThemeConfig>({
     ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
     ["link", { rel: "stylesheet", href: fonts }],
     ["script", {}, pickTheme],
+    ["script", {}, pickSidebar],
   ],
   markdown: {
     theme: flashCodeTheme,
