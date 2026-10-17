@@ -11,8 +11,8 @@ use crate::{Error, Result, io_err};
 
 type SourceKey = (String, String, usize);
 
-pub struct ErpBuild {
-    game: PathBuf,
+pub struct ErpBuild<'a> {
+    original: &'a dyn Fn(&str) -> PathBuf,
     erps: BTreeMap<String, Erp>,
     sources: HashMap<SourceKey, Node>,
     pub warnings: Vec<String>,
@@ -73,10 +73,10 @@ fn read_resource(path: &Path, t: &PkgTarget) -> Result<Node> {
     Ok(Pkg::parse(&frag.data()?)?.root)
 }
 
-impl ErpBuild {
-    pub fn new(game: impl Into<PathBuf>) -> Self {
+impl<'a> ErpBuild<'a> {
+    pub fn new(original: &'a dyn Fn(&str) -> PathBuf) -> Self {
         Self {
-            game: game.into(),
+            original,
             erps: BTreeMap::new(),
             sources: HashMap::new(),
             warnings: Vec::new(),
@@ -85,7 +85,7 @@ impl ErpBuild {
 
     fn erp(&mut self, rel: &str) -> Result<&mut Erp> {
         if !self.erps.contains_key(rel) {
-            let path = self.game.join(checked(rel)?);
+            let path = (self.original)(checked(rel)?);
             let data = std::fs::read(&path).map_err(io_err(&path))?;
             let erp = Erp::parse(&data).map_err(|e| fail(format!("{rel}: {e}")))?;
             self.erps.insert(rel.to_owned(), erp);
@@ -110,7 +110,7 @@ impl ErpBuild {
                     }
                     for t in sources(edits) {
                         if !self.sources.contains_key(&key(t)) {
-                            let node = read_resource(&self.game.join(checked(&t.erp)?), t)?;
+                            let node = read_resource(&(self.original)(checked(&t.erp)?), t)?;
                             self.sources.insert(key(t), node);
                         }
                     }
@@ -268,7 +268,8 @@ mod tests {
             {"op":"warn","message":"room for 26 cars"}]}"#,
         )
         .unwrap();
-        let mut b = ErpBuild::new(&game);
+        let original = |rel: &str| game.join(rel);
+        let mut b = ErpBuild::new(&original);
         b.apply(&ops).unwrap();
         assert_eq!(b.warnings, ["room for 26 cars"]);
         assert_eq!(b.changed().collect::<Vec<_>>(), ["tracks/t/wep/t_world.erp"]);
@@ -306,7 +307,7 @@ mod tests {
             written.find("eaid://t-b.layer").unwrap().fragments[0].raw,
             untouched.find("eaid://t-b.layer").unwrap().fragments[0].raw
         );
-        let mut bad = ErpBuild::new(&game);
+        let mut bad = ErpBuild::new(&original);
         let replace: ErpOps = serde_json::from_str(
             r#"{"schema_version":1,"ops":[{"op":"replace-resource","erp":"x.erp","resource":"r","source":"s"}]}"#,
         )
