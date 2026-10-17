@@ -92,7 +92,7 @@ The built-in Team Simplified addon provides these commands. They work on its mod
 
 ## `swofty maps`
 
-`swofty maps` is a hidden alias of `swofty mods`. Tracks are mods: `swofty mods import <zip>` imports a community track package, and its mod id is the track code.
+`swofty maps` is a hidden alias of `swofty mods`. Tracks are mods: `swofty mods import <zip>` imports a community track package. Its mod id is the track code, or `<code>-track` when a mod in the library already has that id.
 
 ## `swofty doctor`
 
