@@ -313,7 +313,9 @@ pub fn build(store: &Store, profile: &str, game: &Game) -> Result<Built> {
         }
     }
     if !erp_ops.is_empty() {
-        let mut erps = ErpBuild::new(&resolve);
+        let staged = built.plan.data.clone();
+        let base = |rel: &str| staged.get(rel).cloned().unwrap_or_else(|| resolve(rel));
+        let mut erps = ErpBuild::new(&base);
         for (id, dir, files) in &erp_ops {
             let seen = erps.warnings.len();
             for ops in files {
@@ -326,7 +328,7 @@ pub fn build(store: &Store, profile: &str, game: &Game) -> Result<Built> {
         }
         for rel in erps.write(&built.overlay)? {
             let src = built.overlay.join(&rel);
-            if built.plan.data.insert(rel.clone(), src).is_some() {
+            if built.plan.data.insert(rel.clone(), src).is_some() && !staged.contains_key(&rel) {
                 return Err(Error::Other(format!("{rel} is replaced twice")));
             }
         }
