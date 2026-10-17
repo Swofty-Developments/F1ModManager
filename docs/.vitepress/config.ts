@@ -41,6 +41,31 @@ export default defineConfigWithTheme<DocsThemeConfig>({
   markdown: {
     theme: flashCodeTheme,
     lineNumbers: true,
+    config(md) {
+      const { rules } = md.renderer;
+      const code = rules.code_inline!;
+      rules.table_open = (tokens, idx, options, env, self) => {
+        env.inTable = true;
+        return `<div class="table-wrap">${self.renderToken(tokens, idx, options)}`;
+      };
+      rules.table_close = (tokens, idx, options, env, self) => {
+        env.inTable = false;
+        return `${self.renderToken(tokens, idx, options)}</div>\n`;
+      };
+      const cell: typeof code = (tokens, idx, options, _env, self) => {
+        const inline = tokens[idx + 1];
+        if (inline?.type === "inline" && inline.content.length <= 20) tokens[idx].attrJoin("class", "short");
+        return self.renderToken(tokens, idx, options);
+      };
+      rules.th_open = cell;
+      rules.td_open = cell;
+      rules.code_inline = (tokens, idx, options, env, self) => {
+        if (!env.inTable) return code(tokens, idx, options, env, self);
+        const t = tokens[idx];
+        const body = md.utils.escapeHtml(t.content).replace(/\.(?=[A-Za-z_])/g, ".<wbr>");
+        return `<code${self.renderAttrs(t)}>${body}</code>`;
+      };
+    },
   },
   themeConfig: {
     logo: "/logo.svg",

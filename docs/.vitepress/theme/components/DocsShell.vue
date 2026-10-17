@@ -7,7 +7,7 @@ import NavItem from "./NavItem.vue";
 import type { DocsThemeConfig, NavItem as Item } from "../types";
 import { useLinks } from "../links";
 
-const { theme, page } = useData<DocsThemeConfig>();
+const { theme, page, frontmatter } = useData<DocsThemeConfig>();
 const route = useRoute();
 const { to, samePage } = useLinks();
 
@@ -94,7 +94,7 @@ onUnmounted(() => window.removeEventListener("hashchange", syncHash));
 </script>
 
 <template>
-  <div class="flash-docs" :class="{ 'menu-open': menuOpen }">
+  <div class="flash-docs" :class="{ 'menu-open': menuOpen, wide: frontmatter.wide }">
     <a class="skip-link" href="#flash-main">Skip to content</a>
 
     <nav :class="{ collapsed: !menuOpen }" aria-label="Documentation">
