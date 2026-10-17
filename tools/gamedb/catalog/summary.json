@@ -40,24 +40,33 @@
   "t18": 2458,
   "t17": 12
  },
- "tables": 2409,
- "table_instances": 11532,
+ "tables": 2080,
+ "table_instances": 11209,
  "rows": 60782,
  "named_tables": 823,
- "schema_keys": 18649,
- "schema_keys_exe_path": 2393,
- "schema_keys_exe_leaf": 14395,
+ "schema_keys": 16502,
+ "schema_keys_exe_path": 1888,
+ "schema_keys_exe_leaf": 12792,
  "exe_names": 8286,
  "exe_names_in_db": 4351,
  "exe_names_not_in_db": 3935,
  "exe_key_immediates": 1098,
  "exe_key_immediates_named": 98,
  "scopes": {
-  "other": 2306,
-  "track": 37,
-  "team": 29,
+  "other": 1981,
+  "track": 35,
+  "team": 28,
   "driver": 23,
-  "season": 11,
+  "season": 10,
   "vehicle": 3
+ },
+ "table_evidence": {
+  "inferred": 1512,
+  "unknown": 529,
+  "proven": 39
+ },
+ "key_evidence": {
+  "inferred": 12364,
+  "proven": 4138
  }
 }
