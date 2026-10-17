@@ -123,6 +123,81 @@ def words_of(names):
     return out
 
 
+CAMEL = re.compile(r'(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])')
+UNITS = [
+    (re.compile(r'(^|_)(metres|meters|metre|meter)$|_m$'), 'm'),
+    (re.compile(r'(kilometers|kilometres|_km)$'), 'km'),
+    (re.compile(r'(_deg|degrees|angle|latitude|longitude)$'), 'degrees'),
+    (re.compile(r'(kph|kmh)$'), 'km/h'),
+    (re.compile(r'mph$'), 'mph'),
+    (re.compile(r'(seconds|_secs|_sec|_s|duration|delay)$'), 's'),
+    (re.compile(r'(percent|percentage|_pct)$'), '%'),
+    (re.compile(r'(ratio|scale|scalar|multiplier|multi|factor|modifier|mult)$'), 'multiplier'),
+    (re.compile(r'(^num_|count$|^number)'), 'count'),
+    (re.compile(r'laps$'), 'laps'),
+]
+
+
+def humanize(name):
+    words = []
+    for part in name.split('.'):
+        part = re.sub(r'_(\d+|N)$', '', part)
+        words += [w for w in re.split(r'[_\s]+', CAMEL.sub('_', part)) if w]
+    return ' '.join(w.lower() if not w.isupper() or len(w) > 4 else w for w in words)
+
+
+def unit_of(field, types):
+    if 'time' in types:
+        return 'HH,MM'
+    if 't11' in types and re.search(r'colou?r', field, re.I):
+        return 'ARGB'
+    leaf = field.split('.')[-1].lower()
+    for rx, u in UNITS:
+        if rx.search(leaf):
+            return u
+    return ''
+
+
+def guess_key(field, types):
+    leaf = field.split('.')[-1]
+    if len(ROW_INDEX.sub('', leaf)) < 2 and '.' not in field:
+        return ''
+    h = humanize(field)
+    t = types[0] if types else ''
+    if t == 'bool':
+        return 'Flag: ' + h
+    if t == 'curve':
+        return 'Curve of ' + h
+    if t == 'list':
+        return 'List of ' + h
+    if t == 'vector':
+        return 'Vector: ' + h
+    return h[:1].upper() + h[1:]
+
+
+class Meanings:
+    def __init__(self, path):
+        self.rules = {'table': [], 'key': []}
+        if not path or not os.path.exists(path):
+            return
+        with open(path, encoding='utf-8') as f:
+            next(f)
+            for line in f:
+                if not line.strip():
+                    continue
+                kind, pat, meaning, unit, evidence, source = (line.rstrip('\n').split('\t') + [''] * 6)[:6]
+                rx = re.compile('^' + '.*'.join(re.escape(p) for p in pat.split('*')) + '$')
+                self.rules[kind].append((len(pat.replace('*', '')), rx, meaning, unit, evidence, source))
+        for k in self.rules:
+            self.rules[k].sort(key=lambda r: -r[0])
+
+    def find(self, kind, *names):
+        for _, rx, meaning, unit, evidence, source in self.rules[kind]:
+            if any(rx.match(n) for n in names if n):
+                return meaning, unit, evidence, source, rx.pattern.endswith('.*$')
+        return None
+
+
 class Catalog:
     def __init__(self, db_path, names, exe_set, imm):
         self.recs = gamedb.read(open(db_path, 'rb').read())
@@ -194,12 +269,14 @@ class Catalog:
         bogus = np.zeros(len(bases), dtype=bool)
         for d in b'0123456789':
             bogus |= np.isin(back(bases, bytes([d])), bases)
-        self.orphan_bases = {}
+        groups = {}
         for base in bases[~bogus].tolist():
             n = 0
             while self.keys.has(np.array([fnv('%d._metadata_' % n, base)], dtype=np.uint64))[0]:
                 n += 1
-            self.orphan_bases[base] = n
+            groups.setdefault(base >> 4, []).append((base, n))
+        self.orphan_groups = groups
+        self.orphan_bases = {b: n for members in groups.values() for b, n in members}
 
     def depth(self, node):
         kind, info = self.node_info[node]
@@ -263,8 +340,16 @@ class Catalog:
                     if parent is None:
                         parent = self.add_node(ch, None, ('object', None))
                     self.add_table(parent, w)
-        for base, n in list(self.orphan_bases.items()):
-            self.fill_rows(self.table_id(None, None, base), n)
+        for members in self.orphan_groups.values():
+            left = [(b, n) for b, n in members if b in self.orphan_bases]
+            if len(left) < len(members):
+                keep = []
+            else:
+                keep = [min(left, key=lambda m: (-m[1], m[0]))]
+            for b, _ in left:
+                self.orphan_bases.pop(b)
+            for b, n in keep:
+                self.fill_rows(self.table_id(None, None, b), n)
         self.orphan_bases.clear()
         objects = [i for i, (k, v) in enumerate(self.node_info) if k == 'object' and v is None]
         if objects:
@@ -375,18 +460,93 @@ def build(args):
     sets = scope_sets(cat, rows_by_family)
 
     fam_keys = collections.defaultdict(lambda: collections.defaultdict(lambda: {
-        'types': collections.Counter(), 'rows': 0, 'examples': [], 'imm': 0}))
+        'types': collections.Counter(), 'rows': 0, 'examples': [], 'imm': 0, 'lo': None, 'hi': None,
+        'distinct': set(), 'sample': []}))
     for key, (node, rel) in cat.key_owner.items():
         fam = cat.name(node, True, memo)
         e = fam_keys[fam][rel]
         r = cat.rec[key]
-        e['types'][TYPES.get(r.type, 't%d' % r.type)] += 1
+        tn = TYPES.get(r.type, 't%d' % r.type)
+        e['types'][tn] += 1
         e['rows'] += 1
         e['imm'] += cat.imm.get(key, 0) > 0
+        text = r.value.decode('utf-8', 'replace')
         if len(e['examples']) < 3:
-            v = short(r.value.decode('utf-8', 'replace'))
+            v = short(text)
             if v not in e['examples']:
                 e['examples'].append(v)
+        if tn in ('int', 'float', 't11', 't12'):
+            try:
+                x = float(text)
+                e['lo'] = x if e['lo'] is None else min(e['lo'], x)
+                e['hi'] = x if e['hi'] is None else max(e['hi'], x)
+            except ValueError:
+                pass
+        elif tn in ('bool', 'enum') and len(e['distinct']) <= 8:
+            e['distinct'].add(text)
+        if text and len(e['sample']) < 40 and tn in ('id', 'string', 'list'):
+            e['sample'].append(text)
+
+    label_sets = {}
+    for fam, rs in rows_by_family.items():
+        if fam.startswith('{') or len(rs) < 2:
+            continue
+        labs = {cat.text(fnv('._metadata_', cat.node_hash[r])) for r in rs} - {None, ''}
+        if fam == 'tracks.Track_N':
+            labs |= {cat.text(fnv('.instanceName', cat.node_hash[r])) for r in rs} - {None, ''}
+        if len(labs) >= 2:
+            label_sets[fam] = labs
+    canonical = ['tracks.Track_N', 'entrants.teams.team_N', 'entrants.drivers.driver_N', 'entrants.vehicles.vehicle_N',
+                 'entrants.entrant_lists.entrant_list_N', 'entrants.characters.character_N',
+                 'entrants.nationality.nationality_N', 'entrants.vehicles.vehicle_packages.vehicle_package_N',
+                 'track_data.game_setup.TrackDataSet_N', 'entrants.standings.standings_N']
+
+    def reference(sample):
+        vals = [v for x in sample for v in x.split(',') if v]
+        if len(vals) < 2:
+            return None
+        best, score = None, 0.0
+        for fam in canonical + sorted(label_sets, key=lambda f: -len(label_sets[f])):
+            labs = label_sets.get(fam)
+            if not labs:
+                continue
+            f = sum(v in labs for v in vals) / len(vals)
+            need = 0.8 if fam in canonical else 0.95
+            if f >= need and f > score:
+                best, score = fam, f
+                if fam in canonical:
+                    break
+        return best
+
+    meanings = Meanings(args.meanings)
+
+    def value_range(e):
+        if e['lo'] is not None:
+            lo, hi = e['lo'], e['hi']
+            fmt = lambda x: ('%d' % x) if x == int(x) else ('%g' % x)
+            return fmt(lo) if lo == hi else '%s..%s' % (fmt(lo), fmt(hi))
+        if e['distinct']:
+            vals = sorted(e['distinct'])
+            return ', '.join(short(v, 20) for v in vals[:6]) + (', …' if len(vals) > 6 else '')
+        return ''
+
+    def key_meaning(fam, rel, e, base_alias):
+        types = [k for k, _ in e['types'].most_common()]
+        hit = meanings.find('key', '%s.%s' % (fam, rel), base_alias and '%s.%s' % (base_alias, rel))
+        if hit:
+            m, unit, ev, src, group = hit
+            if group:
+                m = '%s: %s' % (m, humanize(rel.split('.')[-1]))
+            return m, unit or unit_of(rel, types), ev, src
+        unit = unit_of(rel, types)
+        ref = reference(e['sample'])
+        if ref:
+            what = 'Labels of rows' if 'list' in types or any(',' in x for x in e['sample']) else 'Label of a row'
+            return '%s in %s' % (what, ref), unit, 'inferred', 'values match that table\'s labels'
+        g = guess_key(rel, types)
+        if g:
+            return g, unit, 'inferred', 'name'
+        return '', unit, 'unknown', ''
 
     def exe_flag(path):
         parts = path.split('.')
@@ -408,6 +568,7 @@ def build(args):
         fam_tables[fam].append(t)
 
     out_tables = []
+    base_of = {}
     for fam in sorted(fam_tables):
         ts = fam_tables[fam]
         rows = rows_by_family[fam]
@@ -420,6 +581,18 @@ def build(args):
         sizes = sorted({len(t['rows']) for t in ts})
         w = ts[0]['word']
         fields = fam_keys.get(fam, {})
+        base_alias = '{%016x}N' % ts[0]['base']
+        hit = meanings.find('table', fam, base_alias)
+        if hit:
+            tmeaning, _, tev, tsrc, _ = hit
+        elif w:
+            parent = fam[:-(len(w) + 3)]
+            where = humanize(parent.split('.')[-1]) if parent and not parent.endswith('}') else ''
+            tmeaning = 'Rows of %s%s' % (humanize(w), ' under ' + where if where and where != humanize(w) else '')
+            tev, tsrc = 'inferred', 'name'
+        else:
+            tmeaning, tev, tsrc = '', 'unknown', ''
+        base_of[fam] = base_alias if len(ts) == 1 else ''
         out_tables.append({
             'table': fam,
             'row_word': w or '',
@@ -433,6 +606,10 @@ def build(args):
             'scope': scope,
             'labels': [short(l, 32) for l in labels if l][:4],
             'exe_fields': sum(1 for f in fields if exe_flag(f) == 'path' or f in exe_set),
+            'base': base_alias[1:-2] if len(ts) == 1 else '',
+            'meaning': tmeaning,
+            'evidence': tev,
+            'source': tsrc,
         })
 
     out_keys = []
@@ -444,6 +621,9 @@ def build(args):
             flag = exe_flag(rel if fam.startswith('{') else path)
             if e['imm']:
                 flag = 'hash' if not flag else flag + '+hash'
+            meaning, unit, ev, src = key_meaning(fam, rel, e, base_of.get(fam, ''))
+            if flag.startswith('path') and ev == 'inferred' and src == 'name':
+                src = 'name; read by the exe'
             out_keys.append({
                 'key': path,
                 'table': fam,
@@ -454,6 +634,11 @@ def build(args):
                 'in_db': 'yes',
                 'exe': flag,
                 'example': ' | '.join(e['examples']),
+                'range': value_range(e),
+                'unit': unit,
+                'meaning': meaning,
+                'evidence': ev,
+                'source': src,
             })
 
     db_words = set()
@@ -480,8 +665,10 @@ def build(args):
             status = 'no'
         out_exe.append({'name': n, 'in_db': status})
         if status == 'no' and NAME_OK.match(n) and not n.endswith('.'):
+            g = guess_key(n, [])
             out_keys.append({'key': n, 'table': '', 'field': n, 'type': '', 'records': 0, 'rows': 0,
-                             'in_db': 'no', 'exe': 'name', 'example': ''})
+                             'in_db': 'no', 'exe': 'name', 'example': '', 'range': '', 'unit': unit_of(n, []),
+                             'meaning': g, 'evidence': 'inferred' if g else 'unknown', 'source': 'name' if g else ''})
 
     unnamed = collections.Counter()
     for r in cat.recs:
@@ -509,6 +696,8 @@ def build(args):
         'exe_key_immediates': len(cat.imm),
         'exe_key_immediates_named': imm_named,
         'scopes': dict(collections.Counter(t['scope'] or 'other' for t in out_tables).most_common()),
+        'table_evidence': dict(collections.Counter(t['evidence'] for t in out_tables).most_common()),
+        'key_evidence': dict(collections.Counter(k['evidence'] for k in out_keys if k['in_db'] == 'yes').most_common()),
     }
     return summary, out_tables, out_keys, out_exe
 
@@ -531,6 +720,12 @@ def mdt(v):
     return md(v).replace('<', '&lt;').replace('{', '&#123;').replace('}', '&#125;').replace('*', '\\*').replace('_', '\\_')
 
 
+def meaning_cell(r):
+    if not r['meaning']:
+        return '*unknown*'
+    return '%s *(%s)*' % (mdt(r['meaning']), r['evidence'])
+
+
 def write_docs(path, summary, tables, keys):
     named = [t for t in tables if not t['table'].startswith('{')]
     hashed = [t for t in tables if t['table'].startswith('{')]
@@ -548,20 +743,24 @@ def write_docs(path, summary, tables, keys):
         out.append('| %s | %s |' % (label, '{:,}'.format(summary[k])))
     out += ['', '## Tables with a full path', '',
             '`scope` is inferred: 60% or more of the rows carry a track, team, driver, vehicle or season label. '
-            '`exe` counts fields whose dotted path appears in a game-DB reader.', '',
-            '| Table | Rows | `_instancecount_` | Fields | Scope | `exe` | Labels |', '|---|---|---|---|---|---|---|']
+            '`exe` counts fields whose dotted path appears in a game-DB reader. Each meaning is tagged *proven* '
+            '(exe use or an in-game test), *inferred* (names or values) or *unknown*; see '
+            '[the glossary](/reference/gamedb#glossary).', '',
+            '| Table | Meaning | Rows | `_instancecount_` | Fields | Scope | `exe` | Labels |',
+            '|---|---|---|---|---|---|---|---|']
     for t in named:
         rows = t['rows_per_instance'] if t['instances'] == 1 else '%s × %d' % (t['rows_per_instance'], t['instances'])
-        out.append('| `%s` | %s | %s | %d | %s | %d | %s |' % (
-            md(t['table']), rows, t['instancecount'], t['fields'], t['scope'], t['exe_fields'],
+        out.append('| `%s` | %s | %s | %s | %d | %s | %d | %s |' % (
+            md(t['table']), meaning_cell(t), rows, t['instancecount'], t['fields'], t['scope'], t['exe_fields'],
             mdt(', '.join(t['labels'][:3]))))
     out += ['', '## Tables with an unresolved container', '',
             '%d families sit under a container whose path is not known. They are listed in '
             '`tools/gamedb/catalog/tables.tsv` as `{hash}` placeholders (see '
             '[Unresolved paths](/reference/gamedb/format#unresolved-paths)). The largest:' % len(hashed), '',
-            '| Table | Rows | Fields | Labels |', '|---|---|---|---|']
+            '| Table | Meaning | Rows | Fields | Labels |', '|---|---|---|---|---|']
     for t in sorted(hashed, key=lambda t: -t['rows'])[:40]:
-        out.append('| `%s` | %d | %d | %s |' % (md(t['table']), t['rows'], t['fields'], mdt(', '.join(t['labels'][:3]))))
+        out.append('| `%s` | %s | %d | %d | %s |' % (md(t['table']), meaning_cell(t), t['rows'], t['fields'],
+                                                   mdt(', '.join(t['labels'][:3]))))
     with open(os.path.join(path, 'catalogue.md'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(out) + '\n')
 
@@ -585,10 +784,12 @@ def write_docs(path, summary, tables, keys):
                 continue
             out += ['### `%s`' % md(t['table']), '',
                     '%s rows, `_instancecount_` %s.' % (t['rows'], t['instancecount']), '',
-                    '| Field | Type | Rows | `exe` | Example |', '|---|---|---|---|---|']
+                    '| Field | Meaning | Type | Unit | Range | Rows | `exe` | Example |',
+                    '|---|---|---|---|---|---|---|---|']
             for k in ks:
-                out.append('| `%s` | %s | %d/%d | %s | %s |' % (
-                    md(k['field']), k['type'], k['records'], k['rows'], k['exe'], mdt(k['example'])))
+                out.append('| `%s` | %s | %s | %s | %s | %d/%d | %s | %s |' % (
+                    md(k['field']), meaning_cell(k), k['type'], k['unit'], mdt(k['range']), k['records'], k['rows'],
+                    k['exe'], mdt(k['example'])))
             out.append('')
     with open(os.path.join(path, 'schema.md'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(out) + '\n')
@@ -609,6 +810,7 @@ def main():
     ap.add_argument('--exe', help='F1_25.exe, overriding --game')
     ap.add_argument('--exe-names', help='read (or cache) the exe name list here instead of running track_keys')
     ap.add_argument('--names', default=os.path.join(HERE, 'names.txt'))
+    ap.add_argument('--meanings', default=os.path.join(HERE, 'meanings.tsv'))
     ap.add_argument('--no-immediates', action='store_true')
     ap.add_argument('--out', default=os.path.join(HERE, 'catalog'))
     ap.add_argument('--docs', help='also write the generated docs pages into this folder')
@@ -618,10 +820,11 @@ def main():
     summary, tables, keys, exe = build(a)
     os.makedirs(a.out, exist_ok=True)
     write_tsv(os.path.join(a.out, 'tables.tsv'), tables,
-              ['table', 'row_word', 'instances', 'rows', 'rows_per_instance', 'instancecount', 'fields', 'keys',
-               'scope', 'exe_fields', 'labels'])
+              ['table', 'row_word', 'base', 'instances', 'rows', 'rows_per_instance', 'instancecount', 'fields',
+               'keys', 'scope', 'exe_fields', 'labels', 'meaning', 'evidence', 'source'])
     write_tsv(os.path.join(a.out, 'keys.tsv.gz'), keys,
-              ['key', 'table', 'field', 'type', 'records', 'rows', 'in_db', 'exe', 'example'], gz=True)
+              ['key', 'table', 'field', 'type', 'records', 'rows', 'in_db', 'exe', 'range', 'unit', 'example',
+               'meaning', 'evidence', 'source'], gz=True)
     write_tsv(os.path.join(a.out, 'exe_names.tsv'), exe, ['name', 'in_db'])
     with open(os.path.join(a.out, 'summary.json'), 'w', encoding='utf-8') as f:
         json.dump(summary, f, indent=1)
