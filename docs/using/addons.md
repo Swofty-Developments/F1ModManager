@@ -1,10 +1,14 @@
-# Addons and maps
+# Addons
 
-**Addons** change the game, such as car data, artwork or menus. **Maps** add community tracks, such as Sepang and Okayama.
+**Addons** change the game with code, settings and in-game screens, such as a bigger grid or new menus. Content with no code, such as liveries and tracks, is a [mod](/using/mods).
 
 ## Install an addon
 
-An addon is a folder with a `swofty.json` file. Use these commands while the desktop controls are in development:
+An addon is a folder with a `swofty.json` file, or a `.swoftymod` file or zip that holds one. Install it in any of these ways:
+
+- Drop the folder, `.swoftymod` file or zip anywhere on the launcher window.
+- On the **Addons** page, select **Install addon…** and choose the folder.
+- From the command line:
 
 ```sh
 swofty addons install <path>
@@ -13,16 +17,23 @@ swofty addons enable <id>
 swofty addons disable <id>
 ```
 
-Use the addon's ID from `addons list`. Installed addons are stored in `$DATA/addons/<id>/`. `swofty mods` is another name for `swofty addons`.
+Installed addons are stored in `$DATA/addons/<id>/`. Installing an addon with an id that is already installed replaces it.
 
-Earlier versions stored addons in `$DATA/mods/`. The launcher and `swofty` move them to `$DATA/addons/` when they start.
+## Turn addons on and off
+
+The **Addons** page lists every installed addon with a switch for the active [profile](/using/profiles). Expand a row for its version, author, game builds, requirements and settings.
 
 Addons can require other addons or conflict with them. Check any warnings before playing.
 
-## Add a map
+## Addon pages
 
-See [Importing maps](/using/importing-maps). Maps are stored separately from addons and selected by track code in a [profile](/using/profiles).
+Some addons add their own page to the sidebar, under the divider after **Addons**. The built-in Team Simplified addon adds [Mods](/using/mods).
 
-## Built-in addon
+## Built-in addons
 
-[SwoftyMod](/using/swofty-mod) adds the in-game ADDON SETTINGS entry. It is always enabled in modded profiles.
+| Addon | Id | What it does |
+|---|---|---|
+| [SwoftyMod](/using/swofty-mod) | `swofty.core` | Loads addons in game and adds **ADDON SETTINGS**. Always on in modded profiles. |
+| Team Simplified | `teamsimplified.mods` | The [Mods](/using/mods) page and `swofty mods`. On by default, and can be turned off per profile. |
+
+Earlier versions stored addons in `$DATA/mods/`. The launcher and `swofty` move them to `$DATA/addons/` when they start.
