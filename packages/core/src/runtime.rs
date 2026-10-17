@@ -316,7 +316,7 @@ mod tests {
         std::fs::write(addon.join("one.dds"), b"one").unwrap();
         std::fs::write(addon.join("two.dds"), b"two").unwrap();
         let resolve = |_: &Op, s: &Source| Ok(s.resolve(&addon)?);
-        let mut rt = Runtime::new(vec![Kind::Group, Kind::File]);
+        let mut rt = Runtime::new(vec![Kind::File]);
         for (id, json) in [
             (
                 "a",
@@ -368,7 +368,7 @@ mod tests {
             written,
             serde_json::json!({
                 "early_stage": true,
-                "features": ["group", "file"],
+                "features": ["file"],
                 "asset_groups": [{
                     "group": "asset_groups/x/y.assetgroup",
                     "erps": ["2025_asset_groups/x/y.erp"],

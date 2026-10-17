@@ -373,6 +373,23 @@ mod tests {
                 "a: 1 lang op(s) wait; the runtime lang feature is experimental and \"runtime_assets\" in config.json does not turn it on"
             ]
         );
+        std::fs::write(
+            &path,
+            r#"{ "schema": 1, "features": { "group": "stable", "erp": "stable", "db": "stable", "lang": "stable", "file": "experimental" } }"#,
+        )
+        .unwrap();
+        let shipped = load_features(&dir).unwrap();
+        let none = BTreeSet::new();
+        let p = Planner::new(&shipped, &none);
+        for kind in [Kind::Group, Kind::Erp, Kind::Db, Kind::Lang] {
+            assert_eq!(p.route(kind), Route::Runtime);
+        }
+        assert_eq!(p.route(Kind::File), Route::Build);
+        assert!(p.features().is_empty());
+        let file = BTreeSet::from([Kind::File]);
+        let p = Planner::new(&shipped, &file);
+        assert_eq!(p.route(Kind::File), Route::Runtime);
+        assert_eq!(p.features(), [Kind::File]);
         std::fs::remove_dir_all(&dir).ok();
     }
 
