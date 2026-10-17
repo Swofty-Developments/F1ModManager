@@ -102,7 +102,13 @@ export default defineConfigWithTheme<DocsThemeConfig>({
           {
             text: "Tutorials",
             items: [
-              { text: "Making an addon", link: "/modding/template" },
+              { text: "1. Your first addon", link: "/tutorials/first-addon" },
+              { text: "2. Addon settings", link: "/tutorials/addon-settings" },
+              { text: "3. Hooking a game function", link: "/tutorials/hooking" },
+              { text: "4. Custom in-game UI", link: "/tutorials/in-game-ui" },
+              { text: "5. Editing the game database", link: "/tutorials/database" },
+              { text: "6. Replacing and adding ERP assets", link: "/tutorials/erp-assets" },
+              { text: "The addon template", link: "/modding/template" },
               { text: "Maps", link: "/using/importing-maps" },
             ],
           },
