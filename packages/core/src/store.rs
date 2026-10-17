@@ -349,7 +349,15 @@ impl Store {
 
     pub fn session_settings(&self, profile: &str) -> Result<SessionSettings> {
         let requests = crate::paths::game_folder_view(&self.requests_path(profile));
-        SessionSettings::build(&self.profile(profile)?, &self.addons()?, Some(requests))
+        let mut addons = self.addons()?;
+        addons.retain(|id, m| {
+            id == CORE_ID
+                || !self.builtins.iter().any(|b| b.addon.manifest().id == *id)
+                || !m.options.is_empty()
+                || !m.operations.native.is_empty()
+                || !m.operations.screens.is_empty()
+        });
+        SessionSettings::build(&self.profile(profile)?, &addons, Some(requests))
     }
 
     pub fn merge_requests(&self, profile: &str, consume: bool) -> Result<Option<Merge>> {
@@ -602,6 +610,32 @@ mod tests {
         let s = store.session_settings(DEFAULT_PROFILE).unwrap();
         assert_eq!(s.addons[0].options[0].current, 0);
         assert!(s.requests.unwrap().ends_with("default.json"));
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn leaves_launcher_only_builtins_out_of_addon_settings() {
+        let root = tmp("builtin-settings");
+        let parse = |json: &str| AddonManifest::parse(json).unwrap();
+        let builtin = |m| Builtin {
+            addon: Arc::new(crate::registry::DeclaredAddon::new(m)),
+            locked: false,
+            default_on: true,
+        };
+        let store = Store::new(&root).with_builtins(vec![
+            builtin(parse(
+                r#"{"schema_version":1,"id":"t.library","name":"Library","version":"1.0.0","author":"t","compat":{"game":"f1_25"}}"#,
+            )),
+            builtin(parse(
+                r#"{"schema_version":1,"id":"t.tuned","name":"Tuned","version":"1.0.0","author":"t","compat":{"game":"f1_25"},
+                    "options":[{"id":"on","type":"toggle","label":"On","default":true,"binds":"native"}]}"#,
+            )),
+        ]);
+        let p = store.profile(DEFAULT_PROFILE).unwrap();
+        assert_eq!(p.enabled().collect::<Vec<_>>(), [CORE_ID, "t.library", "t.tuned"]);
+        let s = store.session_settings(DEFAULT_PROFILE).unwrap();
+        let ids: Vec<&str> = s.addons.iter().map(|a| a.id.as_str()).collect();
+        assert_eq!(ids, [CORE_ID, "t.tuned"]);
         std::fs::remove_dir_all(&root).ok();
     }
 
