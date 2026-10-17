@@ -129,11 +129,17 @@ export default defineConfigWithTheme<DocsThemeConfig>({
           {
             text: "Standard library",
             items: [
+              { text: "Overview", link: "/reference/std/", icon: "file" },
               { text: "Addon manifest", link: "/modding/manifest", icon: "file" },
+              { text: "Mixin API", link: "/reference/std/mixin", icon: "file" },
               { text: "Native plugins", link: "/modding/native-plugins", icon: "file" },
+              { text: "Settings", link: "/reference/std/settings", icon: "file" },
+              { text: "UI", link: "/reference/std/ui", icon: "file" },
+              { text: "Logging", link: "/reference/std/logging", icon: "file" },
               { text: "Database operations", link: "/modding/database-ops", icon: "file" },
               { text: "ERP operations", link: "/modding/erp-ops", icon: "file" },
               { text: "UI patches", link: "/modding/ui-patches", icon: "file" },
+              { text: "File operations", link: "/reference/std/files", icon: "file" },
             ],
           },
           {
