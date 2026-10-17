@@ -81,7 +81,7 @@ fn layout(r: &Resource) -> Option<(Layout, Vec<u8>)> {
     let head = f0.data().ok()?;
     let count = u32::from_le_bytes(head.get(28..32)?.try_into().ok()?) as usize;
     let data = f1.data().ok()?;
-    if count < 2 || data.len() % count != 0 {
+    if count < 2 || data.is_empty() || data.len() % count != 0 {
         return None;
     }
     let l = Layout {
@@ -399,6 +399,13 @@ mod tests {
             erp,
             uris: vec![format!("{LOGOS}.image"), LOGOS.into()],
         }
+    }
+
+    #[test]
+    fn an_array_without_slice_data_has_no_layout() {
+        let mut head = vec![0u8; 38];
+        head[28..32].copy_from_slice(&4u32.to_le_bytes());
+        assert!(layout(&resource(LOGOS, vec![head, Vec::new()])).is_none());
     }
 
     #[test]
