@@ -254,7 +254,7 @@ pub enum Effect {
 - The build visits enabled addons in resolver order. For each one it takes the manifest's declared ops, then the ops `build` returns, and hands both to the asset planner ([section 3](#_3-asset-api)).
 - The build hash covers every op and the size and modification time of every source file an op names.
 - `BuildCx.options` holds the profile's values of the addon's options.
-- `BuildCx.features` is empty until the planner reads `features.json`. Until the planner, hook ops take the same stages as declared ops.
+- `BuildCx.features` holds the features from the loader's `features.json`. Hook ops go through the planner after the addon's declared ops, with the origin the hook gives them.
 
 ### Commands and profile cards
 
@@ -397,7 +397,7 @@ pub enum Target {
 }
 ```
 
-`Planned.runtime` is written to `swofty/assets.json`, and `Built.conflicts` keeps the conflicts for the launcher. `Kind` and `Features` are built, in `swofty_addon::asset`.
+`Planned.runtime` is written to `swofty/assets.json`, and `Built.conflicts` keeps the conflicts for the launcher. `Kind` and `Features` are in `swofty_addon::asset`, and `planner::load_features` reads `features.json`.
 
 ### 3.4 Deliveries
 
