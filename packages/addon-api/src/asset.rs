@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 use serde::de::Error as _;
@@ -244,6 +244,22 @@ pub struct AssetBatch {
     pub ops: Vec<Op>,
     pub lines: Vec<String>,
     pub warnings: Vec<String>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Kind {
+    Group,
+    Erp,
+    Db,
+    Lang,
+    File,
+}
+
+#[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
+pub struct Features {
+    pub stable: BTreeSet<Kind>,
+    pub experimental: BTreeSet<Kind>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
