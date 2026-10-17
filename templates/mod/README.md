@@ -1,6 +1,6 @@
 # Sample mod
 
-A starting point for an F1 Mod Manager mod. Copy this directory, rename it, and change `id` in `swofty.json`.
+A starting point for a mod for Swofty Launcher for F1 25. Copy this directory, rename it, and change `id` in `swofty.json`.
 
 ## Contents
 
@@ -34,7 +34,7 @@ Remove the `native` entry from `swofty.json` and the `native/` directory for a d
 * `add-row` appends at the table's `_instancecount_` and bumps the count. Rows past the count are never read.
 * Hook only `.xtls` code. `.data1` bodies may be called but never hooked.
 
-The manifest reference, the database and UI operations and the plugin API are documented under Modding in the F1 Mod Manager documentation.
+The manifest reference, the database and UI operations and the plugin API are documented under Modding in the Swofty Launcher for F1 25 documentation.
 
 ## Licence
 

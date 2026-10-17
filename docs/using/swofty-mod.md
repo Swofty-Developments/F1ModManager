@@ -1,8 +1,8 @@
 # In-game mod settings
 
-SwoftyMod is the built-in mod. It adds core functionality for Swofty Mod loading and customisation, including **MOD SETTINGS** in the home menu, directly under **Career**. It is always enabled in modded profiles.
+SwoftyMod is the built-in mod. It adds core functionality for mod loading and customisation in Swofty Launcher for F1 25, including **MOD SETTINGS** in the home menu, directly under **Career**. It is always enabled in modded profiles.
 
-The home screen also has an **F9** keyboard prompt (**R3** on a controller) and a panel showing that you launched with F1 Mod Manager.
+The home screen also has an **F9** keyboard prompt (**R3** on a controller) and a panel showing that you launched with Swofty Launcher for F1 25.
 
 ## The settings page
 

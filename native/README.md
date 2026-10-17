@@ -1,6 +1,6 @@
 # SwoftyMod core
 
-The in-game half of F1 Mod Manager. `native/build.sh` writes it to `native/dist/` in the game folder's layout. The launcher places these files in the game folder for a modded session and removes them when the game exits.
+The in-game half of Swofty Launcher for F1 25. `native/build.sh` writes it to `native/dist/` in the game folder's layout. The launcher places these files in the game folder for a modded session and removes them when the game exits.
 
 | File | Source | Role |
 |---|---|---|

@@ -1,8 +1,8 @@
-# F1 Mod Manager
+# Swofty Launcher for F1 25
 
 A desktop app for modding F1 25 on Windows and Linux through Steam and Proton.
 
-![The F1 Mod Manager launcher](docs/public/screenshots/hero-launcher.png)
+![The Swofty Launcher for F1 25 launcher](docs/public/screenshots/hero-launcher.png)
 
 ## Features
 

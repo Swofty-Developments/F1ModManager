@@ -4,9 +4,9 @@ title: Introduction
 
 ![](/logo.svg){.docs-logo width=80 height=80}
 
-# F1 Mod Manager
+# Swofty Launcher for F1 25
 
-**F1 Mod Manager** is a desktop app for modding [F1 25](https://store.steampowered.com/app/3059520/) on Windows and Linux through Steam and Proton. It installs mods and community tracks, keeps them in profiles and launches the game with them. Modded play is offline only.
+**Swofty Launcher for F1 25** is a desktop app for modding [F1 25](https://store.steampowered.com/app/3059520/) on Windows and Linux through Steam and Proton. It installs mods and community tracks, keeps them in profiles and launches the game with them. Modded play is offline only.
 
 ::: warning
 These docs cover playing with mods and making them. To download the app, see the [homepage](/).

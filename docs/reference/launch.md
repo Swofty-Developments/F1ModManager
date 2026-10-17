@@ -30,9 +30,9 @@ vanilla when the game exits, on `swofty restore`, and at the next start.
 
 ## Linux: the Steam wrapper
 
-The launch option `swofty run -- %command%` starts F1 Mod Manager through Steam. It uses the configured Proton version and records session logs.
+The launch option `swofty run -- %command%` starts Swofty Launcher for F1 25 through Steam. It uses the configured Proton version and records session logs.
 
-With this option set, Steam's Play button uses the manager. Clear the option to return to Steam's normal launch.
+With this option set, Steam's Play button uses the launcher. Clear the option to return to Steam's normal launch.
 
 ## Windows
 

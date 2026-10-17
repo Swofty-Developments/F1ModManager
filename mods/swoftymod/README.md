@@ -1,12 +1,12 @@
 # SwoftyMod
 
-SwoftyMod (`swofty.core`) is the built-in mod. It adds core functionality for Swofty Mod loading and customisation. It is always enabled and cannot be disabled or removed.
+SwoftyMod (`swofty.core`) is the built-in mod. It adds core functionality for mod loading and customisation in Swofty Launcher for F1 25. It is always enabled and cannot be disabled or removed.
 
 It provides:
 
 * **MOD SETTINGS** directly under Career on the home screen, added by a `MidHook` in `swofty_core.dll` (`native/src/core/`)
 * the **F9 / R3 prompt** "Mod Settings", a listener and a tooltip entry
-* the bottom-left "Launched with Swofty Mod Launcher" panel, with the F9 or R3 glyph and "to open settings"
+* the bottom-left "Launched with Swofty Launcher for F1 25" panel, with the F9 or R3 glyph and "to open settings"
 * the `mod_menu` route
 * the MOD SETTINGS screen, with a tile per enabled mod and map and a page for each
 * its own setting, `show_launcher_panel`

@@ -1,6 +1,6 @@
 # Design notes
 
-This is a contributor overview of F1 Mod Manager. It covers the intended app and the work still needed. For setup, start with [Installation](/guide/installation).
+This is a contributor overview of Swofty Launcher for F1 25. It covers the intended app and the work still needed. For setup, start with [Installation](/guide/installation).
 
 ## Goals
 
@@ -52,7 +52,7 @@ The intended flow is:
 
 Record changes before applying them so interrupted sessions can be recovered. Never restore an old build's files over a new one. See [Backups and recovery](/reference/restore).
 
-Linux uses a Steam launch option. Windows uses a separate modded launch. Normal Steam launches remain vanilla when the manager's launch option is absent and the game has been restored.
+Linux uses a Steam launch option. Windows uses a separate modded launch. Normal Steam launches remain vanilla when the launcher's launch option is absent and the game has been restored.
 
 ## In-game settings
 
