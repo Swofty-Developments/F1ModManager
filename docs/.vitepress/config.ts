@@ -158,6 +158,11 @@ export default defineConfigWithTheme<DocsThemeConfig>({
               { text: "Overview", link: "/reference/mods/", icon: "file" },
               { text: "Textures and models", link: "/reference/mods/erp-assets", icon: "file" },
               { text: "Game database", link: "/reference/mods/database", icon: "file" },
+              { text: "Adding a livery", link: "/reference/mods/livery", icon: "file" },
+              { text: "In-game text", link: "/reference/mods/text", icon: "file" },
+              { text: "Tracks", link: "/reference/mods/tracks", icon: "file" },
+              { text: "Packaging a mod", link: "/reference/mods/packaging", icon: "file" },
+              { text: "Testing and publishing", link: "/reference/mods/publishing", icon: "file" },
             ],
           },
           {
