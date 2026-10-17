@@ -172,14 +172,15 @@ def main():
     exe = a.exe or os.path.join(a.game, 'F1_25.exe')
     plan = json.load(open(os.path.join(a.overlay, 'plan.json')))
     rep = Report()
-    dirs = {}
+    dirs, manifests = {}, {}
     for c in os.listdir(a.maps):
         for d in (os.path.join(a.maps, c, 'track'), os.path.join(a.maps, c)):
             if os.path.isfile(os.path.join(d, 'manifest.json')):
-                dirs[c] = d
+                m = json.load(open(os.path.join(d, 'manifest.json')))
+                code = m.get('track_code') or c
+                dirs[code], manifests[code] = d, m
                 break
     codes = list(dirs)
-    manifests = {c: json.load(open(os.path.join(dirs[c], 'manifest.json'))) for c in codes}
     slot_dir = 'ui_package/texture_arrays/invitational_events/event_images/'
     slots = {}
     for rel, src in plan['replace'].items():
