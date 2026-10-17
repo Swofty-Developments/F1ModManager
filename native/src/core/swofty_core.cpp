@@ -27,7 +27,7 @@ unsigned long long rva(uintptr_t a)
 
 constexpr const char *ROUTE = "mod_menu";
 constexpr const char *TITLE = "MOD SETTINGS";
-constexpr const char *DESCRIPTION = "Configure the mods installed by Swofty Mod Launcher";
+constexpr const char *DESCRIPTION = "Configure the mods installed by Swofty Launcher for F1 25";
 
 unsigned hook_calls, populate_calls, action_calls;
 void **mod_vt;

@@ -188,7 +188,7 @@ def main():
     ap.add_argument('--label')
     ap.add_argument('--prompt-label')
     ap.add_argument('--action', default='Menu Right Stick Click')
-    ap.add_argument('--offline-text', default='Launched with Swofty Mod Launcher')
+    ap.add_argument('--offline-text', default='Launched with Swofty Launcher for F1 25')
     ap.add_argument('--offline-prompt', default='to open settings')
     ap.add_argument('--settings')
     ap.add_argument('--command-target', choices=['screen', 'fe_home'], default='screen')
