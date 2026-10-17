@@ -403,37 +403,37 @@ pub enum Target {
 
 | Kind | Build delivery (today) | Runtime delivery (swofty_core) | Runtime state | Route now |
 |---|---|---|---|---|
-| `group` | none | `assets.cpp`: entries inserted into the asset manifest after it is parsed | Proven in game (T007) | Runtime |
-| `erp` | `erpbuild.rs` rewrites the archive into the overlay | `resources.cpp`: an overlay archive first in every group that lists the target, bound by resource URI | Wine only (T013) | Build |
-| `db` | `ops.rs` rewrites `gamedatabases.2025.bin` | `gamedb.cpp`: edits applied when the database loads, with the early stage from `stage.cpp` | Wine only (T014) | Build |
-| `lang` | none: the game reads `.lng` only from its packed archive | `overlay.cpp`: partial string tables added after the stock table | Wine only (T015) | Waiting |
-| `file` | journaled copy into the game folder | `overlay.cpp`: file system overlay from `swofty/overlay/` | Wine only (T016) | Build |
+| `group` | none | `assets.cpp`: entries inserted into the asset manifest after it is parsed | Experimental: the game crashed entering a session after a registration (T018 Run C) | Runtime when turned on, otherwise Waiting |
+| `erp` | `erpbuild.rs` rewrites the archive into the overlay | `resources.cpp`: an overlay archive first in every group that lists the target, bound by resource URI | Stable (T011, T013) | Runtime |
+| `db` | `ops.rs` rewrites `gamedatabases.2025.bin` | `gamedb.cpp`: edits applied when the database loads, with the early stage from `stage.cpp` | Stable (T014, T015) | Runtime |
+| `lang` | none: the game reads `.lng` only from its packed archive | `overlay.cpp`: partial string tables added after the stock table | Stable (T016) | Runtime |
+| `file` | journaled copy into the game folder | `overlay.cpp`: file system overlay from `swofty/overlay/` | Experimental: not run in game | Runtime when turned on, otherwise Build |
 
-The launcher has no runtime delivery yet, so `group` and `lang` ops wait and `erp`, `db` and `file` take the build route. Each runtime delivery adds its kind to `RUNTIME_DELIVERIES` in `planner.rs`.
+`RUNTIME_DELIVERIES` in `planner.rs` lists all five kinds. `packages/core/src/runtime.rs` writes `swofty/assets.json` and its files. A `db` build whose ops remove records, or write a record of tag 10, 15 or 16 or one that is not text, falls back to the build route with a warning.
 
 Routing per kind:
 
-- A kind with no build delivery takes the runtime route when swofty_core has the feature, and waits otherwise. The build lists waiting ops with their origins.
+- A kind with no build delivery takes the runtime route when the feature is `stable`, or `experimental` and listed in `config.json` `"runtime_assets"`, and waits otherwise. The build lists waiting ops with their origins.
 - A kind with both takes the runtime route when the feature is `stable`, or `experimental` and listed in `config.json` `"runtime_assets"`. Otherwise it takes the build route.
 - Every op of one kind takes the same route in a build.
 
 Both routes of a kind compute the same result:
 
 - `erp`: `ErpBuild` produces each changed resource. The build route writes the whole archive, keeping unchanged resources as byte copies (`ErpFile::write`). The runtime route writes the changed resources' fragments under `swofty/assets/resources/` and lists them in `resources`.
-- `db`: the planner builds the database. The build route writes the file. The runtime route writes the records that differ from stock as `db_edits` by hash, with raw values, and sets `early_stage`. On both routes, `owned.rs` finds the `unlockable_se_livery` rows the built database has and stock lacks, whichever op added them, and writes their keys to `owned_items` in `swofty/settings.json`.
+- `db`: the planner builds the database. The build route writes the file. The runtime route writes the records that differ from the database after map activation as `db_edits` by hash, with their tag and text, and sets `early_stage`. Map activation stays in the file. On both routes, `owned.rs` finds the `unlockable_se_livery` rows the built database has and stock lacks, whichever op added them, and writes their keys to `owned_items` in `swofty/settings.json`.
 - `file`: the build route installs into the game folder through the journal. The runtime route copies under `swofty/overlay/` and sets `overlay`.
-- `lang`: the runtime route writes one partial table per language under `swofty/assets/lang/` and lists it as `lang.<code>.table`.
+- `lang`: the runtime route writes one partial table per language under `swofty/assets/lang/` and lists it as `lang.<code>.table`. `*` writes `all.lng`, which applies to every language.
 - `group`: the runtime route lists the group in `asset_groups`.
 
 `native/build.sh` writes `swofty/addons/core/features.json`:
 
 ```json
-{ "schema": 1, "features": { "group": "stable", "erp": "experimental", "db": "experimental", "lang": "experimental", "file": "experimental" } }
+{ "schema": 1, "features": { "group": "experimental", "erp": "stable", "db": "stable", "lang": "stable", "file": "experimental" } }
 ```
 
 A feature becomes `stable` in the native code once its runtime test passes and a verifier agrees, under `re/PROTOCOL.md`. The launcher needs no change for it. A loader without `features.json` has no runtime features.
 
-`swofty/assets.json` uses the prototype's schema (`early_stage`, `asset_groups`, `resources`, `db_edits`, `lang`, `overlay`), plus `features` for the experimental features the profile turned on and an `origin` on each entry for the log.
+`swofty/assets.json` uses the prototype's schema (`early_stage`, `asset_groups`, `resources`, `db_edits`, `lang`, `overlay`), plus `features` for the experimental features the profile turned on and an `origin` on each asset group for the log.
 
 ### 3.5 Order and conflicts
 
