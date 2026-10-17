@@ -59,5 +59,6 @@ nix-shell -p 'python3.withPackages(ps: [ps.numpy ps.pefile ps.capstone])'
 3. It walks top-down from every name: `<node>._<word>_instancecount_` finds a table and its row count, and `<node>.<name>` finds a field. New rows are walked again, which finds nested tables.
 4. It names unresolved table prefixes by trying every row word against the count key, and attaches them to a known parent where a name links them.
 5. It scans the exe's code for 64-bit immediates equal to a key.
+6. It gives every table and key a meaning: the most specific pattern in `tools/gamedb/meanings.tsv`, or else one built from the name, the unit suffix (`_metres`, `_deg`, `Factor`) and the values (a field whose values are all labels of one table is a reference to it). It also records each numeric key's range.
 
 Names it cannot reach stay unnamed. Adding names to `names.txt` and rerunning names more of the file.

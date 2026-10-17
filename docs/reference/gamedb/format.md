@@ -61,12 +61,12 @@ Values are text. The type tag says how the game parses the text. Counts are for 
 | 14 | vector | 8,476 | comma-joined floats | `0,-0.6,0` |
 | 7 | (unnamed) | 4,841 | comma-joined integers | `12,30`, `28,40,0` |
 | 8 | (unnamed) | 6,868 | float or comma-joined floats | `0,0,0,0`, `0.31,0.4,0.53` |
-| 11 | (unnamed) | 15,508 | signed integer, colour-like | `-1`, `-14474461` |
+| 11 | colour | 15,508 | signed 32-bit ARGB integer (inferred: every `*colour` field uses it) | `-13249833` (`0xFF35CED7`) |
 | 12 | (unnamed) | 2,622 | integer | `2`, `597` |
 | 17 | (unnamed) | 12 | empty | |
 | 18 | (unnamed) | 2,458 | comma-joined tokens | `game_state`, `driver_names,on` |
 
-Names for tags 0–6, 9, 13 and 14 are inferred from the values; `True`/`False` for tag 5 is proven by the mask derivation. Tags 7, 8, 11, 12, 17 and 18 are described by shape only. A new key must use the tag of the same field on a stock row.
+Names for tags 0–6, 9, 13 and 14 are inferred from the values; `True`/`False` for tag 5 is proven by the mask derivation. Tags 7, 8, 12, 17 and 18 are described by shape only. A new key must use the tag of the same field on a stock row.
 
 - Text is UTF-8 without a terminator inside `len`. 23 values contain non-ASCII bytes.
 - 86,764 values are empty (`len` 0). An empty value is a value: the key exists.
