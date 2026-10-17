@@ -422,8 +422,9 @@ fn tracks_build_for_every_grid_size() {
     if tracks.is_empty() {
         return;
     }
+    let original = |rel: &str| game.join(rel);
     for cars in SIZES {
-        let mut b = ErpBuild::new(&game);
+        let mut b = ErpBuild::new(&original);
         for rel in &tracks {
             b.apply(&erp_ops(rel, cars))
                 .unwrap_or_else(|e| panic!("{rel} at {cars} cars: {e}"));
