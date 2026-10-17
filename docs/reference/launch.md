@@ -51,7 +51,7 @@ A modded launch places the loader in the game folder and removes it when the gam
 | File | Role |
 |---|---|
 | `version.dll` | Loads every DLL in `swofty/mods/core/`, then `swofty/mods/*.dll` |
-| `swofty/mods/core/swofty_core.dll` | SwoftyMod: the MOD SETTINGS entry, the settings bridge, plugin mixins and the crash log |
+| `swofty/mods/core/swofty_core.dll` | SwoftyMod: the MOD SETTINGS entry, the settings bridge, plugin mixins, mod-added special liveries reported as owned, and the crash log |
 | `swofty/mods/core/swofty_gamelog.dll` | Copies the game's own log into `loader.log` |
 | `swofty/mods/core/bindings.json`, `symbols.tsv`, `log_channels.tsv` | Game bindings for plugins, function names for crash reports, and the game's log channels |
 | `swofty/settings.json` | The profile's mod settings for the session, the `ui` block listing the screens to register, and the `owned_items` block listing the ownership keys of unlock rows that mods add |
