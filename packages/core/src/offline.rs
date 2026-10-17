@@ -266,6 +266,10 @@ fn download(url: &str, to: &Path) -> Result<()> {
         .build()
         .call()
         .map_err(|e| Error::Other(format!("{url}: {e}")))?;
+    let status = resp.status().as_u16();
+    if !(200..300).contains(&status) {
+        return Err(Error::Other(format!("{url}: HTTP {status}")));
+    }
     let mut reader = resp.into_body().into_reader();
     let mut buf = Vec::new();
     std::io::Read::read_to_end(&mut reader, &mut buf).map_err(|e| Error::Other(format!("{url}: {e}")))?;
