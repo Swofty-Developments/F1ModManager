@@ -299,6 +299,7 @@ pub fn build(store: &Store, profile: &str, game: &Game) -> Result<Built> {
             built.warnings.extend(found.warnings);
             session.owned_items = found.items;
         }
+        let cars = grid_size(&db);
         if let Some(staged) = staged {
             match db_edits(&staged, &db) {
                 Ok(edits) => {
@@ -320,7 +321,6 @@ pub fn build(store: &Store, profile: &str, game: &Game) -> Result<Built> {
             std::fs::write(&out, bytes).map_err(io_err(&out))?;
             built.plan.data.insert(GVDB.into(), out);
         }
-        let cars = grid_size(&db);
         for ((dir, pkg), slot) in maps.iter().zip(SLOTS) {
             let slot_original = original(&store.root, game, &slot_file(slot));
             let placement = place(
