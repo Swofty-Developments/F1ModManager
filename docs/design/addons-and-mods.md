@@ -403,9 +403,9 @@ pub enum Target {
 
 | Kind | Build delivery (today) | Runtime delivery (swofty_core) | Runtime state | Route now |
 |---|---|---|---|---|
-| `group` | none | `assets.cpp`: entries inserted into the asset manifest after it is parsed | Experimental: the game crashed entering a session after a registration (T018 Run C) | Runtime when turned on, otherwise Waiting |
+| `group` | none | `assets.cpp`: entries inserted into the asset manifest after it is parsed | Stable: a Grand Prix loaded a track from registered groups (T018) | Runtime |
 | `erp` | `erpbuild.rs` rewrites the archive into the overlay | `resources.cpp`: an overlay archive first in every group that lists the target, bound by resource URI | Stable (T011, T013) | Runtime |
-| `db` | `ops.rs` rewrites `gamedatabases.2025.bin` | `gamedb.cpp`: edits applied when the database loads, with the early stage from `stage.cpp` | Stable (T014, T015) | Runtime |
+| `db` | `ops.rs` rewrites `gamedatabases.2025.bin` | `gamedb.cpp`: edits applied when the database loads, with the early stage from `stage.cpp` | Stable (T014, T015, T018) | Runtime |
 | `lang` | none: the game reads `.lng` only from its packed archive | `overlay.cpp`: partial string tables added after the stock table | Stable (T016) | Runtime |
 | `file` | journaled copy into the game folder | `overlay.cpp`: file system overlay from `swofty/overlay/` | Experimental: not run in game | Runtime when turned on, otherwise Build |
 
@@ -423,12 +423,12 @@ Both routes of a kind compute the same result:
 - `db`: the planner builds the database. The build route writes the file. The runtime route writes the records that differ from the database after map activation as `db_edits` by hash, with their tag and text, and sets `early_stage`. Map activation stays in the file. On both routes, `owned.rs` finds the `unlockable_se_livery` rows the built database has and stock lacks, whichever op added them, and writes their keys to `owned_items` in `swofty/settings.json`.
 - `file`: the build route installs into the game folder through the journal. The runtime route copies under `swofty/overlay/` and sets `overlay`.
 - `lang`: the runtime route writes one partial table per language under `swofty/assets/lang/` and lists it as `lang.<code>.table`. `*` writes `all.lng`, which applies to every language.
-- `group`: the runtime route lists the group in `asset_groups`.
+- `group`: the runtime route lists the group in `asset_groups`. Core skips a group that the stock manifest already has. A database field pointed at a stock group whose ERP is missing hangs the session load.
 
 `native/build.sh` writes `swofty/addons/core/features.json`:
 
 ```json
-{ "schema": 1, "features": { "group": "experimental", "erp": "stable", "db": "stable", "lang": "stable", "file": "experimental" } }
+{ "schema": 1, "features": { "group": "stable", "erp": "stable", "db": "stable", "lang": "stable", "file": "experimental" } }
 ```
 
 A feature becomes `stable` in the native code once its runtime test passes and a verifier agrees, under `re/PROTOCOL.md`. The launcher needs no change for it. A loader without `features.json` has no runtime features.
@@ -620,7 +620,7 @@ Each item is one PR, in this order.
 | 4 | Rename in the docs | Titles, text, sidebar and README | 2, 3 |
 | 5 | Asset op model | `packages/addon-api` with `manifest` and `ops` moved in; `AssetOp`, `Op`, `Origin`, `Source`; unified op files and `operations.assets`; build behaviour unchanged | 1 |
 | 6 | Asset planner | Routing, `features.json` reading, build deliveries for `erp`, `db` and `file` (`file.put` is built for the first time), `erp.put-resource` with streamed copies, `db.put-record` and `db.remove-record`, targets and conflicts, waiting ops; `owned_items` from the built database instead of from `add-row` ops | 5 |
-| 7 | Runtime asset groups | `assets.cpp` ported from the prototype into `native/`; `features.json` from `native/build.sh`; `group.register` runtime delivery into `swofty/assets.json` | 3, 6 |
+| 7 | Runtime asset groups | `assets.cpp` ported from the prototype into `native/`; `features.json` from `native/build.sh`; `group.register` runtime delivery into `swofty/assets.json`; stable since T018 | 3, 6 |
 | 8 | Launcher API in core | `Addon`, `Importer`, `Cx`, `BuildCx`, `GameFiles`, `View` types; addon registry with built-ins; `Profile.state`; `addon-data` and cache folders; build hooks in `build.rs`; `addons/builtins` | 5 |
 | 9 | Addon sections in the launcher | Generic `View` renderer, sidebar entries, events and effects on the background executor, pickers, drag and drop routing, progress, profile card summaries | 2, 8 |
 | 10 | Addon commands in the CLI | `CommandSpec` dispatch; forwarding of the old `swofty mods` forms | 2, 8 |
@@ -629,10 +629,10 @@ Each item is one PR, in this order.
 | 13 | Team Simplified: import and library | `addons/simplified` crate; zip and folder import; content root and `mod.serps`; classes; library; profile state; section with list, switches, order and removal; `swofty mods`; `THIRD_PARTY.md` credit | 9, 10 |
 | 14 | Team Simplified: diff | Database, archive, file and text diffs against `GameFiles`; cache per build key; version rule for removals | 11, 12, 13 |
 | 15 | Team Simplified: merge | Build hook emitting ops in profile order; conflict tags and lists in the section | 6, 14 |
-| 16 | Runtime text | `overlay.cpp` string tables ported; `lang` runtime delivery writing partial tables; experimental until T015 passes | 3, 6, 11 |
-| 17 | Runtime resources | `resources.cpp` ported; `erp` runtime delivery; experimental until T013 passes | 6, 7 |
-| 18 | Runtime database | `gamedb.cpp` with raw values and `stage.cpp` ported; `db` runtime delivery; experimental until T014 passes | 6, 7 |
-| 19 | Runtime file overlay | `overlay.cpp` file system overlay ported; `file` runtime delivery; experimental until T016 passes | 6, 7 |
+| 16 | Runtime text | `overlay.cpp` string tables ported; `lang` runtime delivery writing partial tables; stable since T016 | 3, 6, 11 |
+| 17 | Runtime resources | `resources.cpp` ported; `erp` runtime delivery; stable since T013 | 6, 7 |
+| 18 | Runtime database | `gamedb.cpp` with raw values and `stage.cpp` ported; `db` runtime delivery; stable since T014, T015 and T018 | 6, 7 |
+| 19 | Runtime file overlay | `overlay.cpp` file system overlay ported; `file` runtime delivery; experimental until it runs in game | 6, 7 |
 | 20 | Native assets API | API version 4 `assets` table, `swofty/assets.hpp`, the `assets` capability and `"early": true` | 7 (groups), 16 to 19 (other calls) |
 | 21 | Docs | Player docs for the Mods section; modding docs for asset ops, the native assets API and the Launcher API | 15, 20 |
 | 22 | Tracks addon (later) | [Section 5](#_5-tracks-as-mods-later) | 8, 7 |
