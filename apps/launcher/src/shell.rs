@@ -23,7 +23,7 @@ use crate::theme::{Palette, palette};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Page {
-    Mods,
+    Addons,
     Maps,
     Profiles,
 }
@@ -31,7 +31,7 @@ pub enum Page {
 impl Page {
     pub fn label(self) -> &'static str {
         match self {
-            Self::Mods => "Mods",
+            Self::Addons => "Mods",
             Self::Maps => "Maps",
             Self::Profiles => "Profiles",
         }
@@ -39,7 +39,7 @@ impl Page {
 
     pub fn icon(self) -> IconName {
         match self {
-            Self::Mods => IconName::Puzzle,
+            Self::Addons => IconName::Puzzle,
             Self::Maps => IconName::Map,
             Self::Profiles => IconName::Layers,
         }
@@ -59,7 +59,7 @@ pub struct Shell {
     pub(crate) store: Store,
     pub(crate) page: Page,
     pub(crate) library: Library,
-    pub(crate) open_mod: Option<String>,
+    pub(crate) open_addon: Option<String>,
     pub(crate) open_map: Option<String>,
     pub(crate) install: Option<Install>,
     pub(crate) detected: bool,
@@ -218,8 +218,8 @@ impl Shell {
         Self {
             library: Library::load(&store),
             store,
-            page: Page::Mods,
-            open_mod: None,
+            page: Page::Addons,
+            open_addon: None,
             open_map: None,
             install: None,
             detected: false,
@@ -628,7 +628,7 @@ impl Shell {
             .border_r_1()
             .border_color(p.border_variant)
             .child(heading("LIBRARY"))
-            .child(self.nav_item(Page::Mods, self.library.mods.len(), p, cx))
+            .child(self.nav_item(Page::Addons, self.library.addons.len(), p, cx))
             .child(self.nav_item(Page::Maps, self.library.maps.len(), p, cx))
             .child(heading("LAUNCHER"))
             .child(self.nav_item(Page::Profiles, self.library.profiles.len(), p, cx))
@@ -665,7 +665,7 @@ impl Render for Shell {
         let wide = window.viewport_size().width > px(1500.);
         self.sync_sliders(window, cx);
         let content = match self.page {
-            Page::Mods => self.mods_page(p, cx),
+            Page::Addons => self.addons_page(p, cx),
             Page::Maps => self.maps_page(p, cx),
             Page::Profiles => self.profiles_page(p, wide, cx),
         };

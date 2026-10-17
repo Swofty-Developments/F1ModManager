@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
 use crate::install::PROXY;
-use crate::manifest::ModManifest;
+use crate::manifest::AddonManifest;
 use crate::{Result, io_err};
 
 pub const CORE_ID: &str = "swofty.core";
@@ -10,8 +10,8 @@ pub const CORE_MANIFEST: &str = include_str!("../../../addons/swoftymod/swofty.j
 pub const CORE_DLL: &str = "swofty/mods/core/swofty_core.dll";
 pub const LOADER_ENV: &str = "SWOFTY_LOADER_DIR";
 
-pub fn core_manifest() -> ModManifest {
-    ModManifest::parse(CORE_MANIFEST).expect("the built-in manifest is valid")
+pub fn core_manifest() -> AddonManifest {
+    AddonManifest::parse(CORE_MANIFEST).expect("the built-in manifest is valid")
 }
 
 pub fn loader_dir() -> Option<PathBuf> {

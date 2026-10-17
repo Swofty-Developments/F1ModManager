@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 
 use crate::builtin::{CORE_ID, core_manifest};
-use crate::manifest::{MANIFEST_FILE, ModManifest};
+use crate::manifest::{AddonManifest, MANIFEST_FILE};
 use crate::map::{self, TrackPackage};
 use crate::profile::{self, Profile};
 use crate::session::Config;
@@ -25,7 +25,7 @@ impl Store {
         Self::new(crate::paths::data_dir())
     }
 
-    pub fn mods_dir(&self) -> PathBuf {
+    pub fn addons_dir(&self) -> PathBuf {
         self.root.join("mods")
     }
 
@@ -69,13 +69,13 @@ impl Store {
         self.root.join("bin")
     }
 
-    pub fn mods(&self) -> Result<BTreeMap<String, ModManifest>> {
+    pub fn addons(&self) -> Result<BTreeMap<String, AddonManifest>> {
         let mut out = BTreeMap::from([(CORE_ID.to_owned(), core_manifest())]);
-        for dir in subdirs(&self.mods_dir())? {
+        for dir in subdirs(&self.addons_dir())? {
             if !dir.join(MANIFEST_FILE).is_file() {
                 continue;
             }
-            let m = ModManifest::load(&dir)?;
+            let m = AddonManifest::load(&dir)?;
             if m.is_builtin() {
                 continue;
             }
@@ -84,12 +84,12 @@ impl Store {
         Ok(out)
     }
 
-    pub fn install_mod(&self, src: &Path) -> Result<ModManifest> {
-        let m = ModManifest::load(src)?;
+    pub fn install_addon(&self, src: &Path) -> Result<AddonManifest> {
+        let m = AddonManifest::load(src)?;
         if m.is_builtin() {
             return Err(Error::Other(format!("{CORE_ID} is built in")));
         }
-        let dest = self.mods_dir().join(&m.id);
+        let dest = self.addons_dir().join(&m.id);
         if dest.exists() {
             std::fs::remove_dir_all(&dest).map_err(io_err(&dest))?;
         }
@@ -259,7 +259,7 @@ impl Store {
         let requests = crate::paths::game_folder_view(&self.requests_path(profile));
         SessionSettings::build(
             &self.profile(profile)?,
-            &self.mods()?,
+            &self.addons()?,
             &self.maps()?,
             Some(requests),
         )
@@ -273,7 +273,7 @@ impl Store {
         let req: Requests = crate::read_json(&path)?;
         let merged = if req.profile.is_empty() || req.profile == profile {
             let mut p = self.profile(profile)?;
-            let out = settings::merge(&mut p, &self.mods()?, &req);
+            let out = settings::merge(&mut p, &self.addons()?, &req);
             if !out.changed.is_empty() {
                 self.save_profile(&p)?;
             }
@@ -379,18 +379,18 @@ mod tests {
     }
 
     #[test]
-    fn installs_template_mod_and_keeps_core() {
-        let root = tmp("mods");
+    fn installs_template_addon_and_keeps_core() {
+        let root = tmp("addons");
         let store = Store::new(&root);
         let template = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../templates/addon");
-        let m = store.install_mod(&template).unwrap();
-        let mods = store.mods().unwrap();
-        assert!(mods.contains_key(CORE_ID));
-        assert!(mods.contains_key(&m.id));
+        let m = store.install_addon(&template).unwrap();
+        let addons = store.addons().unwrap();
+        assert!(addons.contains_key(CORE_ID));
+        assert!(addons.contains_key(&m.id));
         let mut p = store.profile(DEFAULT_PROFILE).unwrap();
         p.set_enabled(&m.id, true).unwrap();
         store.save_profile(&p).unwrap();
-        let plan = crate::resolver::resolve(&store.profile(DEFAULT_PROFILE).unwrap(), &mods).unwrap();
+        let plan = crate::resolver::resolve(&store.profile(DEFAULT_PROFILE).unwrap(), &addons).unwrap();
         assert_eq!(plan.order, [CORE_ID, m.id.as_str()]);
         std::fs::remove_dir_all(&root).ok();
     }
@@ -417,7 +417,7 @@ mod tests {
         assert!(!path.exists());
         assert_eq!(store.merge_requests(DEFAULT_PROFILE, true).unwrap(), None);
         let s = store.session_settings(DEFAULT_PROFILE).unwrap();
-        assert_eq!(s.mods[0].options[0].current, 0);
+        assert_eq!(s.addons[0].options[0].current, 0);
         assert!(s.requests.unwrap().ends_with("default.json"));
         std::fs::remove_dir_all(&root).ok();
     }
