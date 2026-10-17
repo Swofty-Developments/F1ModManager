@@ -22,7 +22,7 @@ const STOCK_TEAMS: usize = 358;
 const STOCK_VEHICLES: usize = 413;
 
 fn mod_dir() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../mods/custom-grid-size")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../addons/custom-grid-size")
 }
 
 fn read_json(path: &Path) -> Value {

@@ -382,7 +382,7 @@ mod tests {
     fn installs_template_mod_and_keeps_core() {
         let root = tmp("mods");
         let store = Store::new(&root);
-        let template = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../templates/mod");
+        let template = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../templates/addon");
         let m = store.install_mod(&template).unwrap();
         let mods = store.mods().unwrap();
         assert!(mods.contains_key(CORE_ID));

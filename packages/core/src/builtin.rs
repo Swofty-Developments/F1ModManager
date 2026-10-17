@@ -6,7 +6,7 @@ use crate::manifest::ModManifest;
 use crate::{Result, io_err};
 
 pub const CORE_ID: &str = "swofty.core";
-pub const CORE_MANIFEST: &str = include_str!("../../../mods/swoftymod/swofty.json");
+pub const CORE_MANIFEST: &str = include_str!("../../../addons/swoftymod/swofty.json");
 pub const CORE_DLL: &str = "swofty/mods/core/swofty_core.dll";
 pub const LOADER_ENV: &str = "SWOFTY_LOADER_DIR";
 

@@ -19,7 +19,7 @@ fn template_db_ops_resolve_against_the_real_database() {
         return;
     };
     let mut db = Gvdb::parse(&data).unwrap();
-    let template = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../templates/mod");
+    let template = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../templates/addon");
     let m = ModManifest::load(&template).unwrap();
     let mut doc: serde_json::Value =
         serde_json::from_slice(&std::fs::read(template.join("db/example.json")).unwrap()).unwrap();
