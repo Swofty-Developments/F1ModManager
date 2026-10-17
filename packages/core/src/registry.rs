@@ -130,6 +130,7 @@ fn other(e: Error) -> swofty_addon::Error {
 }
 
 pub struct GameDir {
+    data: PathBuf,
     game: Game,
     objects: Objects,
     files: BTreeMap<String, FileRecord>,
@@ -138,6 +139,7 @@ pub struct GameDir {
 impl GameDir {
     pub fn new(store: &Store, game: &Game) -> Result<Self> {
         Ok(Self {
+            data: store.root.clone(),
             game: game.clone(),
             objects: Objects {
                 root: store.root.join("baseline/objects"),
@@ -153,7 +155,7 @@ impl GameFiles for GameDir {
     }
 
     fn exe_version(&self) -> Option<String> {
-        None
+        crate::baseline::exe_version(&self.game.dir).ok().flatten()
     }
 
     fn is_stock(&self, rel: &str) -> bool {
@@ -173,9 +175,7 @@ impl GameFiles for GameDir {
     }
 
     fn original_lang(&self, code: &str) -> swofty_addon::Result<PathBuf> {
-        Err(swofty_addon::Error::Other(format!(
-            "language_{code}.lng: the language baseline is not built yet"
-        )))
+        crate::baseline::original_lang(&self.data, &self.game.dir, &self.game.identity, code).map_err(other)
     }
 }
 

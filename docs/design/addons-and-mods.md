@@ -67,7 +67,7 @@ These stay as they are: `swofty.json` and every field in it, manifest `schema_ve
 
 A new crate, `packages/addon-api` (`swofty-addon`), holds the API. `manifest` and `ops` move there from core, and core re-exports them. Core depends on `swofty-addon` and runs addons. Built-in addons depend on `swofty-addon` and `swofty-formats`, never on `swofty-core`. The apps register them through `addons/builtins` (`swofty-builtins`). Core names no addon.
 
-The types below, the registry, `Profile.state`, the `addon-data` and cache folders and the build hooks are built: `swofty_addon::launcher` and `swofty_addon::view`, core's `registry` module, and `Store::with_builtins`. The launcher and the CLI do not show sections, run importers or commands, or show summaries yet. `GameFiles::exe_version` returns nothing and `original_lang` fails until the language baseline.
+The types below, the registry, `Profile.state`, the `addon-data` and cache folders and the build hooks are built: `swofty_addon::launcher` and `swofty_addon::view`, core's `registry` module, and `Store::with_builtins`. The launcher and the CLI do not show sections, run importers or commands, or show summaries yet.
 
 ```rust
 pub trait Addon: Send + Sync {
