@@ -1,6 +1,6 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
+use std::sync::{Arc, Mutex, MutexGuard};
 
 use swofty_addon::launcher::Builtin;
 
@@ -16,6 +16,12 @@ use crate::{Error, Result, io_err};
 pub const DEFAULT_PROFILE: &str = "default";
 pub const DATA_VERSION: u32 = 3;
 const LEGACY_ADDONS_DIR: &str = "mods";
+
+static PROFILE_WRITE: Mutex<()> = Mutex::new(());
+
+fn profile_write() -> MutexGuard<'static, ()> {
+    PROFILE_WRITE.lock().unwrap_or_else(|e| e.into_inner())
+}
 
 #[derive(Debug, Clone)]
 pub struct Store {
@@ -352,6 +358,7 @@ impl Store {
             return Ok(None);
         }
         let req: Requests = crate::read_json(&path)?;
+        let _write = profile_write();
         let merged = if req.profile.is_empty() || req.profile == profile {
             let mut p = self.profile(profile)?;
             let out = settings::merge(&mut p, &self.addons()?, &req);
@@ -366,6 +373,14 @@ impl Store {
             std::fs::remove_file(&path).map_err(io_err(&path))?;
         }
         Ok(merged)
+    }
+
+    pub fn update_profile<T>(&self, name: &str, f: impl FnOnce(&mut Profile) -> Result<T>) -> Result<T> {
+        let _write = profile_write();
+        let mut p = self.profile(name)?;
+        let out = f(&mut p)?;
+        self.save_profile(&p)?;
+        Ok(out)
     }
 
     pub fn save_profile(&self, p: &Profile) -> Result<()> {
