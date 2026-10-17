@@ -176,6 +176,8 @@ export default defineConfigWithTheme<DocsThemeConfig>({
               { text: "Mixin system", link: "/reference/addons/hooking", icon: "file" },
               { text: "In-game UI", link: "/reference/addons/in-game-ui", icon: "file" },
               { text: "Native plugins", link: "/reference/addons/native-plugins", icon: "file" },
+              { text: "Asset API", link: "/reference/addons/asset-api", icon: "file" },
+              { text: "Launcher API", link: "/reference/addons/launcher-api", icon: "file" },
             ],
           },
           {
