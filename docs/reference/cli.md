@@ -65,7 +65,7 @@ See [Restoring the game](/using/profiles-and-restoring).
 
 Built-in addons add their own top-level commands. `swofty --help` lists them.
 
-A command that uses the data folder first moves what an earlier version stored there: addons in `$DATA/mods/` to `$DATA/addons/`, and tracks in `$DATA/maps/` into the Team Simplified library, turned on in the same profiles.
+Each command first moves what an earlier version stored in the data folder: addons in `$DATA/mods/` to `$DATA/addons/`, and tracks in `$DATA/maps/` into the Team Simplified library, turned on in the same profiles. `swofty --help`, `swofty --version` and mistyped commands leave the data folder alone.
 
 ## `swofty mods`
 
