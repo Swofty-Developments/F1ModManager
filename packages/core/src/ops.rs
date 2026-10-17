@@ -92,6 +92,16 @@ pub enum ErpOp {
         source: String,
         target: String,
     },
+    PatchPkg {
+        erp: String,
+        resource: String,
+        #[serde(default)]
+        fragment: usize,
+        edits: Vec<PkgEdit>,
+    },
+    Warn {
+        message: String,
+    },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -165,6 +175,8 @@ pub enum PkgEdit {
     },
     CloneEntry {
         at: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        from: Option<PkgTarget>,
         src: String,
         #[serde(rename = "as")]
         name: String,
@@ -574,6 +586,20 @@ mod tests {
         );
         let err = apply_db_ops(&mut db, &taken, &names()).unwrap_err();
         assert!(err.to_string().contains("already exists"), "{err}");
+    }
+
+    #[test]
+    fn erp_ops_parse_patch_pkg_and_warn() {
+        let ops: ErpOps = serde_json::from_str(
+            r#"{"schema_version":1,"ops":[
+            {"op":"patch-pkg","erp":"a.erp","resource":"eaid://x.layer","edits":[
+              {"op":"clone-entry","at":"instances","from":{"erp":"b.erp","resource":"eaid://y.layer"},
+               "src":"[name=y$A]","as":"x$B","set":{"overrides.VehPlacement.Id":25}}]},
+            {"op":"warn","message":"Imola has room for 26 cars"}]}"#,
+        )
+        .unwrap();
+        assert_eq!(ops.ops.len(), 2);
+        assert!(serde_json::from_str::<ErpOps>(r#"{"schema_version":1,"ops":[{"op":"warn"}]}"#).is_err());
     }
 
     #[test]
