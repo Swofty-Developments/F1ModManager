@@ -7,7 +7,7 @@ This is a contributor overview of Swofty Launcher for F1 25. It covers the inten
 - Manage mods and community maps in one desktop app.
 - Keep modded play offline only, with multiplayer off.
 - Switch profiles and restore the original game in one click.
-- Change mod options through MOD SETTINGS under Career.
+- Change mod options through ADDON SETTINGS under Career.
 - Support Windows and Linux through Steam and Proton.
 
 ## Main parts
@@ -56,9 +56,9 @@ Linux uses a Steam launch option. Windows uses a separate modded launch. Normal 
 
 ## In-game settings
 
-SwoftyMod adds MOD SETTINGS below Career, an F9/R3 prompt and a launcher panel.
+SwoftyMod adds ADDON SETTINGS below Career, an F9/R3 prompt and a launcher panel.
 
-MOD SETTINGS has a tile per enabled mod and map and a page for each, built from the player's game files and the profile when the profile is built. Database settings need a restart; plugin settings apply immediately.
+ADDON SETTINGS has a tile per enabled mod and map and a page for each, built from the player's game files and the profile when the profile is built. Database settings need a restart; plugin settings apply immediately.
 
 ## Current status
 

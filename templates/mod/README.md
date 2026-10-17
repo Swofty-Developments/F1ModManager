@@ -16,7 +16,7 @@ A starting point for a mod for Swofty Launcher for F1 25. Copy this directory, r
 
 ## Settings
 
-`options` in `swofty.json` declares four settings: a toggle, a choice and a slider read by the plugin (`binds: native`), and a slider written into the database (`binds: db`). The launcher shows them in the mod's row and the game shows them under **MOD SETTINGS**. The plugin declares the same ids with `SWOFTY_SETTING` and reacts to in-game changes with `SWOFTY_ON_CHANGE`.
+`options` in `swofty.json` declares four settings: a toggle, a choice and a slider read by the plugin (`binds: native`), and a slider written into the database (`binds: db`). The launcher shows them in the mod's row and the game shows them under **ADDON SETTINGS**. The plugin declares the same ids with `SWOFTY_SETTING` and reacts to in-game changes with `SWOFTY_ON_CHANGE`.
 
 ## Build and install
 

@@ -10,8 +10,8 @@ screenshots:
     alt: The Swofty Launcher for F1 25 launcher
   gallery:
     - src: /screenshots/gallery-ingame.png
-      alt: The F1 25 home menu with MOD SETTINGS under Career, the "Launched with Swofty Launcher for F1 25" panel and the F9 prompt
-      caption: MOD SETTINGS in the game's home menu
+      alt: The F1 25 home menu with ADDON SETTINGS under Career, the "Launched with Swofty Launcher" panel and the F9 prompt
+      caption: ADDON SETTINGS in the game's home menu
       shape: square
     - src: /screenshots/gallery-launcher.png
       alt: The Swofty Launcher for F1 25 launcher
@@ -51,7 +51,7 @@ features:
     link: /using/mods-and-maps
   - icon: sliders
     title: In-game mod settings
-    details: Open <em>MOD SETTINGS</em> in the game's home menu, under Career, to change mod options without leaving the game.
+    details: Open <em>ADDON SETTINGS</em> in the game's home menu, under Career, to change mod options without leaving the game.
     link: /using/swofty-mod
   - icon: layers
     title: Profiles
