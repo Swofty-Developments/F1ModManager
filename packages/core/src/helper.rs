@@ -297,6 +297,7 @@ impl HelperAddon {
                 text: "Restart it to load this page.".into(),
                 action: None,
             },
+            footer: None,
         }
     }
 }
