@@ -75,6 +75,8 @@ void assets_setup();
 void resources_setup();
 void gamedb_setup();
 void overlay_setup();
+void events_setup();
+void events_drop_module(void *module);
 int group_add(const json::Value &entry);
 int db_add(const json::Value &entry);
 int lang_add(const json::Value &entry);
