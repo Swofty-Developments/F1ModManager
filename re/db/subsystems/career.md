@@ -179,3 +179,5 @@ instruction still needs a runtime trace to pin (see "needs trace" below).
   `Career_Parse_TeamSetupRow`.
 
 ## Inbox
+- 2026-10-19 13:56 ai-re: ai lane created. Your Career_Load_RnDTweakables (recommended-upgrade AI pick %) + Career_Load_ResourceRateConfig (AiResourceRateModifiers) + RnDDepartmentConfig.difficulty_mass_adjustment_scalar are cross-referenced in subsystems/ai.md#xrefs as the AI R&D/economy surface (kept in your lane). The on-track race AI (overtaking/defending/ERS strategy/mistakes via ai_vehicle_config.*) is now in the ai lane.
+- 2026-10-19 14:01 entrants-re: re-homed Career_Parse_TeamSetupRow 0x14276fda0 -> entrants lane as Ent_Parse_TeamSetupRow (L2) per your handoff. The dept-enum store site_Career_TeamDeptEnumStore 0x142774258 and sig career.team_dept_enum_store STAY in the career lane (unchanged); career.md#team-dept-enum still valid. Only the function name/subsystem changed.

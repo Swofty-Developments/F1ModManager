@@ -1007,6 +1007,216 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "ai.general_settings_resolve",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 89 C8 49 B9 E1 64 19 A5 D6 AB F3 2D",
+   "match": "0x1405fb920",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1405fb920",
+   "kind": "func_start",
+   "names": [
+    "Ai_Resolve_GeneralSettings"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ai-re",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.merge_heatmap_parse",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 28 48 89 D7 48 89 CE 45 85 C0",
+   "match": "0x140682580",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140682580",
+   "kind": "func_start",
+   "names": [
+    "Ai_Parse_MergeHeatMap"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ai-re",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "entrants.session_enter_veh_clamp",
+   "section": ".xtls",
+   "pattern": "48 C7 83 38 0E 00 00 00 00 00 00 0F B6 0D ?? ?? ?? ?? 80 F9 1B B8 1B 00 00 00 0F 42 C1",
+   "match": "0x14080c7f2",
+   "anchor": "0xb",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14080c7fd",
+   "kind": "mid",
+   "expect": "0F B6 0D D8",
+   "names": [
+    "site_Ent_SessionEnterVehClamp"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "entrants-re"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "vm.register_node_classes",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 00 00 00 48 89 CE 48 8D 05",
+   "match": "0x14419b1d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14419b1d0",
+   "kind": "func_start",
+   "names": [
+    "Vm_Register_NodeClasses"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ui-re"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "vm.run_route",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 C5 F8 29 B4 24 90 00 00 00 4C 89 CB 4C 89 C7 48 89 CE",
+   "match": "0x144188370",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144188370",
+   "kind": "func_start",
+   "names": [
+    "Vm_Run_Route"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ui-re"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "fe_flow.state_frontend_enter",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 01 00 00 C5 F8 29 B4 24 C0 01 00 00 48 89 CE 8B 0D",
+   "match": "0x1436cdac0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436cdac0",
+   "kind": "func_start",
+   "names": [
+    "FeFlow_StateFrontend_OnStateEnter"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ui-re"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "fe_flow.recalc_transition_state",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC C8 00 00 00 48 89 D3",
+   "match": "0x1436d1500",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436d1500",
+   "kind": "func_start",
+   "names": [
+    "FeFlow_Recalculate_TransitionState"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ui-re"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "fe_popup.show_notification",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC 38 01 00 00 C5 F8 29 B4 24 20 01 00 00 44 89 CB",
+   "match": "0x1406d1db0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1406d1db0",
+   "kind": "func_start",
+   "names": [
+    "FePopup_Show_Notification"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ui-re"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "fe_input.add_input_provider",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 81 EC E0 00 00 00 48 89 D7",
+   "match": "0x1434d6fd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434d6fd0",
+   "kind": "func_start",
+   "names": [
+    "FeInput_Add_PlayerProvider"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-19",
+     "by": "ui-re"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
