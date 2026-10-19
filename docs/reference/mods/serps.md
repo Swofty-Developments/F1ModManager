@@ -65,8 +65,8 @@ The mod's id is `<author>.<name>`: both lowercased, each run of other characters
 
 | Input | Claimed when |
 |---|---|
-| A `.serps` file or a zip | It holds `mod.serps` at its root, a folder whose name starts with `F1 25`, or a game folder at most three folders down |
-| A 7z or RAR archive | Always, by its extension |
+| A `.serps` file, 7z or RAR archive | Always, by its extension |
+| A zip | It holds `mod.serps` at its root, a folder whose name starts with `F1 25`, or a game folder at most three folders down |
 | A folder | As for a zip |
 | A track zip | It holds `manifest.json` with a `track_code` at its root, or holds one such zip ([Track packages](./tracks)) |
 

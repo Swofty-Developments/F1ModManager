@@ -149,7 +149,7 @@ items: rmdesigns.alphatauri-orlen-livery unlock row toro_rosso_rm_alphatauri_202
 
 In game, you'll find the livery in the Racing Bulls car's picker. If it's missing while the stock Miami and Suzuka 2026 liveries show, the rows loaded but the ownership check hid your livery. Check `owned_items` in the session's `swofty/settings.json`.
 
-To share your livery, package the addon as a `.swoftyaddon` ([Packaging and publishing](/reference/addons/publishing)).
+To share your livery, package the addon as a `.swoftyaddon` ([Package it](/reference/addons/publishing#package-it)).
 
 ## Reference
 

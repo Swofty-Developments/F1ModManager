@@ -13,8 +13,8 @@ A data addon changes F1 25's content with **operations** only: no DLL and no lau
 2. Decide what you change and find its operation kind in [the table below](#what-to-change).
 3. Write the operation file and list it in `operations` ([Operations](./operations)).
 4. Install the folder, enable it on a modded profile, and run `swofty build`; read every line of output ([Check what a build did](./operations#check-what-a-build-did)).
-5. Test it in game with only your addon enabled ([Packaging and publishing](/reference/addons/publishing)).
-6. Package it as a `.swoftyaddon` and publish it ([Packaging and publishing](/reference/addons/publishing)).
+5. Test it in game with only your addon enabled ([Test in game](/reference/addons/publishing#test-in-game)).
+6. Package it as a `.swoftyaddon` and publish it ([Package it](/reference/addons/publishing#package-it)).
 
 ## What to change
 
