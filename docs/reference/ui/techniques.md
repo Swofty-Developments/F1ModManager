@@ -89,7 +89,7 @@ These shapes mean a count is fixed in code. The values are examples.
 | Inlined construction loop | `add rax, 0x120 ; cmp rax, 0x4a0 ; jne` | Exactly 4 slots are constructed |
 | Vector sized exactly | `end - begin` compared with or set to `N × 8` | N pointers, then truncated |
 | Range guard | `cmp r14d, 3 ; ja <skip>` | Values above 3 are skipped |
-| Clamp | `cmp al, 4 ; cmovae eax, ecx` | An index of 4 or more becomes 0 |
+| Clamp | `xor ecx, ecx ; cmp al, 4 ; cmovae eax, ecx` | An index of 4 or more becomes 0 |
 | Early return | `cmp byte [rcx+<field>], 3 ; ja <ret>` at a function's start | The function does nothing for values above 3 |
 | Sentinel branch | `cmp byte [rcx+<field>], 4 ; jne <normal>` | Value 4 gets special handling, such as a disabled placeholder |
 | Jump table | `cmp r14d, 3 ; ja <default>` before an indirect `jmp` through a table | 4 cases; the default often produces an `error_*` name and white |
