@@ -59,7 +59,8 @@ struct Installer {
 
 impl Installer {
     fn new(cc: &eframe::CreationContext) -> Self {
-        cc.egui_ctx.set_visuals(visuals());
+        cc.egui_ctx.set_theme(egui::Theme::Dark);
+        cc.egui_ctx.set_visuals_of(egui::Theme::Dark, visuals());
         let parent = if cfg!(windows) {
             dirs::data_local_dir().map(|d| d.join("Programs"))
         } else {
