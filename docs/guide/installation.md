@@ -10,7 +10,13 @@ To get started, you'll download the launcher, extract it, then follow the setup 
 
 ## Install with the installer
 
-1. Download [SwoftyLauncherInstaller.zip](https://github.com/Swofty-Developments/SwoftyLauncher/raw/main/installer/SwoftyLauncherInstaller.zip) and extract it.
+1. Download the installer for your platform:
+
+   | Platform | Download |
+   |---|---|
+   | Windows | [SwoftyLauncherInstaller.exe](https://github.com/Swofty-Developments/SwoftyLauncher/raw/main/installer/SwoftyLauncherInstaller.exe) |
+   | Linux and Steam Deck | [SwoftyLauncherInstaller-linux.zip](https://github.com/Swofty-Developments/SwoftyLauncher/raw/main/installer/SwoftyLauncherInstaller-linux.zip), then extract it |
+
 2. Run `SwoftyLauncherInstaller.exe` on Windows, or `SwoftyLauncherInstaller` on Linux and Steam Deck.
 3. Choose a folder and select **Install**.
 
