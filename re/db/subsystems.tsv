@@ -1,5 +1,7 @@
 id	prefix	owner	status	description
 assets	Asset	-	open	eaid:// resolution, asset groups, world/WEP paths, textures
+car	Car	car-re	open	per-car performance: vehicle object + attribute array, R&D apply, setup, ERS/fuel, engine/PU, tyre model, damage/reliability
+career	Career	career-re	open	career / My Team: R&D upgrade trees + departments, resource points, facilities, contracts, driver development/market, season/weekend flow
 core	Ne	-	open	neon engine basics: NeStr, allocators, formatting, feature flags
 fe_home	FeHome	-	open	front-end home screen: FEHomeViewModel, home tile adders, item classes, command dispatch
 fe_tiles	FeTile	-	open	generic tile-menu builder, Tile/Item base classes, item vector
@@ -7,5 +9,5 @@ game	Game	-	open	game:: functions named in bulk from pretty-function strings, no
 gamedb	Gdb	-	open	GVDB game value database: load, key lookup, table cursors, row counts
 protection	Prot	-	open	Denuvo stubs and .data1 bodies, signature/cert checks, VirtualProtect callers
 render	Render	overlay	open	D3D12/DXGI present path, swapchain overlay hooks, in-game immediate-mode HUD rendering
-session	Sess	grid-cap	open	entrants, setup modes, participant selection, weekend/session start, garages (grid size work)
+session	Sess	-	open	entrants, setup modes, participant selection, weekend/session start, garages (grid size work)
 vm	Vm	-	open	UI view-model registry: node properties, setters, routes
