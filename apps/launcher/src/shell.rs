@@ -342,6 +342,7 @@ impl Shell {
 
     fn apply(&mut self, probe: Probe, window: &mut Window, cx: &mut Context<Self>) {
         let before = (self.requests, self.processes.clone(), self.session.clone());
+        let was_live = self.launch.is_some() || !self.processes.is_empty();
         self.requests = probe.requests;
         if let Some(n) = probe.recovered.filter(|n| n.at > self.recovered_seen) {
             self.recovered_seen = n.at;
@@ -406,7 +407,7 @@ impl Shell {
             .detach();
         }
         self.session = probe.session;
-        let live = self.launch.is_some() || !self.processes.is_empty();
+        let live = was_live || self.launch.is_some() || !self.processes.is_empty();
         if live
             || before != (self.requests, self.processes.clone(), self.session.clone())
             || self.painted.elapsed() >= REPAINT
