@@ -7,6 +7,7 @@
 #include <wchar.h>
 #include <math.h>
 #include "swofty_api.h"
+#include "pattern_scan.h"
 
 #define HOST_EXE L"F1_25.exe"
 #define EXPECTED_SIZE 408063872ULL
@@ -156,26 +157,6 @@ static int parse_pattern(const char *p, int *out, int max)
     return n;
 }
 
-static int scan_range(const uint8_t *lo, const uint8_t *hi, const int *pat, int n, int anchor, uintptr_t *first)
-{
-    int hits = 0;
-    if (hi - lo < n)
-        return 0;
-    const uint8_t *last = hi - n + anchor;
-    for (const uint8_t *p = lo + anchor; p <= last; p++) {
-        p = memchr(p, pat[anchor], last - p + 1);
-        if (!p)
-            break;
-        const uint8_t *c = p - anchor;
-        int i = 0;
-        while (i < n && (pat[i] < 0 || c[i] == pat[i]))
-            i++;
-        if (i == n && hits++ == 0)
-            *first = (uintptr_t)c;
-    }
-    return hits;
-}
-
 static int is_readable(const MEMORY_BASIC_INFORMATION *m)
 {
     return m->State == MEM_COMMIT && (m->Protect & 0xEE) && !(m->Protect & (PAGE_GUARD | PAGE_NOACCESS));
@@ -183,14 +164,12 @@ static int is_readable(const MEMORY_BASIC_INFORMATION *m)
 
 static int scan(const char *section, const char *pattern, uintptr_t *out)
 {
-    int pat[256], n = parse_pattern(pattern, pat, 256), anchor = 0;
+    int pat[256], n = parse_pattern(pattern, pat, 256), a1 = -1, a2 = -1;
     uintptr_t first = 0;
     int hits = 0, searched = 0;
     if (out)
         *out = 0;
-    while (anchor < n && pat[anchor] < 0)
-        anchor++;
-    if (n <= 0 || anchor == n) {
+    if (n <= 0 || !pick_anchors(pat, n, &a1, &a2)) {
         slog("scan: invalid pattern '%s'", pattern);
         return 0;
     }
@@ -212,7 +191,7 @@ static int scan(const char *section, const char *pattern, uintptr_t *out)
                     run = a;
             } else if (run) {
                 uintptr_t f = 0;
-                int h = scan_range((const uint8_t *)run, (const uint8_t *)a, pat, n, anchor, &f);
+                int h = scan_range((const uint8_t *)run, (const uint8_t *)a, pat, n, a1, a2, &f);
                 if (h && !hits)
                     first = f;
                 hits += h;
@@ -222,7 +201,7 @@ static int scan(const char *section, const char *pattern, uintptr_t *out)
         }
         if (run) {
             uintptr_t f = 0;
-            int h = scan_range((const uint8_t *)run, (const uint8_t *)a, pat, n, anchor, &f);
+            int h = scan_range((const uint8_t *)run, (const uint8_t *)a, pat, n, a1, a2, &f);
             if (h && !hits)
                 first = f;
             hits += h;
