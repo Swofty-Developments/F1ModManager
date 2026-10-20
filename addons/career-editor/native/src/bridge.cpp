@@ -519,6 +519,7 @@ struct Bridge {
     size_t pass_index = 0;
     uint64_t last_viewer_poll = 0;
     uint64_t viewer_at = 0;
+    bool viewer_seeded = false;
     uint64_t renders = 0;
     uint64_t skipped = 0;
     uint64_t pass_ms = 0;
@@ -1186,6 +1187,8 @@ bool viewer_fresh(uint64_t now)
                     break;
                 at = at * 10 + uint64_t(c - '0');
             }
+        else if (!g.viewer_seeded)
+            g.viewer_seeded = true, st::write("viewer.json", "0");
         g.viewer_at = at;
     }
     uint64_t wall = wall_ms();

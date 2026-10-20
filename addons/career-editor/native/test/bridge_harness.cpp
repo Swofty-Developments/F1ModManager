@@ -105,6 +105,7 @@ int main() {
     CHECK(snap["sections"].type == ce::Json::Obj && snap["sections"].o.empty());
     CHECK(snap["bridge"]["renders"].n == 0 && snap["bridge"]["renders_skipped"].n > 0);
     CHECK(!snap["bridge"]["viewer"].b);
+    CHECK(slurp(root / "viewer.json") == "0");
     // 2: career but not safe: still blocked; the page is open, so sections render one per frame
     viewer_on = true; pump(40);
     CHECK(fs::exists(root / "inbox/100.json"));
