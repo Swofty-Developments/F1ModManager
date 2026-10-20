@@ -221,7 +221,7 @@ static void alog_flush_at_exit(void)
     }
 }
 
-static void alog_stop(void)
+static inline void alog_stop(void)
 {
     Alog *a = &alog_state;
     if (!__atomic_load_n(&a->live, __ATOMIC_ACQUIRE))
