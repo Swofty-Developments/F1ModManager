@@ -91,6 +91,7 @@ pub struct Shell {
     pub(crate) dropping: bool,
     pub(crate) sidebar_list: bool,
     pub(crate) vr_profiles: BTreeSet<String>,
+    pub(crate) start_steam: bool,
     pub(crate) updates: crate::update::Updates,
     pub(crate) forms: HashMap<String, crate::blocks::FormSlot>,
     pub(crate) searches: HashMap<String, crate::blocks::SearchSlot>,
@@ -248,6 +249,7 @@ impl Shell {
         }
         let config = store.config();
         let (sidebar_list, vr_profiles) = (config.sidebar_list, config.vr_profiles);
+        let start_steam = config.launch.start_steam;
         let mut shell = Self {
             library,
             store,
@@ -278,6 +280,7 @@ impl Shell {
             dropping: false,
             sidebar_list,
             vr_profiles,
+            start_steam,
             updates: crate::update::Updates::new(),
             forms: HashMap::new(),
             searches: HashMap::new(),
@@ -358,6 +361,7 @@ impl Shell {
         self.processes = probe.processes;
         if let Some(launch) = self.launch.as_mut() {
             launch.saw_game |= !self.processes.is_empty();
+            launch.stage = probe.launch_stage;
             if let Some(ok) = launch.finished() {
                 if !ok && !launch.saw_game {
                     self.blocked = Blocked::read(&self.store.root);
@@ -401,7 +405,9 @@ impl Shell {
 
     pub(crate) fn reload(&mut self, cx: &mut Context<Self>) {
         self.library = Library::load(&self.store);
-        self.vr_profiles = self.store.config().vr_profiles;
+        let config = self.store.config();
+        self.vr_profiles = config.vr_profiles;
+        self.start_steam = config.launch.start_steam;
         if matches!(self.page, Page::Section(i) if i >= self.library.sections.len()) {
             self.page = Page::Addons;
         }
@@ -471,6 +477,16 @@ impl Shell {
         } else {
             LaunchMode::Normal
         }
+    }
+
+    pub(crate) fn set_start_steam(&mut self, on: bool, window: &mut Window, cx: &mut Context<Self>) {
+        let mut config = self.store.config();
+        config.launch.start_steam = on;
+        if let Err(e) = self.store.save_config(&config) {
+            window.push_notification(Notification::error(e.to_string()), cx);
+        }
+        self.start_steam = config.launch.start_steam;
+        cx.notify();
     }
 
     pub(crate) fn set_launch_mode(&mut self, mode: LaunchMode, window: &mut Window, cx: &mut Context<Self>) {
