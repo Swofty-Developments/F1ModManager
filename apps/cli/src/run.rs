@@ -327,7 +327,7 @@ fn wrapper(store: &Store, profile: &str, args: &RunArgs, g: &Game) -> Result<Exi
     if let Some(note) = crate::offline::loader_note(&artifacts) {
         say("info", &format!("offline play: {note}"));
     }
-    let probe = swofty_core::offline::probe(&game, &artifacts)?;
+    let probe = swofty_core::offline::probe_cached(&store.root, &game, &artifacts)?;
     if !probe.supported {
         bail!(
             "this F1 25 build is not supported by the offline play extension yet ({}); \

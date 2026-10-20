@@ -2,7 +2,7 @@ use std::collections::{BTreeSet, HashMap, HashSet};
 use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Arc;
-use std::time::{Duration, SystemTime};
+use std::time::{Duration, Instant, SystemTime};
 
 use gpui_kit::assets::IconName;
 use gpui_kit::component::button::{Button, ButtonVariant};
@@ -100,6 +100,7 @@ pub struct Shell {
     pub(crate) pending_cells: HashMap<String, String>,
     pub(crate) content_width: f32,
     pub(crate) ticking: bool,
+    painted: Instant,
     pub(crate) live_n: u64,
     _console_closed: Subscription,
     _poll: Task<()>,
@@ -180,6 +181,9 @@ fn offline_terms(p: Palette) -> impl IntoElement {
                 )),
         )
 }
+
+// Times shown as "5 min ago" stay current without a repaint every probe.
+const REPAINT: Duration = Duration::from_secs(30);
 
 impl Shell {
     pub fn new(window: &mut Window, cx: &mut Context<Self>) -> Self {
@@ -289,6 +293,7 @@ impl Shell {
             pending_cells: HashMap::new(),
             content_width: 900.,
             ticking: false,
+            painted: Instant::now(),
             live_n: 0,
             _console_closed: console_closed,
             _poll: poll,
@@ -336,6 +341,7 @@ impl Shell {
     }
 
     fn apply(&mut self, probe: Probe, window: &mut Window, cx: &mut Context<Self>) {
+        let before = (self.requests, self.processes.clone(), self.session.clone());
         self.requests = probe.requests;
         if let Some(n) = probe.recovered.filter(|n| n.at > self.recovered_seen) {
             self.recovered_seen = n.at;
@@ -400,7 +406,13 @@ impl Shell {
             .detach();
         }
         self.session = probe.session;
-        cx.notify();
+        let live = self.launch.is_some() || !self.processes.is_empty();
+        if live
+            || before != (self.requests, self.processes.clone(), self.session.clone())
+            || self.painted.elapsed() >= REPAINT
+        {
+            cx.notify();
+        }
     }
 
     pub(crate) fn reload(&mut self, cx: &mut Context<Self>) {
@@ -1029,6 +1041,7 @@ fn tile_art(art: TileArt, size: f32, active: bool, p: Palette) -> Div {
 
 impl Render for Shell {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        self.painted = Instant::now();
         let p = palette(cx);
         let wide = window.viewport_size().width > px(1500.);
         self.content_width =
