@@ -7,6 +7,7 @@
 #include <wchar.h>
 #include <math.h>
 #include "swofty_api.h"
+#include "alog.h"
 
 #define HOST_EXE L"F1_25.exe"
 #define EXPECTED_SIZE 408063872ULL
@@ -75,23 +76,31 @@ static int ea_diag;
 static LPTOP_LEVEL_EXCEPTION_FILTER prev_filter;
 static volatile LONG diag_crash_reports, activation_logged;
 
+static int log_async;
+
 static void emit(HANDLE h, const char *body)
 {
     if (h == INVALID_HANDLE_VALUE)
         return;
-    char buf[2048];
-    SYSTEMTIME t;
-    GetLocalTime(&t);
-    int n = snprintf(buf, sizeof buf, "%04u-%02u-%02u %02u:%02u:%02u.%03u [%5lu] ", t.wYear, t.wMonth, t.wDay,
-                     t.wHour, t.wMinute, t.wSecond, t.wMilliseconds, GetCurrentThreadId());
-    int m = (int)strlen(body);
-    if (m > (int)sizeof buf - n - 3)
-        m = (int)sizeof buf - n - 3;
-    memcpy(buf + n, body, m);
-    n += m;
-    buf[n++] = '\r';
-    buf[n++] = '\n';
-    DWORD w;
+    FILETIME now;
+    GetSystemTimePreciseAsFileTime(&now);
+    DWORD tid = GetCurrentThreadId(), w;
+    unsigned int m = (unsigned int)strlen(body);
+    char buf[ALOG_LINE];
+    if (h == log_file && log_async) {
+        if (alog_push(body, m, &now, tid)) {
+            if (!strncmp(body, "[crash]", 7))
+                alog_flush();
+            return;
+        }
+        if (alog_lock_bounded(&alog_state, ALOG_FLUSH_WAIT_MS)) {
+            alog_drain_locked(&alog_state);
+            WriteFile(h, buf, (DWORD)alog_format_line(buf, body, m, &now, tid), &w, NULL);
+            LeaveCriticalSection(&alog_state.drain_lock);
+            return;
+        }
+    }
+    int n = alog_format_line(buf, body, m, &now, tid);
     EnterCriticalSection(&log_lock);
     WriteFile(h, buf, n, &w, NULL);
     LeaveCriticalSection(&log_lock);
@@ -123,6 +132,7 @@ static void ediag(const char *fmt, ...)
     va_end(ap);
     emit(log_file, body);
     emit(diag_file, body);
+    alog_flush();
 }
 
 static uintptr_t module_base(void)
@@ -1217,6 +1227,8 @@ static void log_build(void)
 BOOL WINAPI DllMain(HINSTANCE self, DWORD reason, LPVOID reserved)
 {
     (void)reserved;
+    if (reason == DLL_PROCESS_DETACH)
+        alog_flush_at_exit();
     if (reason != DLL_PROCESS_ATTACH)
         return TRUE;
     DisableThreadLibraryCalls(self);
@@ -1246,6 +1258,11 @@ BOOL WINAPI DllMain(HINSTANCE self, DWORD reason, LPVOID reserved)
     game_dir[slash ? slash - exe_path : 0] = 0;
     InitializeCriticalSection(&log_lock);
     open_log();
+    {
+        char sync[8] = {0};
+        DWORD n = GetEnvironmentVariableA("SWOFTY_LOG_SYNC", sync, sizeof sync);
+        log_async = !(n && n < sizeof sync && sync[0] && sync[0] != '0') && alog_start(log_file);
+    }
     capture_sections();
 
     wchar_t self_path[MAX_PATH] = L"?", real_path[MAX_PATH] = L"(not loaded)";
@@ -1253,6 +1270,8 @@ BOOL WINAPI DllMain(HINSTANCE self, DWORD reason, LPVOID reserved)
     if (real)
         GetModuleFileNameW(real, real_path, MAX_PATH);
     slog("swofty loader (version.dll proxy) attached, pid %lu", GetCurrentProcessId());
+    slog("log: %s", log_async ? "asynchronous writer (batched, crash lines flush at once; SWOFTY_LOG_SYNC=1 writes each line synchronously)"
+                              : "synchronous, one write per line");
     slog("host: %ls", exe_path);
     slog("proxy: %ls", self_path);
     slog("real version.dll: %ls (requested %ls)", real_path, sys);
