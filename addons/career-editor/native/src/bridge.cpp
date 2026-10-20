@@ -16,6 +16,7 @@
 // and the op or section is switched off for the rest of the game session.
 
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 #include <condition_variable>
 #include <mutex>
@@ -1249,6 +1250,48 @@ void continue_pass(uint64_t now)
     }
 }
 
+using Clock = std::chrono::steady_clock;
+
+enum Part { PartState, PartInbox, PartBatch, PartSnapshot, PartCount };
+
+struct FramePerf {
+    uint64_t calls = 0;
+    uint64_t logged = 0;
+    double total = 0;
+    double max = 0;
+    double part[PartCount] = {};
+    Clock::time_point lap;
+};
+
+FramePerf g_perf;
+
+void perf_lap(Part p)
+{
+    Clock::time_point t = Clock::now();
+    double ms = std::chrono::duration<double, std::milli>(t - g_perf.lap).count();
+    g_perf.part[p] = std::max(g_perf.part[p], ms);
+    g_perf.lap = t;
+}
+
+void perf_frame(Clock::time_point start, uint64_t now)
+{
+    double ms = std::chrono::duration<double, std::milli>(Clock::now() - start).count();
+    g_perf.calls++;
+    g_perf.total += ms;
+    g_perf.max = std::max(g_perf.max, ms);
+    if (!g_perf.logged)
+        g_perf.logged = now;
+    if (now - g_perf.logged < 10000)
+        return;
+    log("[perf] frame callback: %llu call(s) in %.1f s, %.3f ms in total, slowest %.3f ms; slowest part: state %.3f, "
+        "inbox %.3f, batches %.3f, snapshot %.3f ms (page %s)",
+        (unsigned long long)g_perf.calls, double(now - g_perf.logged) / 1000.0, g_perf.total, g_perf.max,
+        g_perf.part[PartState], g_perf.part[PartInbox], g_perf.part[PartBatch], g_perf.part[PartSnapshot],
+        g.viewer_at && wall_ms() - g.viewer_at < kViewerFreshMs ? "open" : "closed");
+    g_perf = FramePerf{};
+    g_perf.logged = now;
+}
+
 } // namespace
 
 namespace bridge {
@@ -1299,11 +1342,16 @@ void frame()
 {
     if (!g.up)
         return;
+    bool perf = perf_on();
+    Clock::time_point start = perf ? Clock::now() : Clock::time_point{};
+    g_perf.lap = start;
     uint64_t now = now_ms();
     if (now - g.last_state >= kStatePollMs) {
         g.last_state = now;
         state::poll(now);
     }
+    if (perf)
+        perf_lap(PartState);
     if (now - g.last_inbox >= kInboxPollMs) {
         g.last_inbox = now;
 #if defined(_WIN32)
@@ -1316,7 +1364,11 @@ void frame()
             list_inbox();
         }
     }
+    if (perf)
+        perf_lap(PartInbox);
     drain_one();
+    if (perf)
+        perf_lap(PartBatch);
     if (g.force_render) {
         g.force_render = false;
         g.pass_active = false;
@@ -1329,6 +1381,10 @@ void frame()
         snapshot(now, false);
         if (g.pass_active)
             continue_pass(now);
+    }
+    if (perf) {
+        perf_lap(PartSnapshot);
+        perf_frame(start, now);
     }
 }
 
