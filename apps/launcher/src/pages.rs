@@ -36,7 +36,7 @@ pub(crate) fn tag(label: impl Into<SharedString>, p: Palette) -> Div {
         .child(label.into())
 }
 
-fn tile(size: f32, p: Palette) -> Div {
+pub(crate) fn tile(size: f32, p: Palette) -> Div {
     div()
         .size(px(size))
         .flex_shrink_0()

@@ -1057,7 +1057,7 @@ impl Shell {
             let tile = self.nav_item(
                 Page::Section(i),
                 s.spec.title.clone().into(),
-                match addon.and_then(|a| a.icon.clone()) {
+                match s.icon.clone().or_else(|| addon.and_then(|a| a.icon.clone())) {
                     Some(AddonIcon::Glyph(data)) => TileArt::Glyph(data),
                     Some(AddonIcon::Image(image)) => TileArt::Image(image),
                     None => TileArt::Icon(crate::sections::icon(s.spec.icon)),

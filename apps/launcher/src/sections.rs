@@ -22,8 +22,8 @@ use swofty_core::view::{self, Art, Block, Body, ButtonKind, Control, Effect, Eve
 
 use crate::blocks::{At, search_id};
 use crate::game::Install;
-use crate::library::{SectionItem, plural};
-use crate::pages::{GUTTER, badge, chevron, fact, label, monogram, names, stat, tag};
+use crate::library::{AddonIcon, SectionItem, plural};
+use crate::pages::{GUTTER, badge, chevron, fact, label, monogram, names, stat, tag, tile};
 use crate::shell::{Page, Shell};
 use crate::theme::Palette;
 
@@ -622,6 +622,22 @@ impl Shell {
     }
 
     #[allow(clippy::too_many_arguments)]
+    // A row without art shows its page's icon: `sections/<id>.svg` when the addon has one,
+    // else the page's icon from the launcher's set.
+    fn row_art(&self, addon: &str, section: &str, a: &Art, size: f32, p: Palette) -> AnyElement {
+        if !a.is_none() {
+            return art(a, size, p);
+        }
+        let s = self.library.sections.iter().find(|s| s.addon == addon && s.spec.id == section);
+        match s {
+            Some(SectionItem { icon: Some(AddonIcon::Glyph(data)), .. }) => tile(size, p)
+                .child(svg().data(data).size(px(size * 0.5)).text_color(p.text_muted))
+                .into_any_element(),
+            Some(s) => badge(icon(s.spec.icon), size, p).into_any_element(),
+            None => art(a, size, p),
+        }
+    }
+
     fn view_row(
         &self,
         addon: &str,
@@ -641,7 +657,7 @@ impl Shell {
         let toggle_key = key.clone();
         let head = self
             .row_head(format!("row-{key}"), open, p)
-            .child(art(&r.art, 32., p))
+            .child(self.row_art(addon, section, &r.art, 32., p))
             .child(
                 v_flex()
                     .flex_1()
