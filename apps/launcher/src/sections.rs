@@ -625,7 +625,6 @@ impl Shell {
         }
     }
 
-    #[allow(clippy::too_many_arguments)]
     // A row without art shows its page's icon: `sections/<id>.svg` when the addon has one,
     // else the page's icon from the launcher's set.
     fn row_art(&self, addon: &str, section: &str, a: &Art, size: f32, p: Palette) -> AnyElement {
@@ -649,6 +648,7 @@ impl Shell {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn view_row(
         &self,
         addon: &str,
