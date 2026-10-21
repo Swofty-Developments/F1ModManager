@@ -473,11 +473,15 @@ impl Shell {
                     .into_any_element();
             }
         };
-        let actions: Vec<AnyElement> = view
+        let mut actions: Vec<AnyElement> = view
             .actions
             .iter()
             .map(|b| self.button(&addon, &id, b, false, cx))
             .collect();
+        // Tracks is in the Addons group, whose pages all have Install addon.
+        if id == crate::library::TRACKS_SECTION {
+            actions.push(self.install_addon_button(cx).into_any_element());
+        }
         let notices: Vec<AnyElement> = view
             .notices
             .iter()
