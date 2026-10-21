@@ -56,7 +56,11 @@ pub struct SectionItem {
 }
 
 fn section_icon(store: &Store, addon: &str, section: &str) -> Option<AddonIcon> {
-    let path = store.addons_dir().join(addon).join("sections").join(format!("{section}.svg"));
+    let path = store
+        .addons_dir()
+        .join(addon)
+        .join("sections")
+        .join(format!("{section}.svg"));
     Some(AddonIcon::Glyph(std::fs::read(path).ok()?.into()))
 }
 

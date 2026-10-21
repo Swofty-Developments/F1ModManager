@@ -1082,7 +1082,14 @@ impl Shell {
             }
         }
         let database = Page::Database;
-        add_ons.push(self.nav_item(database, database.label().into(), TileArt::Icon(database.icon()), None, p, cx));
+        add_ons.push(self.nav_item(
+            database,
+            database.label().into(),
+            TileArt::Icon(database.icon()),
+            None,
+            p,
+            cx,
+        ));
         groups.insert(0, ("Addons".into(), add_ons));
         v_flex()
             .w(px(220.))

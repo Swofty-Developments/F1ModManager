@@ -632,9 +632,16 @@ impl Shell {
         if !a.is_none() {
             return art(a, size, p);
         }
-        let s = self.library.sections.iter().find(|s| s.addon == addon && s.spec.id == section);
+        let s = self
+            .library
+            .sections
+            .iter()
+            .find(|s| s.addon == addon && s.spec.id == section);
         match s {
-            Some(SectionItem { icon: Some(AddonIcon::Glyph(data)), .. }) => tile(size, p)
+            Some(SectionItem {
+                icon: Some(AddonIcon::Glyph(data)),
+                ..
+            }) => tile(size, p)
                 .child(svg().data(data).size(px(size * 0.5)).text_color(p.text_muted))
                 .into_any_element(),
             Some(s) => badge(icon(s.spec.icon), size, p).into_any_element(),

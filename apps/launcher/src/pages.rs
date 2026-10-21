@@ -317,16 +317,23 @@ impl Shell {
     pub(crate) fn database_page(&self, p: Palette, cx: &mut Context<Self>) -> AnyElement {
         v_flex()
             .size_full()
-            .child(self.header(
-                Page::Database.label(),
-                String::new(),
-                h_flex()
-                    .gap(px(8.))
-                    // Nothing is listed here yet, so there is nothing to turn off.
-                    .child(Button::new("disable-all-database").outline().label("Disable all").disabled(true))
-                    .child(self.install_addon_button(cx)),
-                p,
-            ))
+            .child(
+                self.header(
+                    Page::Database.label(),
+                    String::new(),
+                    h_flex()
+                        .gap(px(8.))
+                        // Nothing is listed here yet, so there is nothing to turn off.
+                        .child(
+                            Button::new("disable-all-database")
+                                .outline()
+                                .label("Disable all")
+                                .disabled(true),
+                        )
+                        .child(self.install_addon_button(cx)),
+                    p,
+                ),
+            )
             .child(self.empty(
                 Page::Database.icon(),
                 "Nothing here yet",

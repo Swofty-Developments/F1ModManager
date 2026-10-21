@@ -660,9 +660,14 @@ mod tests {
         let put = &erp_ops(
             r#"{"schema_version":1,"ops":[{"op":"put-resource","erp":"ui/a.erp","resource":"eaid://one","source":"mods/a.erp"}]}"#,
         )[0];
-        let ready = &erp_ops(r#"{"schema_version":1,"ops":[{"op":"overlay","erps":["ui/a.erp"],"source":"mods/ready.erp"}]}"#)[0];
+        let ready = &erp_ops(
+            r#"{"schema_version":1,"ops":[{"op":"overlay","erps":["ui/a.erp"],"source":"mods/ready.erp"}]}"#,
+        )[0];
         let path = addon.join("mods/ready.erp");
-        assert_eq!(crate::runtime::overlay_fits(&path, &["ui/a.erp".into()], &original).unwrap(), Ok(2));
+        assert_eq!(
+            crate::runtime::overlay_fits(&path, &["ui/a.erp".into()], &original).unwrap(),
+            Ok(2)
+        );
 
         // Loaded as it is: listed before the earlier origin's overlay, so it wins.
         let mut b = ErpBuild::new(&original);
@@ -677,9 +682,19 @@ mod tests {
         let mut rt = Runtime::new(Vec::new());
         let ranks = ["mods (a)".to_owned(), "mods (c)".to_owned()];
         rt.resources(b.resources(), &ranks, &prebuilt, &overlay).unwrap();
-        let listed: Vec<(&str, &str)> =
-            rt.assets.resource_erps.iter().map(|e| (e.file.as_str(), e.origin.as_str())).collect();
-        assert_eq!(listed, [("assets/resources/p0.erp", "mods (c)"), ("assets/resources/0.erp", "mods (a)")]);
+        let listed: Vec<(&str, &str)> = rt
+            .assets
+            .resource_erps
+            .iter()
+            .map(|e| (e.file.as_str(), e.origin.as_str()))
+            .collect();
+        assert_eq!(
+            listed,
+            [
+                ("assets/resources/p0.erp", "mods (c)"),
+                ("assets/resources/0.erp", "mods (a)")
+            ]
+        );
         assert_eq!(rt.files["swofty/assets/resources/p0.erp"], path);
 
         // Off the runtime route it is a put-resource of each of its resources.

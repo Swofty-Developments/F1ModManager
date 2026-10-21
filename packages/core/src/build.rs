@@ -732,7 +732,10 @@ pub fn build(store: &Store, profile: &str, game: &Game) -> Result<Built> {
                 ranks.push(origin.clone());
             }
             match &op.op {
-                AssetOp::Erp(crate::ops::ErpOp::Overlay { erps: targets, source }) if runtime_route => {
+                AssetOp::Erp(crate::ops::ErpOp::Overlay {
+                    erps: targets,
+                    source,
+                }) if runtime_route => {
                     let path = resolve(source)?;
                     match overlay_fits(&path, targets, &base)? {
                         Ok(resources) => prebuilt.push(Prebuilt {
@@ -745,10 +748,14 @@ pub fn build(store: &Store, profile: &str, game: &Game) -> Result<Built> {
                             built.lines.push(format!(
                                 "erp: {origin}: its overlay archive goes in resource by resource; {why}"
                             ));
-                            erps.apply_for(&crate::ops::ErpOp::Overlay {
-                                erps: targets.clone(),
-                                source: source.clone(),
-                            }, &origin, &resolve)
+                            erps.apply_for(
+                                &crate::ops::ErpOp::Overlay {
+                                    erps: targets.clone(),
+                                    source: source.clone(),
+                                },
+                                &origin,
+                                &resolve,
+                            )
                             .map_err(|e| Error::Other(format!("applying {}: {e}", op.origin)))?;
                         }
                     }
