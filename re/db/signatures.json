@@ -11172,6 +11172,894 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "session.build_safety_car_logic_graph",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 03 00 00 C5 F8 29 B4 24 E0 03 00 00 49 89 D7 48 89 CE",
+   "match": "0x1435f81a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435f81a0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Build_SafetyCarLogicGraph"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.unk_1406427e0",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 02 00 00 C5 78 29 BC 24 00 02 00 00 C5 78 29 B4 24 F0 01 00 00 C5 78 29 AC 24 E0 01 00 00 C5 78 29 A4 24 D0 01 00 00 C5 78 29 9C 24 C0 01 00 00 C5 78 29 94 24 B0 01 00 00 C5 78 29 8C 24 A0 01 00 00 C5 78 29 84 24 90 01 00 00 C5 F8 29 BC 24 80 01 00 00 C5 F8 29 B4 24 70 01 00 00 48 89 CE B8 01 00 00 00",
+   "match": "0x1406427e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1406427e0",
+   "kind": "func_start",
+   "names": [
+    "Ai_Unk_1406427e0"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_tether_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 01 00 00 C5 78 29 BC 24 00 01 00 00 C5 79 29 B4 24 F0 00 00 00",
+   "match": "0x14360d700",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14360d700",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarTether_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_tether_attach",
+   "section": ".xtls",
+   "pattern": "E9 ?? ?? ?? ?? 72 FC 59 E9 ?? ?? ?? ?? 48 0F 86",
+   "match": "0x14360aff0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14360aff0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarTether_Attach"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_tether_detach",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 00 00 00 C5 78 29 94 24 80 00 00 00 C5 78 29 4C 24 70 C5 78 29 44 24 60 C5 F8 29 7C 24 50 C5 F9 29 74 24 40",
+   "match": "0x14360b550",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14360b550",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarTether_Detach"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.set_safety_car_deployment_type",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 48 48 89 D6 48 89 CF 8B 42 18 83 F8 03",
+   "match": "0x143608160",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143608160",
+   "kind": "func_start",
+   "names": [
+    "Sess_Set_SafetyCarDeploymentType"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rc_send_ahead_of_lead_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 83 79 48 01 0F 8F ?? ?? ?? ?? 48 89 CE 48 8B A9 90 00 00 00",
+   "match": "0x14361dac0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14361dac0",
+   "kind": "func_start",
+   "names": [
+    "Sess_RC_SendAheadOfLeadData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rc_handle_ahead_of_lead_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 28 83 79 48 02",
+   "match": "0x14361c620",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14361c620",
+   "kind": "func_start",
+   "names": [
+    "Sess_RC_HandleAheadOfLeadData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_emergency_ghosting_init",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 48 4C 89 C7 48 89 CE 48 8D 05",
+   "match": "0x1435c27d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435c27d0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarEmergencyGhosting_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.read_deployment_points",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 07 00 00 49 89 CC",
+   "match": "0x14362f0c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14362f0c0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Read_DeploymentPoints"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.sc_red_flag_deploy_update",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 48 48 89 D7 48 89 CE 48 8B 05",
+   "match": "0x143646d20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143646d20",
+   "kind": "func_start",
+   "names": [
+    "Sess_ScRedFlagDeploy_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.red_flag_to_restart_enter",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 68 C5 F9 29 74 24 50",
+   "match": "0x142dfef00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142dfef00",
+   "kind": "func_start",
+   "names": [
+    "Sess_RedFlagToRestart_Enter"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.apply_decided_penalties",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 48 8B 81 50 1C 00 00",
+   "match": "0x1435730a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435730a0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Apply_DecidedPenalties"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.corner_cutting_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 01 00 00 C7 81 E0 1C 00 00 00 00 00 00",
+   "match": "0x14356bb00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14356bb00",
+   "kind": "func_start",
+   "names": [
+    "Sess_CornerCutting_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.load_rule_settings_profiles",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 08 00 00 C5 78 29 8C 24 90 08 00 00 C5 78 29 84 24 80 08 00 00 C5 F8 29 BC 24 70 08 00 00 C5 F8 29 B4 24 60 08 00 00 48 BB 35 9C 7C 5A DF CB 88 E3",
+   "match": "0x143575df0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143575df0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Load_RuleSettingsProfiles"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.auto_reset_to_track_teleport",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC B0 00 00 00 C5 78 29 84 24 A0 00 00 00 C5 F8 29 BC 24 90 00 00 00 C5 F8 29 B4 24 80 00 00 00 48 89 CF 0F B6 5A 10",
+   "match": "0x142f032b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f032b0",
+   "kind": "func_start",
+   "names": [
+    "Game_AutoResetToTrack_Teleport"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.player_terminal_damage_enter",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 38 48 89 CE 48 8B 0D",
+   "match": "0x142d98430",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d98430",
+   "kind": "func_start",
+   "names": [
+    "Sess_PlayerTerminalDamage_Enter"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.retirement_sequence_update",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 50 C5 F8 29 74 24 40 48 89 D6 80 B9 EA 0D 00 00 00",
+   "match": "0x142d8a440",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d8a440",
+   "kind": "func_start",
+   "names": [
+    "Sess_RetirementSequence_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.winner_sequence_enter",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC E0 00 00 00 48 89 CE 48 8B 81 B0 0C 00 00",
+   "match": "0x142daa070",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142daa070",
+   "kind": "func_start",
+   "names": [
+    "Sess_WinnerSequence_Enter"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.winner_sequence_update",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 50 48 89 CF C5 EB 5A C2",
+   "match": "0x142daaff0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142daaff0",
+   "kind": "func_start",
+   "names": [
+    "Sess_WinnerSequence_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.doughnut_sequence_enter",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 78 01 00 00 C5 78 29 94 24 60 01 00 00",
+   "match": "0x142d59920",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d59920",
+   "kind": "func_start",
+   "names": [
+    "Sess_DoughnutSequence_Enter"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.osq_teleport_to_start",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 00 00 00 C5 F8 29 74 24 70 48 89 D7 48 89 CE 48 8B 81 98 0C 00 00",
+   "match": "0x142d68a80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d68a80",
+   "kind": "func_start",
+   "names": [
+    "Sess_OsqTeleportToStart"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.start_vehicles_in_garages",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC F8 01 00 00 48 89 CE 48 8B 49 10",
+   "match": "0x142d692e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d692e0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Start_VehiclesInGarages"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.formation_lap_logic_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 00 00 00 C5 78 29 4C 24 70 C5 78 29 44 24 60 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 48 8B 05",
+   "match": "0x143613d50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143613d50",
+   "kind": "func_start",
+   "names": [
+    "Sess_FormationLapLogic_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.vehicle_progress_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 58 C5 F8 29 74 24 40 44 89 CB",
+   "match": "0x1446007c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446007c0",
+   "kind": "func_start",
+   "names": [
+    "Game_VehicleProgress_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.rolling_start_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC 90 00 00 00 C5 F8 29 B4 24 80 00 00 00 C4 E2 79 18 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C4 E2 79 18 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 FA 10 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 F8 28 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C4 E2 79 18 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 FB 12 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 F8 28 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 F8 28 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 F8 28 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 F8 28 05 ?? ?? ?? ?? C5 F8 29 05 ?? ?? ?? ?? C5 F9 6F 05 2E 67 5A 02",
+   "match": "0x143032330",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143032330",
+   "kind": "func_start",
+   "names": [
+    "Game_RollingStart_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.marshal_zone_monitor_init",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 01 00 00 C5 F8 29 B4 24 F0 00 00 00 49 89 CF E8",
+   "match": "0x14357e780",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14357e780",
+   "kind": "func_start",
+   "names": [
+    "Sess_MarshalZoneMonitor_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.marshal_placement_on_add",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 50 48 89 D7 48 89 CE 48 8B 59 10",
+   "match": "0x1403d1af0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403d1af0",
+   "kind": "func_start",
+   "names": [
+    "Game_MarshalPlacement_OnAdd"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.race_marshal_instance_init",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 48 C5 F8 29 74 24 30 48 89 CE 48 C7 81 90 00 00 00 00 00 00 00",
+   "match": "0x1403c2920",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403c2920",
+   "kind": "func_start",
+   "names": [
+    "Game_RaceMarshalInstance_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.race_marshal_instance_build_actor",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC F0 01 00 00 C5 78 29 84 24 E0 01 00 00",
+   "match": "0x1403d2ed0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403d2ed0",
+   "kind": "func_start",
+   "names": [
+    "Game_RaceMarshalInstance_BuildActor"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.register_cutscenes",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 78 C5 F8 29 74 24 60 4C 89 C3 48 89 D7",
+   "match": "0x140213e10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140213e10",
+   "kind": "func_start",
+   "names": [
+    "Game_Register_Cutscenes"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.front_wing_on_collision",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC 80 00 00 00 C5 78 29 4C 24 70",
+   "match": "0x14465fdc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14465fdc0",
+   "kind": "func_start",
+   "names": [
+    "Car_FrontWing_OnCollision"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.create_detachable_part",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 98 0A 00 00 C5 78 29 94 24 80 0A 00 00",
+   "match": "0x144661440",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144661440",
+   "kind": "func_start",
+   "names": [
+    "Car_Create_DetachablePart"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.detachable_part_update",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 C5 F8 29 74 24 20 48 89 CE 80 B9 30 01 00 00 64",
+   "match": "0x1446686d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446686d0",
+   "kind": "func_start",
+   "names": [
+    "Car_DetachablePart_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.damage_meshes_init",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 C5 78 29 9C 24 A0 00 00 00 C5 78 29 94 24 90 00 00 00 C5 78 29 8C 24 80 00 00 00 C5 78 29 44 24 70 C5 F8 29 7C 24 60 C5 F8 29 74 24 50 89 D3 48 89 CE",
+   "match": "0x144650b00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144650b00",
+   "kind": "func_start",
+   "names": [
+    "Car_DamageMeshes_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "render.evaluate_car_damage_levels",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 C5 F8 29 74 24 20 41 80 F8 0A",
+   "match": "0x142f17170",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f17170",
+   "kind": "func_start",
+   "names": [
+    "Render_Evaluate_CarDamageLevels"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.parse_tyre_model",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 02 00 00 C5 78 29 BC 24 80 02 00 00 C5 78 29 B4 24 70 02 00 00 C5 78 29 AC 24 60 02 00 00 C5 78 29 A4 24 50 02 00 00 C5 78 29 9C 24 40 02 00 00 C5 78 29 94 24 30 02 00 00 C5 78 29 8C 24 20 02 00 00 C5 78 29 84 24 10 02 00 00 C5 F8 29 BC 24 00 02 00 00 C5 F8 29 B4 24 F0 01 00 00 48 89 D0",
+   "match": "0x144743900",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144743900",
+   "kind": "func_start",
+   "names": [
+    "Car_Parse_TyreModel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
