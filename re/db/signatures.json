@@ -12156,6 +12156,78 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "ai.write_adaptive_ai_session_record",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 50 48 89 D6 48 89 CF 48 83 79 50 00 0F 84 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 48 8D 5C 24 20 48 89 F1 48 89 DA E8 ?? ?? ?? ?? 48 8B 4F 50 4C 8D 05 ?? ?? ?? ?? 48 89 DA E8 ?? ?? ?? ?? 80 7C 24 48 00 74 66 48 8B 44 24 20 80 78 1C 00 74 1A 8B 50 18 48 8B 48 08 48 29 CA 48 03 10 48 83 FA 01 76 11 C6 01 7D 48 FF 40 08 48 83 7C 24 30 00 75 39 EB 0C C6 40 1C 00 48 83 7C 24 30 00 75 2B 48 8B 44 24 20 80 78 1C 00 74 20 8B 50 18 48 8B 48 08 48 29 CA 48 03 10 48 83 FA 01 76 09 C6 01 0A 48 FF 40 08 EB 04 C6 40 1C 00 44 0F B6 47 60 48 8D 15 ?? ?? ?? ?? 48 89 F1 E8 ?? ?? ?? ?? 44 0F B6 47 61 48 8D 15 ?? ?? ?? ?? 48 89 F1 E8 ?? ?? ?? ?? 44 8B 47 64",
+   "match": "0x1403e1a10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403e1a10",
+   "kind": "func_start",
+   "names": [
+    "Ai_Write_AdaptiveAiSessionRecord"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rule_manager_handle_session_events",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 30 48 89 CE 48 8B 99 50 1C 00 00",
+   "match": "0x1435692d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435692d0",
+   "kind": "func_start",
+   "names": [
+    "Sess_RuleManager_HandleSessionEvents"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_logic_subscribe",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 C5 F8 29 74 24 30 48 89 CE 48 8D 05 ?? ?? ?? ?? 48 89 01 48 8D 05 ?? ?? ?? ?? 48 89 41 20",
+   "match": "0x1436156c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436156c0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarLogic_Subscribe"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
