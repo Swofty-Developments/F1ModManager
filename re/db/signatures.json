@@ -38207,6 +38207,174 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "car.tyre_magic_formula",
+   "section": ".xtls",
+   "pattern": "56 57 48 81 EC 88 00 00 00 C5 78 29 5C 24 70 C5 78 29 54 24 60 C5 78 29 4C 24 50 C5 78 29 44 24 40 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 4C 89 CE",
+   "match": "0x1446cf080",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446cf080",
+   "kind": "func_start",
+   "names": [
+    "Car_Tyre_MagicFormula"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_grip_scale",
+   "section": ".xtls",
+   "pattern": "48 83 EC 18 C5 F8 29 34 24 48 8B 01 48 8B 51 08",
+   "match": "0x1446b7240",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446b7240",
+   "kind": "func_start",
+   "names": [
+    "Car_Tyre_GripScale"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.suspension_solve_wheels",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 04 00 00 C5 78 29 BC 24 00 04 00 00 C5 78 29 B4 24 F0 03 00 00 C5 78 29 AC 24 E0 03 00 00 C5 78 29 A4 24 D0 03 00 00 C5 78 29 9C 24 C0 03 00 00 C5 78 29 94 24 B0 03 00 00 C5 78 29 8C 24 A0 03 00 00 C5 78 29 84 24 90 03 00 00 C5 F8 29 BC 24 80 03 00 00 C5 F8 29 B4 24 70 03 00 00 C5 78 28 E1",
+   "match": "0x1446dee60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446dee60",
+   "kind": "func_start",
+   "names": [
+    "Car_Suspension_SolveWheels"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.suspension_publish_wheel_state",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 00 00 00 C5 78 29 BC 24 E0 00 00 00 C5 78 29 B4 24 D0 00 00 00 C5 78 29 AC 24 C0 00 00 00 C5 78 29 A4 24 B0 00 00 00 C5 78 29 9C 24 A0 00 00 00 C5 78 29 94 24 90 00 00 00 C5 78 29 8C 24 80 00 00 00 C5 78 29 44 24 70 C5 F8 29 7C 24 60 C5 F8 29 74 24 50 48 89 CE C5 FA 2A B9 4C 0A 00 00",
+   "match": "0x1446e4330",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446e4330",
+   "kind": "func_start",
+   "names": [
+    "Car_Suspension_PublishWheelState"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "core.crt_atanf",
+   "section": ".xtls",
+   "pattern": "48 83 EC 38 0F 57 E4 0F 29 74 24 20",
+   "match": "0x1453530e4",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1453530e4",
+   "kind": "func_start",
+   "names": [
+    "Ne_Crt_Atanf"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "core.crt_sinf",
+   "section": ".xtls",
+   "pattern": "48 83 EC 68 83 3D ?? ?? ?? ?? 00 0F 85 ?? ?? ?? ?? 66 0F 57 D2 66 0F 7E C2 B8 00 00 80 7F 44 8B D0 44 23 D2 44 3B D0 0F 84 ?? ?? ?? ?? 66 0F 28 D8",
+   "match": "0x14535cf70",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14535cf70",
+   "kind": "func_start",
+   "names": [
+    "Ne_Crt_Sinf"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "core.crt_powf",
+   "section": ".xtls",
+   "pattern": "48 83 EC 68 66 0F 7F 74 24 20 66 0F 7F 7C 24 30",
+   "match": "0x14535a510",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14535a510",
+   "kind": "func_start",
+   "names": [
+    "Ne_Crt_Powf"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
