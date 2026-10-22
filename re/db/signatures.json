@@ -56329,6 +56329,5862 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "game.driver_actor_spawner_make_custom_driver_setup",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 01 00 00 4D 89 CF",
+   "match": "0x1401b0880",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1401b0880",
+   "kind": "func_start",
+   "names": [
+    "Game_DriverActorSpawner_MakeCustomDriverSetup"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.driver_actor_spawner_make_scene_setup",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 0A 00 00 4C 89 C3",
+   "match": "0x1401b1860",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1401b1860",
+   "kind": "func_start",
+   "names": [
+    "Game_DriverActorSpawner_MakeSceneSetup"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.garage_restart_session",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 CE 80 3D ?? ?? ?? ?? 01 75 78 B8 F6 00 00 00",
+   "match": "0x140383360",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140383360",
+   "kind": "func_start",
+   "names": [
+    "Game_Garage_RestartSession"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.elastic_verbose_report_throttler_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 00 00 00 C5 F8 29 BC 24 C0 00 00 00 C5 F8 29 B4 24 B0 00 00 00 48 89 D6",
+   "match": "0x14076ecc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14076ecc0",
+   "kind": "func_start",
+   "names": [
+    "Game_ElasticVerbose_Report_ThrottlerStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.game_handle_application_resume_from_suspended",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 48 89 CE 80 3D ?? ?? ?? ?? 01 75 67 B8 5F 01 00 00 48 8D 0D ?? ?? ?? ?? 66 90 8B 14 81 85 D2 74 52 81 FA CB 88 7C 7C 74 30 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 5F 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 7E 30 48 8D 05 ?? ?? ?? ?? 48 89 44 24 28",
+   "match": "0x1407fd310",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1407fd310",
+   "kind": "func_start",
+   "names": [
+    "Game_Game_HandleApplicationResumeFromSuspended"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_game_data_synchronisation_message",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 70 4C 89 C6 89 D3",
+   "match": "0x140996e20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140996e20",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleGameDataSynchronisationMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.playerset_report_game_data_synchronised",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 30 48 8B 71 70 48 8B 41 78",
+   "match": "0x140997110",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140997110",
+   "kind": "func_start",
+   "names": [
+    "Game_Playerset_ReportGameDataSynchronised"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.playerset_try_promote_spectators",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 20 80 79 28 00",
+   "match": "0x140997490",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140997490",
+   "kind": "func_start",
+   "names": [
+    "Game_Playerset_TryPromoteSpectators"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.f1_car_setup_data_manager_base_construct",
+   "section": ".xtls",
+   "pattern": "56 57 53 B8 80 20 00 00 E8 ?? ?? ?? ?? 48 29 C4",
+   "match": "0x140b77890",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140b77890",
+   "kind": "func_start",
+   "names": [
+    "Game_F1CarSetupDataManagerBase_Construct"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.tyres_should_show_screen_during_loading",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC 80 00 00 00 48 89 CF",
+   "match": "0x140bcf610",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140bcf610",
+   "kind": "func_start",
+   "names": [
+    "Game_Tyres_ShouldShowScreenDuringLoading"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.career_online_manager_add_pending_player_desc",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 01 00 00 48 89 CE 48 8B 81 D0 02 00 00",
+   "match": "0x140fdb4f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140fdb4f0",
+   "kind": "func_start",
+   "names": [
+    "Game_CareerOnlineManager_AddPendingPlayerDesc"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.career_online_manager_add_pending_connection",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 38 83 79 08 01",
+   "match": "0x140fe3b30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140fe3b30",
+   "kind": "func_start",
+   "names": [
+    "Game_CareerOnlineManager_AddPendingConnection"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.career_online_manager_remove_pending_connection",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 28 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 72 B8 51 01 00 00",
+   "match": "0x140fe3d20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140fe3d20",
+   "kind": "func_start",
+   "names": [
+    "Game_CareerOnlineManager_RemovePendingConnection"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_on_rival_from_leaderboard_download_requested",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC 68 01 00 00 48 89 D3 48 89 CE",
+   "match": "0x141482d60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141482d60",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_OnRivalFromLeaderboardDownloadRequested"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_on_ghostlap_download_completed",
+   "section": ".xtls",
+   "pattern": "56 57 48 81 EC E8 00 00 00 4C 89 CF",
+   "match": "0x141484aa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141484aa0",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_OnGhostlapDownloadCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.entrants_ui_exit_screen",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 70 44 0F B6 CA 41 80 F9 06",
+   "match": "0x1424b6550",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1424b6550",
+   "kind": "func_start",
+   "names": [
+    "Game_EntrantsUi_ExitScreen"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_leave_multiplayer_session",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 38 02 00 00 C5 79 7F BC 24 20 02 00 00 C5 79 7F B4 24 10 02 00 00 C5 79 7F AC 24 00 02 00 00 C5 79 7F A4 24 F0 01 00 00 C5 79 7F 9C 24 E0 01 00 00 C5 79 7F 94 24 D0 01 00 00 C5 79 7F 8C 24 C0 01 00 00 C5 79 7F 84 24 B0 01 00 00 C5 F9 7F BC 24 A0 01 00 00 C5 F8 29 B4 24 90 01 00 00",
+   "match": "0x142767670",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142767670",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_LeaveMultiplayerSession"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_on_driver_component_cleanup_callback",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 48 89 54 24 28 48 89 CE 80 3D ?? ?? ?? ?? 01 48 8D 1D ?? ?? ?? ?? 75 5B B8 9F 00 00 00 0F 1F 00 8B 0C 83 81 F9 B3 A4 11 9C 74 2E 85 C9 74 44 83 C0 10 48 69 C8 43 43 66 5F 48 C1 E9 20 89 C2 29 CA D1 EA 01 CA C1 EA 08 69 CA 75 01 00 00 29 C8 3D 9F 00 00 00 75 C9 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 46 10 48 89 44 24 20 4C 8B B6 B8 6F 00 00",
+   "match": "0x1428c85f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428c85f0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_OnDriverComponentCleanupCallback"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_on_vehicle_component_cleanup_callback",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 48 89 54 24 28 48 89 CE 80 3D ?? ?? ?? ?? 01 48 8D 1D ?? ?? ?? ?? 75 5B B8 9F 00 00 00 0F 1F 00 8B 0C 83 81 F9 B3 A4 11 9C 74 2E 85 C9 74 44 83 C0 10 48 69 C8 43 43 66 5F 48 C1 E9 20 89 C2 29 CA D1 EA 01 CA C1 EA 08 69 CA 75 01 00 00 29 C8 3D 9F 00 00 00 75 C9 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 46 10 48 89 44 24 20 4C 8B B6 D8 6F 00 00",
+   "match": "0x1428c8af0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428c8af0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_OnVehicleComponentCleanupCallback"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_switch_to_appropriate_renderer_mode_for_scen",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 28 48 89 CE 80 3D ?? ?? ?? ?? 01 75 71 B8 BD 00 00 00",
+   "match": "0x1428cf660",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428cf660",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_SwitchToAppropriateRendererModeForScen"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_component_requires_component_reset",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 78 06 00 00 48 89 D6",
+   "match": "0x1428d7b40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428d7b40",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneComponent_RequiresComponentReset"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_component_requires_transition",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 58 0F 00 00 4D 89 C5",
+   "match": "0x1428d8680",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428d8680",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneComponent_RequiresTransition"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_remove_any_invalid_pending_components",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 48 89 D7 48 89 CE 48 63 42 18",
+   "match": "0x1428d96c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428d96c0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_RemoveAnyInvalidPendingComponents"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_despawn_main_scene",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 66 B8 BD 00 00 00",
+   "match": "0x1428d9a90",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428d9a90",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_DespawnMainScene"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_play_cutscene",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 28 48 89 D6 48 89 CF F7 81 30 01 00 00 FD FF FF FF",
+   "match": "0x1428db0e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428db0e0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_PlayCutscene"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_find_or_create_new_custom_driver",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 04 00 00 89 D3",
+   "match": "0x1428dd3e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428dd3e0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_FindOrCreateNewCustomDriver"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_setup_custom_driver",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 81 EC C0 03 00 00",
+   "match": "0x1428ddc30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428ddc30",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_SetupCustomDriver"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_find_or_create_new_custom_car",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 B8 D8 69 00 00 E8 ?? ?? ?? ?? 48 29 C4 89 D3 48 89 CE",
+   "match": "0x1428ea4c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428ea4c0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_FindOrCreateNewCustomCar"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_set_custom_car_personal_sticker",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 4C 89 C3 89 D6",
+   "match": "0x1428eb470",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428eb470",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_SetCustomCarPersonalSticker"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_set_custom_car_livery",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 20 4C 89 C7 89 D6 48 89 CB 80 3D ?? ?? ?? ?? 01 75 73 B8 40 00 00 00 48 8D 0D ?? ?? ?? ?? 66 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 81 FA 19 EB 20 E0 74 32 85 D2 74 4C 83 C0 10 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 40 75 C5 EB 1E 44 0F B7 CE 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 93 D8 6F 00 00 48 8B 83 E0 6F 00 00 48 39 C2 74 17 66 90 66 39 B2 B8 00 00 00 74 74 48 81 C2 90 69 00 00 48 39 C2 75 EB 66 83 FE FF 0F 84 ?? ?? ?? ?? 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 40 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 84 00 00 00 00 00 8B 14 81 81 FA 19 EB 20 E0 74 4C 85 D2",
+   "match": "0x1428eb990",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428eb990",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_SetCustomCarLivery"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_find_or_create_new_custom_object",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 6B B8 16 01 00 00",
+   "match": "0x1428ebaf0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428ebaf0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_FindOrCreateNewCustomObject"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_setup_custom_object",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC D8 00 00 00 4C 89 C6 89 D7",
+   "match": "0x1428ec420",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428ec420",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_SetupCustomObject"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_despawn_custom_object",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 89 D6 48 89 CF 66 89 54 24 26",
+   "match": "0x1428ecdb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428ecdb0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_DespawnCustomObject"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_manager_set_custom_object_visible",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 20 44 89 C3 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1428ecf20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428ecf20",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneManager_SetCustomObjectVisible"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_component_spawn",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC 30 07 00 00",
+   "match": "0x1428efd50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428efd50",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneComponent_Spawn"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_component_refresh_active_scene",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 78 02 00 00 48 89 CE C5 F8 57 C0",
+   "match": "0x1428f0cf0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428f0cf0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneComponent_RefreshActiveScene"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.frontend_scene_component_spawn_complete",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 B8 68 10 00 00 E8 ?? ?? ?? ?? 48 29 C4 48 8B B9 98 00 00 00",
+   "match": "0x1428f19c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1428f19c0",
+   "kind": "func_start",
+   "names": [
+    "Game_FrontendSceneComponent_SpawnComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.garage_on_pit_state_changed",
+   "section": ".xtls",
+   "pattern": "56 57 55 53 48 83 EC 28 48 89 D3 48 89 CE 0F B6 4A 10",
+   "match": "0x142a39b80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142a39b80",
+   "kind": "func_start",
+   "names": [
+    "Game_Garage_OnPitStateChanged"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.garage_return_vehicle_to_garage",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 00 00 00 C5 F8 29 BC 24 80 00 00 00 C5 F8 29 74 24 70 44 89 C6",
+   "match": "0x142a3c0f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142a3c0f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Garage_ReturnVehicleToGarage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.garage_return_vehicle_to_pit_lane_entry",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 78",
+   "match": "0x142a42040",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142a42040",
+   "kind": "func_start",
+   "names": [
+    "Game_Garage_ReturnVehicleToPitLaneEntry"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_multiplayer_handle_garage_event_message",
+   "section": ".xtls",
+   "pattern": "56 57 55 53 48 83 EC 38 48 89 CE 48 8B 81 18 02 00 00",
+   "match": "0x142a427e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142a427e0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_Multiplayer_handleGarageEventMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_session_system_message",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 48 89 D6 0F B6 42 10",
+   "match": "0x142ce43a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142ce43a0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleSessionSystemMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.game_set_local_players_statuses",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 00 00 00 44 89 CF",
+   "match": "0x142cea230",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142cea230",
+   "kind": "func_start",
+   "names": [
+    "Game_Game_SetLocalPlayersStatuses"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.game_retire_local_player",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 6B",
+   "match": "0x142cea5b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142cea5b0",
+   "kind": "func_start",
+   "names": [
+    "Game_Game_RetireLocalPlayer"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.game_set_local_players_teams_statuses",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 00 00 00 48 8B 81 50 02 00 00",
+   "match": "0x142cea650",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142cea650",
+   "kind": "func_start",
+   "names": [
+    "Game_Game_SetLocalPlayersTeamsStatuses"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.garage_return_all_vehicles_to_garage",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 48 48 89 CE 80 A1 C0 0D 00 00 FD",
+   "match": "0x142d7d120",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d7d120",
+   "kind": "func_start",
+   "names": [
+    "Game_Garage_ReturnAllVehiclesToGarage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_press_interview_finished",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 8B B1 B8 0C 00 00",
+   "match": "0x142df9cd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142df9cd0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionPressInterviewFinished"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_in_press_interview",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 CE 48 8B 81 A0 0C 00 00 48 8B 80 88 00 00 00 48 85 C0 74 5F",
+   "match": "0x142df9fd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142df9fd0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionInPressInterview"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.tyres_deserialise",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 C5 F8 29 74 24 30 48 8B A9 F0 00 00 00",
+   "match": "0x142e917a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142e917a0",
+   "kind": "func_start",
+   "names": [
+    "Game_Tyres_Deserialise"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.voice_commands_set_selected_command",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 78 C5 F8 29 74 24 60 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x142f75d00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f75d00",
+   "kind": "func_start",
+   "names": [
+    "Game_VoiceCommands_SetSelectedCommand"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.voice_commands_command_recognised",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 CE 80 3D ?? ?? ?? ?? 01 75 66 B8 04 01 00 00",
+   "match": "0x142f7f3c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f7f3c0",
+   "kind": "func_start",
+   "names": [
+    "Game_VoiceCommands_CommandRecognised"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_fill_find_tail_by_rank",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 74 B8 12 01 00 00 48 8D 0D ?? ?? ?? ?? 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 85 D2 74 52 81 FA CC 56 63 16 74 30 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 12 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 96 C0 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 84 C0 74 5E",
+   "match": "0x142f84fe0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f84fe0",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_FillFindTailByRank"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_on_find_tail_by_rank_completed",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 40 4C 89 CF 48 89 CE 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 12 01 00 00 48 8D 0D ?? ?? ?? ?? 66 0F 1F 44 00 00 44 8B 0C 81 45 85 C9 74 7A",
+   "match": "0x142f85a30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f85a30",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_OnFindTailByRankCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_fill_find_tail_by_pivot",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 68 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x142f860d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f860d0",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_FillFindTailByPivot"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_on_find_tail_by_pivot_completed",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 40 4C 89 CF 48 89 CE 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 12 01 00 00 48 8D 0D ?? ?? ?? ?? 66 0F 1F 44 00 00 44 8B 0C 81 45 85 C9 0F 84",
+   "match": "0x142f86210",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f86210",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_OnFindTailByPivotCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_fill_find_head",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 12 01 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 85 D2 74 52 81 FA CC 56 63 16 74 30 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 12 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 96 C0 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 84 C0 74 62",
+   "match": "0x142f868f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f868f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_FillFindHead"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_on_find_head_completed",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC A8 00 00 00 C5 F9 29 BC 24 90 00 00 00",
+   "match": "0x142f869f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f869f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_OnFindHeadCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_fill_find_mid",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 74 B8 12 01 00 00 48 8D 0D ?? ?? ?? ?? 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 85 D2 74 52 81 FA CC 56 63 16 74 30 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 12 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 96 C0 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 89 C1 48 85 FF",
+   "match": "0x142f86eb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f86eb0",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_FillFindMid"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_on_find_mid_completed",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC C8 00 00 00 C5 79 29 8C 24 B0 00 00 00",
+   "match": "0x142f86fc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f86fc0",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_OnFindMidCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_fill_find_rivals",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 12 01 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 85 D2 74 52 81 FA CC 56 63 16 74 30 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 12 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8D 96 C0 00 00 00 48 89 F1 E8 ?? ?? ?? ?? 84 C0 74 67",
+   "match": "0x142f87530",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f87530",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_FillFindRivals"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_fill_ghostlap_download",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC C8 00 00 00 4D 89 CE 44 89 C6",
+   "match": "0x142f88450",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f88450",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_FillGhostlapDownload"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_on_download_ghostlap_completed",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 4C 89 CF 48 89 CE",
+   "match": "0x142f89530",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f89530",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_OnDownloadGhostlapCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_evaluate_rival_laptime",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 4C 89 C7 89 D6",
+   "match": "0x142f89920",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f89920",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_EvaluateRivalLaptime"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlaps_evaluate_rival_friend_laptime",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 40 89 D6",
+   "match": "0x142f89c70",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f89c70",
+   "kind": "func_start",
+   "names": [
+    "Game_Ghostlaps_EvaluateRivalFriendLaptime"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_read_and_validate",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 48 4D 89 C6 48 89 D6",
+   "match": "0x142f8a730",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f8a730",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_ReadAndValidate"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghost_laps_storage_system_construct",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 01 00 00 4C 89 8C 24 A8 00 00 00 4D 89 C6",
+   "match": "0x142f8fd40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f8fd40",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostLapsStorageSystem_Construct"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_destroy_ghostlap_handlder",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 CE 48 8B 89 78 02 00 00",
+   "match": "0x142f940b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f940b0",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_DestroyGhostlapHandlder"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_allocate_session_rival_storage",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 4A B8 62 00 00 00",
+   "match": "0x142f9eef0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f9eef0",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_AllocateSessionRivalStorage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_allocate_racenet_ghost_telemetry_storage",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 66 B8 62 00 00 00",
+   "match": "0x142f9efb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f9efb0",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_AllocateRacenetGhostTelemetryStorage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ghostlap_trace_on_leaderboard_entry_read",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC 40 02 00 00 4C 89 CB",
+   "match": "0x142fa53c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142fa53c0",
+   "kind": "func_start",
+   "names": [
+    "Game_GhostlapTrace_OnLeaderboardEntryRead"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_traffic_receive_bandwidth_message_from_connection",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 44 89 CF 4C 89 C6",
+   "match": "0x143040cd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143040cd0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTraffic_ReceiveBandwidthMessageFromConnection"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_connection_quality_on_session_connection_arrived",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 38 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x143053710",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143053710",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkConnectionQuality_OnSessionConnectionArrived"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_connection_quality_on_session_connection_left",
+   "section": ".xtls",
+   "pattern": "56 57 55 53 48 83 EC 28 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 0F B6 FA 75 73",
+   "match": "0x1430538b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430538b0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkConnectionQuality_OnSessionConnectionLeft"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_mechanical_send_vehicle_mechanics_message",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 05 00 00 4C 89 CE",
+   "match": "0x143056460",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143056460",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkMechanical_SendVehicleMechanicsMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_leave",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC F0 00 00 00 44 89 CD",
+   "match": "0x1430605c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430605c0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_Leave"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_update_authority_manager_connectivity",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 83 B9 A8 01 00 00 00",
+   "match": "0x143060800",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143060800",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_UpdateAuthorityManagerConnectivity"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_send_game_mode_data",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC C8 05 00 00",
+   "match": "0x143060be0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143060be0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_SendGameModeData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_get_initial_data_progress",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 C7 02 00 00 00 00",
+   "match": "0x143061360",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143061360",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_GetInitialDataProgress"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_send_initial_data_size_message",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 48 88 54 24 37",
+   "match": "0x143061550",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143061550",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_SendInitialDataSizeMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_migration_request_to_leave_with_error",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC F0 00 00 00 44 89 C3 48 89 D6",
+   "match": "0x143062f90",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143062f90",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkMigration_RequestToLeaveWithError"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_content_domain_verifier_terminate_session",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC F0 00 00 00 48 89 CE 80 3D ?? ?? ?? ?? 01 75 7D B8 00 01 00 00",
+   "match": "0x143063ef0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143063ef0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_ContentDomainVerifier_TerminateSession"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_send_net_message_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 05 00 00 88 94 24 83 00 00 00",
+   "match": "0x143064410",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143064410",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_SendNetMessageData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_received_initial_data",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 CE 80 3D ?? ?? ?? ?? 01 75 66 B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 90 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 4A 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 00 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 86 E0 01 00 00 01",
+   "match": "0x143066600",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143066600",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnReceivedInitialData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_attributes_update_public_slots",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 30 89 D3 48 89 CF",
+   "match": "0x143069a80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143069a80",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkAttributes_UpdatePublicSlots"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_matching_set_matching_object",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x14307bb20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14307bb20",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkMatching_SetMatchingObject"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_search_match",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 30 48 89 D6 48 8B 81 B0 00 00 00",
+   "match": "0x14307fd70",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14307fd70",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_SearchMatch"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_platform_initialise",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 30 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 F8 00 00 00",
+   "match": "0x143080f10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143080f10",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_PlatformInitialise"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_platform_abort",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 30 48 89 CE 80 3D ?? ?? ?? ?? 01 75 4C",
+   "match": "0x143081060",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143081060",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_PlatformAbort"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_platform_search",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC 58 01 00 00 48 89 CE 48 8B 49 10",
+   "match": "0x143082ae0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143082ae0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_PlatformSearch"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_platform_join",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 30 48 89 CE 0F B6 81 80 05 00 00",
+   "match": "0x1430833b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430833b0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_PlatformJoin"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_on_session_search_complete",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 02 00 00 C5 79 29 A4 24 C0 02 00 00",
+   "match": "0x143083c40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143083c40",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_OnSessionSearchComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_restart_vote",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 83 79 10 01 0F 85",
+   "match": "0x14308c4f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14308c4f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_RestartVote"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_options",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x14308efa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14308efa0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleOptions"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_send_options",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 41 89 D1 48 89 CE",
+   "match": "0x143090ca0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143090ca0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_SendOptions"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_race_status_message",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 44 0F B6 4A 10",
+   "match": "0x143091c40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143091c40",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleRaceStatusMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_session_document_message_open",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 28 44 89 C3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 78 B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 4E 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 00 01 00 00 75 C3 EB 1E 44 0F B6 CB 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86 20 04 00 00 48 8B 88 D8 00 00 00 48 8B 01 FF 50 10 38 D8 75 15",
+   "match": "0x143097c10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143097c10",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleSessionDocumentMessageOpen"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_session_document_message_close",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 28 44 89 C3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 78 B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 4E 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 00 01 00 00 75 C3 EB 1E 44 0F B6 CB 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86 20 04 00 00 48 8B 88 D8 00 00 00 48 8B 01 FF 50 10 38 D8 0F 85",
+   "match": "0x143097d20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143097d20",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleSessionDocumentMessageClose"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_session_document_message_skip_practice",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 81 EC C0 00 00 00 C5 F8 29 B4 24 B0 00 00 00 48 89 D6 48 89 CF",
+   "match": "0x143097ea0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143097ea0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleSessionDocumentMessageSkipPractice"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_populate_ui_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 48 89 CE 80 3D ?? ?? ?? ?? 01 75 6D",
+   "match": "0x14309ac00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14309ac00",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_PopulateUIData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_setup_from_featured_event",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 01 00 00 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1430a8720",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430a8720",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_SetupFromFeaturedEvent"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_unlock_slot_requested",
+   "section": ".xtls",
+   "pattern": "56 57 48 81 EC E8 00 00 00 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1430abfc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430abfc0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnUnlockSlotRequested"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_vote_skip_practice_requested",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 01 00 00 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1430ac1b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac1b0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnVoteSkipPracticeRequested"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_cancel_kick_player_requested",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 41 89 D1",
+   "match": "0x1430ac540",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac540",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnCancelKickPlayerRequested"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_leave_session_notification",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 CE 80 3D ?? ?? ?? ?? 01 75 67 B8 70 01 00 00",
+   "match": "0x1430ac600",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac600",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnLeaveSessionNotification"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_invite_cancelled",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 70 01 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA 2A 91 DA 80 74 34 85 D2 74 4A 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 70 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 F1",
+   "match": "0x1430ac6e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac6e0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnInviteCancelled"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_view_profile_requested",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 70 01 00 00 48 8D 0D ?? ?? ?? ?? 8B 14 81 81 FA 2A 91 DA 80 74 34 85 D2 74 4D 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 70 01 00 00 75 C3 EB 1D 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 41 89 F9 E8 ?? ?? ?? ?? 48 8B 46 08",
+   "match": "0x1430ac780",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac780",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnViewProfileRequested"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_view_super_licence_requested_front_end",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 68 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 70 01 00 00 48 8D 0D ?? ?? ?? ?? 8B 14 81 81 FA 2A 91 DA 80 74 34 85 D2 74 4D 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 70 01 00 00 75 C3 EB 1D 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 41 89 F9 E8 ?? ?? ?? ?? 48 8B 46 08",
+   "match": "0x1430ac850",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac850",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnViewSuperLicenceRequestedFrontEnd"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_view_super_licence_requested_by_driver_stat_id_post_race",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 68 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 70 01 00 00 48 8D 0D ?? ?? ?? ?? 8B 14 81 81 FA 2A 91 DA 80 74 34 85 D2 74 4D 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 70 01 00 00 75 C3 EB 1D 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 41 89 F9 E8 ?? ?? ?? ?? 48 8B 86 B0 04 00 00",
+   "match": "0x1430ac960",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ac960",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnViewSuperLicenceRequestedByDriverStatIdPostRace"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_view_super_licence_requested_for_ghost_rival_post_race",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 68 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 4D",
+   "match": "0x1430acaa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430acaa0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnViewSuperLicenceRequestedForGhostRivalPostRace"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_view_profile_requested_by_driver_stat_id",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 70 01 00 00 48 8D 0D ?? ?? ?? ?? 8B 14 81 81 FA 2A 91 DA 80 74 34 85 D2 74 4D 83 C0 17 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 70 01 00 00 75 C3 EB 1D 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? 41 89 F9 E8 ?? ?? ?? ?? 48 8B 86 B0 04 00 00",
+   "match": "0x1430acb90",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430acb90",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnViewProfileRequestedByDriverStatId"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_hopper_search_success_popup_completed",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC 68 01 00 00 48 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1430ad6d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ad6d0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnHopperSearchSuccessPopupCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_custom_creating_popup_completed",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 74 B8 70 01 00 00",
+   "match": "0x1430ade60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ade60",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnCustomCreatingPopupCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_hopper_search_failed_popup_completed",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 48 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 74 B8 70 01 00 00",
+   "match": "0x1430ae0b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ae0b0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnHopperSearchFailedPopupCompleted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_custom_create",
+   "section": ".xtls",
+   "pattern": "56 48 81 EC 70 01 00 00 48 89 CE E8",
+   "match": "0x1430ae3f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430ae3f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_CustomCreate"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ui_on_view_profile_requested_by_player_description",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 48 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01 0F 85",
+   "match": "0x1430b0910",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430b0910",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkUi_OnViewProfileRequestedByPlayerDescription"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ce_create",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 44 89 C3 48 89 D7 48 89 CE E8",
+   "match": "0x1430b2190",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430b2190",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_CECreate"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_refused",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC 80 00 00 00 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1430c7300",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430c7300",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleRefused"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_remove_listener",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 77",
+   "match": "0x1430c81f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430c81f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_RemoveListener"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_cast_vote_internal",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 01 00 00 4C 89 CB",
+   "match": "0x1430c8430",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430c8430",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_CastVoteInternal"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_kick_player_from_session",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 00 00 00 48 89 D7 48 89 CE 48 8B 41 20",
+   "match": "0x1430c91a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430c91a0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_KickPlayerFromSession"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_load_definitions",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC 90 01 00 00 C5 F8 29 B4 24 80 01 00 00 48 89 D0",
+   "match": "0x1430da5d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430da5d0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_LoadDefinitions"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_game_mode_sync_received",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 44 89 CE 44 89 C3",
+   "match": "0x1430f0cb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430f0cb0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnGameModeSyncReceived"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_started",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 48 89 CE 80 3D ?? ?? ?? ?? 01 75 66 B8 00 01 00 00",
+   "match": "0x1430f2f40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430f2f40",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionStarted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_finished",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 68 01 00 00 48 89 CE 80 3D ?? ?? ?? ?? 01 75 6A B8 00 01 00 00",
+   "match": "0x1430f3180",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430f3180",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionFinished"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_in_career_hub",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 66 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 73 83 C0 19",
+   "match": "0x1430f3940",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430f3940",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionInCareerHub"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_post_race",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 4A 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 00 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86 C0 03 00 00 48 8B 88 A8 00 00 00 BA 0A 00 00 00",
+   "match": "0x1430f3a10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430f3a10",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionPostRace"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_session_complete",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 4A 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 00 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 86 C0 03 00 00 48 8B 88 A8 00 00 00 BA 0B 00 00 00",
+   "match": "0x1430f3b60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1430f3b60",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnSessionComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_send_registered_entrants",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 83 79 08 01 7F 0F",
+   "match": "0x1431099a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1431099a0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_SendRegisteredEntrants"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_finalise_entrants",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 28 48 89 CE 80 3D ?? ?? ?? ?? 01 75 65 B8 63 00 00 00",
+   "match": "0x143109ae0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143109ae0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_FinaliseEntrants"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_register_entrant",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 00 00 00 31 FF",
+   "match": "0x14310e1e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14310e1e0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestRegisterEntrant"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_handle_entrants_document_message_response",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC B8 00 00 00 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x143112950",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143112950",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_HandleEntrantsDocumentMessageResponse"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_unregister_entrant",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC 60 01 00 00 80 B9 DC 00 00 00 00",
+   "match": "0x143113f60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143113f60",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestUnregisterEntrant"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_drop_in_to_entrant",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 38 01 00 00 45 89 CC",
+   "match": "0x143114aa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143114aa0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_DropInToEntrant"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_handle_entrants_document_message_open",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 6A B8 63 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA 33 86 9E 86 74 32 85 D2 74 4C 83 C0 13 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C1 41 29 D1 41 D1 E9 41 01 D1 41 C1 E9 08 41 69 D1 75 01 00 00 29 D0 83 F8 63 75 C5 EB 1E 45 0F B6 C8 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 86 DC 00 00 00 01",
+   "match": "0x1431153a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1431153a0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_HandleEntrantsDocumentMessageOpen"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_handle_entrants_document_message_close",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 6A B8 63 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA 33 86 9E 86 74 32 85 D2 74 4C 83 C0 13 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C1 41 29 D1 41 D1 E9 41 01 D1 41 C1 E9 08 41 69 D1 75 01 00 00 29 D0 83 F8 63 75 C5 EB 1E 45 0F B6 C8 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? C6 86 DC 00 00 00 00",
+   "match": "0x143115430",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143115430",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_HandleEntrantsDocumentMessageClose"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_handle_entrants_document_message_clear",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 83 79 08 02 0F 8C",
+   "match": "0x1431154c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1431154c0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_HandleEntrantsDocumentMessageClear"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_unregister_ai_entrant",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC F8 00 00 00 48 89 D7 48 89 CE",
+   "match": "0x143115c50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143115c50",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestUnregisterAIEntrant"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_register_custom_entrant",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 31 C0",
+   "match": "0x143116e80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143116e80",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestRegisterCustomEntrant"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_change_se_livery",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 00 00 00 4C 89 C3 48 89 D7 48 89 CE",
+   "match": "0x143117420",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143117420",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestChangeSELivery"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_register_ai_entrant",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 00 00 00 31 C0",
+   "match": "0x143117630",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143117630",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestRegisterAIEntrant"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_entrants_request_register_ai_entrants",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 01 00 00 48 89 CE 83 79 08 02",
+   "match": "0x143117bb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143117bb0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkEntrants_RequestRegisterAIEntrants"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.leaderboards_on_discover_finished",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 48 89 CE 48 C7 41 10 00 00 00 00",
+   "match": "0x143150520",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143150520",
+   "kind": "func_start",
+   "names": [
+    "Game_Leaderboards_OnDiscoverFinished"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_invite_can_receive_new_invite",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 81 EC B0 00 00 00 48 89 D6 48 89 CB 48 89 D1 E8",
+   "match": "0x1431608c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1431608c0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkInvite_CanReceiveNewInvite"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_invite_on_career_joined_session_complete",
+   "section": ".xtls",
+   "pattern": "56 57 55 53 48 83 EC 48 44 89 CD 44 89 C7 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 53 B8 73 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 84 00 00 00 00 00 8B 14 81 85 D2 74 38 81 FA 1F A4 C1 3A 0F 84 ?? ?? ?? ?? 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 73 75 C1 40 84 ED 0F 84 ?? ?? ?? ?? 84 DB 0F 85 ?? ?? ?? ?? 0F B6 46 10",
+   "match": "0x143162480",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143162480",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkInvite_OnCareerJoinedSessionComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.playerset_handle_player_set_request_spectate_message",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01 75 58 B8 6D 01 00 00",
+   "match": "0x14316a360",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14316a360",
+   "kind": "func_start",
+   "names": [
+    "Game_Playerset_HandlePlayerSetRequestSpectateMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.playerset_send_player_set_info_message_internal",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 81 EC E0 00 00 00 48 89 D6 8B 41 28 85 C0",
+   "match": "0x14316e8a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14316e8a0",
+   "kind": "func_start",
+   "names": [
+    "Game_Playerset_SendPlayerSetInfoMessageInternal"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_handle_player_message",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 5E 00 00 00",
+   "match": "0x1432266d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1432266d0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_HandlePlayerMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_handle_super_message",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 50 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 75 59 B8 5E 00 00 00",
+   "match": "0x143226a90",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143226a90",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_HandleSuperMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_handle_ready_monitor_message",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 5E 00 00 00",
+   "match": "0x143226eb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143226eb0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_HandleReadyMonitorMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_send_player_ready",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 60 48 89 CE 48 C7 44 24 48 01 00 00 00",
+   "match": "0x143227240",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143227240",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_SendPlayerReady"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_add_ai_player",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC C0 00 00 00 48 89 D6",
+   "match": "0x14323a180",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323a180",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_AddAIPlayer"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_remove_ai_player",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC C0 00 00 00 48 89 D6 48 89 CF 48 8D 05 ?? ?? ?? ?? 48 89 44 24 28",
+   "match": "0x14323a4d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323a4d0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_RemoveAIPlayer"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_update_driver_authority",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 00 00 00 44 89 CB 44 89 C7",
+   "match": "0x14323c000",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323c000",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_UpdateDriverAuthority"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_drop_in_request_message",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 66 66 2E 0F 1F 84 00 00 00 00 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 62 83 C0 19",
+   "match": "0x14323d550",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323d550",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleDropInRequestMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_drop_in_result_message",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 D6 48 89 CF 8B 42 6C 80 3D ?? ?? ?? ?? 01",
+   "match": "0x14323d6e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323d6e0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleDropInResultMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_update_drop_in_results",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 48 8D A9 C0 00 00 00",
+   "match": "0x14323da80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323da80",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_UpdateDropInResults"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_force_drop_in_spectator",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 83 79 08 01",
+   "match": "0x14323efc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323efc0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_ForceDropInSpectator"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_add_drop_in_request",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 30 83 79 08 01",
+   "match": "0x14323f450",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323f450",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_AddDropInRequest"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_find_entrant_to_drop_in",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 44 89 C3 49 89 D7",
+   "match": "0x14323fcb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14323fcb0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_FindEntrantToDropIn"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_request_drop_in",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC 38 01 00 00 48 8B 41 20",
+   "match": "0x143240770",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143240770",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_RequestDropIn"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_find_entrant_unattached",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 30 48 89 C8 48 8B 49 20",
+   "match": "0x143240b80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143240b80",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_FindEntrantUnattached"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_find_entrant_attached_to_player",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC 88 00 00 00 48 8B 41 20",
+   "match": "0x143240cb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143240cb0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_FindEntrantAttachedToPlayer"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_can_drop_into_driver",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 41 80 B8 82 00 00 00 FF",
+   "match": "0x143240eb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143240eb0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_CanDropIntoDriver"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_progress_observer_locator_message",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 78 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x14325bf30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14325bf30",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleProgressObserverLocatorMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_send_update_message",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 80 79 68 00",
+   "match": "0x14325c4f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14325c4f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_SendUpdateMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_discarded_connection",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 28 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 44 0F B6 F2",
+   "match": "0x143267690",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143267690",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnDiscardedConnection"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_create_packet",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 05 00 00 C5 F9 29 B4 24 00 05 00 00",
+   "match": "0x143268620",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143268620",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_CreatePacket"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_deserialise_vehicle",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 06 00 00 C5 78 29 BC 24 90 06 00 00",
+   "match": "0x14326a9c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14326a9c0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_DeserialiseVehicle"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_handle_remote_player_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC F0 01 00 00",
+   "match": "0x14327a420",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14327a420",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_HandleRemotePlayerStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_broadcast_coordination_point",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 28 4C 89 C6 48 89 D7 48 89 CB 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1432b0f00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1432b0f00",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_BroadcastCoordinationPoint"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.f1os_start_task",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 B8 68 00 02 00 E8 ?? ?? ?? ?? 48 29 C4 48 89 D6",
+   "match": "0x1432b3b20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1432b3b20",
+   "kind": "func_start",
+   "names": [
+    "Game_F1os_StartTask"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.f1os_clean_up_request",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 C5 F8 29 B4 24 A0 00 00 00 44 89 C5 48 89 D7",
+   "match": "0x1432b4440",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1432b4440",
+   "kind": "func_start",
+   "names": [
+    "Game_F1os_CleanUpRequest"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.f1os_tasksystem_internal_start_task",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 01 00 00 C5 F8 29 B4 24 30 01 00 00 4D 89 C5 48 89 D7",
+   "match": "0x1432d9780",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1432d9780",
+   "kind": "func_start",
+   "names": [
+    "Game_F1osTasksystem_InternalStartTask"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_progress_get_progress_time_stamp",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 20 89 D6 8B 41 24",
+   "match": "0x1432e2560",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1432e2560",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkProgress_GetProgressTimeStamp"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pitlane_set_vehicle_status",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 00 00 00 C5 79 29 84 24 D0 00 00 00",
+   "match": "0x1434bc540",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434bc540",
+   "kind": "func_start",
+   "names": [
+    "Game_Pitlane_SetVehicleStatus"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pitlane_multiplayer_reset_to_track",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 70 89 D3",
+   "match": "0x1434bff40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434bff40",
+   "kind": "func_start",
+   "names": [
+    "Game_Pitlane_Multiplayer_resetToTrack"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pitlane_multiplayer_trigger_garage_drive_out",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 38 89 D3 80 FA 1A",
+   "match": "0x1434d16a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434d16a0",
+   "kind": "func_start",
+   "names": [
+    "Game_Pitlane_Multiplayer_triggerGarageDriveOut"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pitlane_multiplayer_teleport_to_garage",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 50 89 D3",
+   "match": "0x1434d17f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434d17f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Pitlane_Multiplayer_teleportToGarage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_message_mid_session_driver_swap",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 00 01 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA BB 5E FE A7 74 34 85 D2 74 4A 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 3D 00 01 00 00 75 C3 EB 1A 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 4C 8D 05 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 8B 06 48 89 F1 FF 50 70 48 8B 06 48 89 F1 FF 50 58 31 C0 48 83 C4 20 5E C3 CC CC CC CC CC CC CC CC CC CC CC CC CC E9",
+   "match": "0x1434db270",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434db270",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnMessageMidSessionDriverSwap"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_update_spectator_skip",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 C5 F9 29 74 24 40 48 89 D6 48 89 CF 0F B6 99 14 0F 00 00",
+   "match": "0x1436ea400",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436ea400",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_UpdateSpectatorSkip"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_gather_ui_legacy",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 06 00 00 C5 F9 29 BC 24 D0 06 00 00",
+   "match": "0x1436ec5f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436ec5f0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_GatherUILegacy"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_ready_can_join_lobby_watching",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 78 48 89 D6 48 89 CF 48 8B 89 90 0C 00 00",
+   "match": "0x1436f1bf0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436f1bf0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkReady_CanJoinLobbyWatching"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.trace_read_from_stream",
+   "section": ".xtls",
+   "pattern": "55 41 57 41 56 41 55 41 54 56 57 53 48 81 EC B8 00 00 00 48 8D AC 24 80 00 00 00 C5 78 29 75 20",
+   "match": "0x1437ad610",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1437ad610",
+   "kind": "func_start",
+   "names": [
+    "Game_Trace_ReadFromStream"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.rtt_create_textures",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 06 00 00 C5 F8 29 BC 24 30 06 00 00 C5 F8 29 B4 24 20 06 00 00 44 89 CB",
+   "match": "0x143d7f030",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143d7f030",
+   "kind": "func_start",
+   "names": [
+    "Game_Rtt_CreateTextures"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.smoketest_debug_on_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 78 01 00 00 48 8B 91 28 01 00 00",
+   "match": "0x143deeae0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143deeae0",
+   "kind": "func_start",
+   "names": [
+    "Game_SmoketestDebug_OnUpdate"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.texture_streaming_verbose_clearing",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 58 04 00 00 C5 F8 29 BC 24 40 04 00 00 C5 F8 29 B4 24 30 04 00 00 48 8B 71 08",
+   "match": "0x143eb8070",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143eb8070",
+   "kind": "func_start",
+   "names": [
+    "Game_TextureStreamingVerbose_Clearing"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ramdisc_found",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 81 EC 48 01 00 00 4C 89 C7 48 89 CE",
+   "match": "0x143f31280",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143f31280",
+   "kind": "func_start",
+   "names": [
+    "Game_Ramdisc_Found"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.video_verbose_false",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 C5 F8 29 B4 24 B0 00 00 00 48 89 CE 48 8D 79 28",
+   "match": "0x143f92920",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143f92920",
+   "kind": "func_start",
+   "names": [
+    "Game_VideoVerbose_False"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_send_mute_status",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC F0 04 00 00 48 8B 81 98 01 00 00",
+   "match": "0x144033dc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144033dc0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_SendMuteStatus"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_send_headset_status",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC F0 04 00 00 48 8B 81 98 01 00 00 48 0B 81 90 01 00 00 0F 84 ?? ?? ?? ?? 4D 89 CE",
+   "match": "0x144035ba0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144035ba0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_SendHeadsetStatus"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_join_channel",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 68 80 79 08 00",
+   "match": "0x144036890",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144036890",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_JoinChannel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_leave_active_channel",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 80 79 08 00",
+   "match": "0x144036a30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144036a30",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_LeaveActiveChannel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_receive_voice_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 00 00 00 C5 F9 7F BC 24 80 00 00 00",
+   "match": "0x144036fc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144036fc0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_ReceiveVoiceData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_handle_play_fab_party_state_change",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 01 00 00 8B 02",
+   "match": "0x14403cc50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403cc50",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_HandlePlayFabPartyStateChange"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_user_joined_network",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 01 00 00 48 89 D3",
+   "match": "0x14403d9c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403d9c0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_UserJoinedNetwork"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_set_chat_permissions",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 00 00 00 48 89 CE 48 8D 44 24 58",
+   "match": "0x14403e810",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403e810",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_SetChatPermissions"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_user_left_network",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 28 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x14403eba0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403eba0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_UserLeftNetwork"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_user_joined_channel",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC 88 00 00 00 44 89 C7 48 89 D3",
+   "match": "0x14403ed20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403ed20",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_UserJoinedChannel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_user_left_channel",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01 0F 85 ?? ?? ?? ?? B8 F9 00 00 00",
+   "match": "0x14403eee0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403eee0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_UserLeftChannel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_is_remote_user_chatting",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 80 3D ?? ?? ?? ?? 00",
+   "match": "0x14403f140",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403f140",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_IsRemoteUserChatting"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_is_local_microphone_muted",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 38 31 C0 80 3D ?? ?? ?? ?? 00 0F 84 ?? ?? ?? ?? 80 B9 00 01 00 00 00 0F 84 ?? ?? ?? ?? 80 B9 80 01 00 00 00",
+   "match": "0x14403f420",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403f420",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_IsLocalMicrophoneMuted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_enable_speech_to_text",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 00 0F 84 ?? ?? ?? ?? 80 BE 00 01 00 00 00 0F 84 ?? ?? ?? ?? 4C 8B B6 70 01 00 00 48 8D 4C 24 28 E8 ?? ?? ?? ?? 85 C0 74 04 89 C7 EB 21",
+   "match": "0x14403f5c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403f5c0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_EnableSpeechToText"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_enable_text_to_speech",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 00 0F 84 ?? ?? ?? ?? 80 BE 00 01 00 00 00 0F 84 ?? ?? ?? ?? 4C 8B B6 70 01 00 00 48 8D 4C 24 28 E8 ?? ?? ?? ?? 85 C0 74 04 89 C7 EB 20",
+   "match": "0x14403f6f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403f6f0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_EnableTextToSpeech"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_request_text_to_speech",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 31 C0 80 3D ?? ?? ?? ?? 00",
+   "match": "0x14403f820",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403f820",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_RequestTextToSpeech"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_set_text_to_speech_profile",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 80 3D ?? ?? ?? ?? 00 0F 84",
+   "match": "0x14403f970",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14403f970",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_SetTextToSpeechProfile"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_set_remote_user_muted",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 38 80 3D ?? ?? ?? ?? 00",
+   "match": "0x1440400e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440400e0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_SetRemoteUserMuted"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_voice_text_received_helper",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC B8 08 00 00",
+   "match": "0x1440404b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440404b0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkVoice_TextReceivedHelper"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_destroy_disconnecting_and_timed_out_connecting_c",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 01 00 00 C5 79 29 8C 24 B0 01 00 00",
+   "match": "0x144047600",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144047600",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_DestroyDisconnectingAndTimedOutConnectingC"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_connect",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC 70 01 00 00 48 89 D3",
+   "match": "0x144048de0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144048de0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_Connect"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_find_or_create_channel",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 78 01 00 00 44 89 CD",
+   "match": "0x144049210",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144049210",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_FindOrCreateChannel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_send_connect_message",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 50 4C 89 C3 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x144049a40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144049a40",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_SendConnectMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_disconnect",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 81 EC 78 01 00 00 48 89 D7 48 89 CE",
+   "match": "0x144049b60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144049b60",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_Disconnect"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_add_packet_to_builder",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 01 00 00 44 89 CD 4C 89 C3",
+   "match": "0x144049e30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144049e30",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_AddPacketToBuilder"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_handle_rudp_packet",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC 70 01 00 00 4C 89 C3",
+   "match": "0x14404a460",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14404a460",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_HandleRUDPPacket"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_update_transport_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 38 48 89 CE 80 3D ?? ?? ?? ?? 01 75 70",
+   "match": "0x14404ac50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14404ac50",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_UpdateTransportStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_add_connection_to_store_client",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 81 EC 90 00 00 00 48 8B 41 08 48 85 C0",
+   "match": "0x14405b330",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14405b330",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_AddConnectionToStoreClient"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_alloc_connection_id",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 28 84 D2 0F 84 ?? ?? ?? ?? 48 89 CE",
+   "match": "0x14405b670",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14405b670",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_AllocConnectionID"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_migration_on_migrate_session_host_complete",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 4C 89 C7 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x144069f10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144069f10",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkMigration_OnMigrateSessionHostComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_on_migrate_session_client_complete",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 28 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 79 B8 F8 00 00 00",
+   "match": "0x14406a480",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14406a480",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_OnMigrateSessionClientComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_send_to_connection",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 BD 10 00 00 00",
+   "match": "0x14406ed50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14406ed50",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_SendToConnection"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_kick_connection",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 08 05 00 00",
+   "match": "0x14406fa70",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14406fa70",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_KickConnection"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_throttle_send_packet",
+   "section": ".xtls",
+   "pattern": "55 41 57 41 56 41 55 41 54 56 57 53 48 83 EC 28 48 8D 6C 24 20 48 89 CE",
+   "match": "0x144070f00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144070f00",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkThrottle_SendPacket"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_data_send_to_connection_id_via_system_channel",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 4C 89 CF 44 89 C6 89 D3",
+   "match": "0x144073560",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144073560",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkData_SendToConnectionIDViaSystemChannel"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_throttle_get_data_sent",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 28 48 89 C8 44 0F B6 CA",
+   "match": "0x1440751a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440751a0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkThrottle_GetDataSent"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_throttle_connection_left",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 20 89 D3 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x144076060",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144076060",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkThrottle_ConnectionLeft"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_throttle_update_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 60 C5 F9 29 74 24 50",
+   "match": "0x1440762d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440762d0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkThrottle_UpdateStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_throttle_get_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 C5 79 29 84 24 A0 00 00 00",
+   "match": "0x1440765b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440765b0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkThrottle_GetStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_initialise_async_socket",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 CE 80 3D ?? ?? ?? ?? 01 75 79 B8 AC 00 00 00",
+   "match": "0x144076cd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144076cd0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_InitialiseAsyncSocket"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_reset_transport_stats",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 CE 80 3D ?? ?? ?? ?? 01 75 67 B8 AC 00 00 00",
+   "match": "0x1440772d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440772d0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_ResetTransportStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_stats_report_transport_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 01 00 00 C5 79 29 84 24 E0 01 00 00",
+   "match": "0x1440775c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440775c0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkStats_ReportTransportStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_session_leave_session",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 44 89 C3 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1440833a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440833a0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkSession_LeaveSession"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_send_to",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 4D 89 CF 44 89 C5",
+   "match": "0x144093a40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144093a40",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_SendTo"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_flush",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 01 00 00 48 89 CE C6 44 24 60 00",
+   "match": "0x144093dd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144093dd0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_Flush"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_p2_p_connect_request",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 28 48 89 D6 48 89 CF 48 8D 0D",
+   "match": "0x1440966b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440966b0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnP2PConnectRequest"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_lobby_migrated_host",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC F0 00 00 00 44 89 C3 48 89 D7 48 89 CE 48 8D 0D ?? ?? ?? ?? 31 D2 E8 ?? ?? ?? ?? 8B 0F 89 44 24 30 C7 44 24 34 5F 02 02 00",
+   "match": "0x144098c10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144098c10",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnLobbyMigratedHost"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_on_lobby_migrated_client",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC F0 00 00 00 C5 F8 29 B4 24 E0 00 00 00 44 89 C3",
+   "match": "0x144099090",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144099090",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_OnLobbyMigratedClient"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_migrate_session_host",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 4C 89 C7 48 89 D3",
+   "match": "0x144099410",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144099410",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_MigrateSessionHost"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_migrate_session_client",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 48 4C 89 C7 48 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x144099ec0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144099ec0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_MigrateSessionClient"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_update_connection_stats",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 38 01 00 00 C5 F8 29 B4 24 20 01 00 00 48 89 CF 48 8B 89 78 05 00 00",
+   "match": "0x1440a1aa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440a1aa0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_UpdateConnectionStats"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_transport_wait_for_endpoint",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 38 01 00 00 4C 8B 69 08",
+   "match": "0x1440b7fa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1440b7fa0",
+   "kind": "func_start",
+   "names": [
+    "Game_NetworkTransport_WaitForEndpoint"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.network_view_player_card",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 81 EC F0 00 00 00 0F B6 1A",
+   "match": "0x14412afb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14412afb0",
+   "kind": "func_start",
+   "names": [
+    "Game_Network_ViewPlayerCard"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ui_attacher_do_detach_child",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 30 48 89 CE 48 8B 49 50",
+   "match": "0x144218690",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144218690",
+   "kind": "func_start",
+   "names": [
+    "Game_UiAttacher_DoDetachChild"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ui_attacher_do_attach_child",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 30 48 89 CE 8B 41 14",
+   "match": "0x144218810",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144218810",
+   "kind": "func_start",
+   "names": [
+    "Game_UiAttacher_DoAttachChild"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.ui_message_display_message",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 30 4D 89 CE 4C 89 C3",
+   "match": "0x1442d9bf0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1442d9bf0",
+   "kind": "func_start",
+   "names": [
+    "Game_UiMessage_DisplayMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
