@@ -144,7 +144,7 @@ export default defineConfigWithTheme<DocsThemeConfig>({
               { text: "News", link: "/using/news" },
               { text: "Addons", link: "/using/addons" },
               { text: "Addons that ship with the launcher", link: "/using/bundled-addons" },
-              { text: "Mod Importer", link: "/using/mods" },
+              { text: "Simplified Importer", link: "/using/mods" },
               { text: "Profiles", link: "/using/profiles" },
               { text: "In-game addon settings", link: "/using/swofty-mod" },
               { text: "Steam and EA app copies", link: "/using/game-copies" },
@@ -170,6 +170,7 @@ export default defineConfigWithTheme<DocsThemeConfig>({
           {
             text: "Releases",
             items: [
+              { text: "1.3.3", link: "/releases/1.3.3" },
               { text: "1.3.2", link: "/releases/1.3.2" },
               { text: "1.3.1", link: "/releases/1.3.1" },
               { text: "1.3.0", link: "/releases/1.3.0" },
