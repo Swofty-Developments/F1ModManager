@@ -38375,6 +38375,30 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "car.physics_step_vehicle",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 08 02 00 00 C5 78 29 BC 24 F0 01 00 00",
+   "match": "0x1446dceb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446dceb0",
+   "kind": "func_start",
+   "names": [
+    "Car_Physics_StepVehicle"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
