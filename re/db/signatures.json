@@ -12335,6 +12335,150 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "ai.canned_events_load_per_race_dnfs",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 78 05 00 00 C5 F8 29 B4 24 60 05 00 00 48 89 CB 48 8B 41 08",
+   "match": "0x1409c2b10",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1409c2b10",
+   "kind": "func_start",
+   "names": [
+    "Ai_CannedEvents_LoadPerRaceDnfs"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.canned_events_load_player_fault_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 04 00 00 C5 F8 29 BC 24 70 04 00 00 C5 F8 29 B4 24 60 04 00 00 49 89 CF",
+   "match": "0x1409b5fb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1409b5fb0",
+   "kind": "func_start",
+   "names": [
+    "Game_CannedEvents_LoadPlayerFaultData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_damage_monitor_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 C5 F8 29 74 24 30 48 89 CE 48 C7 81 20 0C 00 00 00 00 00 00",
+   "match": "0x142f15ce0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f15ce0",
+   "kind": "func_start",
+   "names": [
+    "Car_TyreDamageMonitor_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.parse_suspension_system",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 48 89 D6 48 89 CF 48 8B 02",
+   "match": "0x1446a8870",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446a8870",
+   "kind": "func_start",
+   "names": [
+    "Car_Parse_SuspensionSystem"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.audio_random_fault_events",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 48 89 D7 48 89 CE 0F B6 5A 10",
+   "match": "0x140a1d610",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140a1d610",
+   "kind": "func_start",
+   "names": [
+    "Game_Audio_RandomFaultEvents"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.audio_gearbox_fault_events",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 50 C5 F8 29 74 24 40 4C 89 CB 4D 89 C6",
+   "match": "0x140a01c30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140a01c30",
+   "kind": "func_start",
+   "names": [
+    "Game_Audio_GearboxFaultEvents"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
