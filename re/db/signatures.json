@@ -12060,6 +12060,102 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "game.create_terminal_damage_slow_mo",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 44 89 C7 89 D3",
+   "match": "0x142f47480",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f47480",
+   "kind": "func_start",
+   "names": [
+    "Game_Create_TerminalDamageSlowMo"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.handle_sequence_event",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 68 01 00 00 C5 F8 29 B4 24 50 01 00 00 C5 F8 28 F3",
+   "match": "0x1402333d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1402333d0",
+   "kind": "func_start",
+   "names": [
+    "Game_Handle_SequenceEvent"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.play_safety_car_wipers",
+   "section": ".xtls",
+   "pattern": "48 83 EC 48 48 89 C8 48 8B 89 30 0E 00 00",
+   "match": "0x140a01bd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140a01bd0",
+   "kind": "func_start",
+   "names": [
+    "Game_Play_SafetyCarWipers"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.parse_mode_championship",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 0A 00 00 C5 F8 29 BC 24 D0 0A 00 00",
+   "match": "0x1407b2c60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1407b2c60",
+   "kind": "func_start",
+   "names": [
+    "Game_Parse_ModeChampionship"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
