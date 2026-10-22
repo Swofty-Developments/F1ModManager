@@ -12479,6 +12479,3270 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "session.misconduct_on_car_to_car_collision",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 C5 F8 29 7C 24 50 C5 F9 29 74 24 40",
+   "match": "0x142f55040",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f55040",
+   "kind": "func_start",
+   "names": [
+    "Sess_Misconduct_OnCarToCarCollision"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.misconduct_dump_table",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 01 00 00 C5 78 29 84 24 00 01 00 00 C5 F8 29 BC 24 F0 00 00 00 C5 F8 29 B4 24 E0 00 00 00 48 89 CE",
+   "match": "0x1435924d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435924d0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Misconduct_DumpTable"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.misconduct_remove_watched_incident",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 04 00 00 C5 F8 29 BC 24 D0 04 00 00 C5 F8 29 B4 24 C0 04 00 00 0F B6 02",
+   "match": "0x1435b1550",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435b1550",
+   "kind": "func_start",
+   "names": [
+    "Sess_Misconduct_RemoveWatchedIncident"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.misconduct_check_environment_contact",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 C5 78 29 44 24 50 C5 F8 29 7C 24 40 C5 F8 29 74 24 30 48 89 CE 48 8B 41 28",
+   "match": "0x1435baf40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435baf40",
+   "kind": "func_start",
+   "names": [
+    "Sess_Misconduct_CheckEnvironmentContact"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.misconduct_check_wall_riding",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 C5 78 29 84 24 90 00 00 00 C5 F8 29 BC 24 80 00 00 00 C5 F8 29 74 24 70 48 89 CE 48 8B 41 28",
+   "match": "0x1435ca400",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435ca400",
+   "kind": "func_start",
+   "names": [
+    "Sess_Misconduct_CheckWallRiding"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.misconduct_hand_back_illegal_overtake",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 78 C5 F8 29 7C 24 60 C5 F9 29 74 24 50 48 8B 41 08",
+   "match": "0x14359a640",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14359a640",
+   "kind": "func_start",
+   "names": [
+    "Sess_Misconduct_HandBackIllegalOvertake"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.stop_go_penalty_receive_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 30 48 89 D7 48 89 CE 44 0F B6 42 10",
+   "match": "0x1435c6a40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435c6a40",
+   "kind": "func_start",
+   "names": [
+    "Sess_StopGoPenalty_ReceiveData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.stop_go_penalty_send_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 48 89 CE 48 8B 41 28 48 8B 49 30 48 39 C8 74 4C",
+   "match": "0x1435c6ef0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435c6ef0",
+   "kind": "func_start",
+   "names": [
+    "Sess_StopGoPenalty_SendData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.stop_go_penalty_send_data_2",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 4C 8B 69 20 48 8B 69 28 49 39 ED 0F 84 ?? ?? ?? ?? 89 D3 48 89 CE 80 FA 01 BF 02 00 00 00 83 DF 00 4C 8D 3D",
+   "match": "0x1435c76a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435c76a0",
+   "kind": "func_start",
+   "names": [
+    "Sess_StopGoPenalty_SendData_2"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.drive_through_penalty_receive_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 60 48 89 D7 48 89 CE 4C 8D 72 10",
+   "match": "0x1435a6b70",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435a6b70",
+   "kind": "func_start",
+   "names": [
+    "Sess_DriveThroughPenalty_ReceiveData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.drive_through_penalty_send_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 28 01 00 00 C5 78 29 BC 24 10 01 00 00 C5 78 29 B4 24 00 01 00 00 C5 78 29 AC 24 F0 00 00 00 C5 78 29 A4 24 E0 00 00 00 C5 78 29 9C 24 D0 00 00 00 C5 79 29 94 24 C0 00 00 00",
+   "match": "0x1435a7200",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435a7200",
+   "kind": "func_start",
+   "names": [
+    "Sess_DriveThroughPenalty_SendData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.drive_through_penalty_send_data_2",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 4C 8B 69 20 48 8B 69 28 49 39 ED 0F 84 ?? ?? ?? ?? 89 D3 48 89 CE 4C 8D 74 24 40",
+   "match": "0x1435a9070",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435a9070",
+   "kind": "func_start",
+   "names": [
+    "Sess_DriveThroughPenalty_SendData_2"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.speed_limit_penalty_receive_data",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 60 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 48 89 CE",
+   "match": "0x1435c5070",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435c5070",
+   "kind": "func_start",
+   "names": [
+    "Sess_SpeedLimitPenalty_ReceiveData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.speed_limit_penalty_send_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 4C 8B 69 20 48 8B 69 28 49 39 ED 0F 84 ?? ?? ?? ?? 89 D3 48 89 CE 80 FA 01 BF 02 00 00 00 83 DF 00 4C 8D 35",
+   "match": "0x1435c55d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435c55d0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SpeedLimitPenalty_SendData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.multiple_warnings_penalty_send_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 48 8B 41 08",
+   "match": "0x1435b5bc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435b5bc0",
+   "kind": "func_start",
+   "names": [
+    "Sess_MultipleWarningsPenalty_SendData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.multiple_warnings_penalty_receive_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 30 48 89 D7 48 89 CE 4C 8D 72 10",
+   "match": "0x1435b6780",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435b6780",
+   "kind": "func_start",
+   "names": [
+    "Sess_MultipleWarningsPenalty_ReceiveData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.multiple_warnings_penalty_send_data_2",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 4C 8B 69 20 48 8B 69 28 49 39 ED 0F 84 ?? ?? ?? ?? 89 D3 48 89 CE 4C 8D 74 24 38",
+   "match": "0x1435b7240",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435b7240",
+   "kind": "func_start",
+   "names": [
+    "Sess_MultipleWarningsPenalty_SendData_2"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.penalty_log_remove_vehicle",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 48 89 D7 48 89 CB 80 3D ?? ?? ?? ?? 01 75 4F B8 E7 00 00 00",
+   "match": "0x1435641f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435641f0",
+   "kind": "func_start",
+   "names": [
+    "Sess_PenaltyLog_RemoveVehicle"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.penalty_log_print",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 02 00 00 C5 F9 29 B4 24 C0 02 00 00",
+   "match": "0x143565bc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143565bc0",
+   "kind": "func_start",
+   "names": [
+    "Sess_PenaltyLog_Print"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.penalty_log_receive_add_record",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 70 48 89 D7 48 89 CE 48 8D 5A 10",
+   "match": "0x143563c50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143563c50",
+   "kind": "func_start",
+   "names": [
+    "Sess_PenaltyLog_ReceiveAddRecord"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.penalty_log_send_record",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 00 00 00 C5 F8 29 B4 24 D0 00 00 00 44 88 4C 24 6C",
+   "match": "0x143565170",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143565170",
+   "kind": "func_start",
+   "names": [
+    "Sess_PenaltyLog_SendRecord"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.penalty_log_send_record_2",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 4C 8B 79 48",
+   "match": "0x1435656c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435656c0",
+   "kind": "func_start",
+   "names": [
+    "Sess_PenaltyLog_SendRecord_2"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.penalty_log_send_all_records",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 83 79 08 01 0F 8F ?? ?? ?? ?? 89 D3 48 89 CE",
+   "match": "0x143566630",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143566630",
+   "kind": "func_start",
+   "names": [
+    "Sess_PenaltyLog_SendAllRecords"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.overtake_log_send_all_records",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 83 79 08 01 0F 8F ?? ?? ?? ?? 89 D3",
+   "match": "0x143379f60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143379f60",
+   "kind": "func_start",
+   "names": [
+    "Sess_OvertakeLog_SendAllRecords"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_disqualify_for_penalty_points",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 00 00 00 C5 F8 29 7C 24 70 C5 F8 29 74 24 60 48 89 CB 48 8B 81 08 1C 00 00",
+   "match": "0x14356b120",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14356b120",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_DisqualifyForPenaltyPoints"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.issue_stop_go",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 88 00 00 00 44 89 C3 48 89 D7 48 89 CE 0F B6 12 48 81 FA FF 00 00 00",
+   "match": "0x143571850",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143571850",
+   "kind": "func_start",
+   "names": [
+    "Sess_Issue_StopGo"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.issue_grid_place_penalty",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 81 EC 90 00 00 00 C5 F9 29 B4 24 80 00 00 00",
+   "match": "0x143572070",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143572070",
+   "kind": "func_start",
+   "names": [
+    "Sess_Issue_GridPlacePenalty"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_apply_post_session_penalties",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 C1 00 00 00",
+   "match": "0x143575170",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143575170",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_ApplyPostSessionPenalties"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_send_black_flag_timer_to_osd",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 30 80 FA FF 0F 84",
+   "match": "0x1435752b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435752b0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_SendBlackFlagTimerToOsd"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.issue_post_race_time_penalty",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 78 C5 F8 29 7C 24 60 C5 F8 29 74 24 50 48 89 CF",
+   "match": "0x143575400",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143575400",
+   "kind": "func_start",
+   "names": [
+    "Sess_Issue_PostRaceTimePenalty"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_remove_invalid_overtake",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 48 01 00 00 C5 79 29 A4 24 30 01 00 00",
+   "match": "0x1435990e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435990e0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_RemoveInvalidOvertake"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_corner_cutting_time_gained",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 C5 F8 29 BC 24 B0 00 00 00 C5 F8 29 B4 24 A0 00 00 00 89 D3 48 89 CE",
+   "match": "0x14359e5a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14359e5a0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_CornerCuttingTimeGained"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_pace_car_new_lap",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 40 C5 F8 29 74 24 30 C5 F8 28 F2",
+   "match": "0x14359f2b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14359f2b0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_PaceCarNewLap"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_corner_cutting_time_gained_2",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 00 00 00 C5 F8 29 BC 24 90 00 00 00 C5 F8 29 B4 24 80 00 00 00 89 D3 48 89 CE",
+   "match": "0x1435a4de0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1435a4de0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_CornerCuttingTimeGained_2"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.ruleset_finalise_results",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 40 48 89 D7 48 89 CE 48 8B 89 00 03 00 00",
+   "match": "0x142d2ee50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d2ee50",
+   "kind": "func_start",
+   "names": [
+    "Sess_Ruleset_FinaliseResults"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.carbon_damage_on_impulse",
+   "section": ".xtls",
+   "pattern": "56 57 48 81 EC C8 00 00 00 C5 78 29 B4 24 B0 00 00 00",
+   "match": "0x142f13de0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f13de0",
+   "kind": "func_start",
+   "names": [
+    "Car_CarbonDamage_OnImpulse"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.damage_component_reset_nose_cone",
+   "section": ".xtls",
+   "pattern": "55 41 57 41 56 41 54 56 57 53 48 81 EC 90 00 00 00",
+   "match": "0x142f146b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f146b0",
+   "kind": "func_start",
+   "names": [
+    "Car_DamageComponent_ResetNoseCone"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.carbon_damage_print_setting",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 78 44 89 CD 4C 89 C3",
+   "match": "0x142f19ad0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f19ad0",
+   "kind": "func_start",
+   "names": [
+    "Car_CarbonDamage_PrintSetting"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.carbon_damage_init",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 4C 89 C7 48 89 D3 48 89 CE 48 8B 02",
+   "match": "0x142f1a700",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f1a700",
+   "kind": "func_start",
+   "names": [
+    "Car_CarbonDamage_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.carbon_damage_on_session_restart",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 20 48 89 CE 48 8B 41 60 48 8B 80 88 00 00 00",
+   "match": "0x142f1b010",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f1b010",
+   "kind": "func_start",
+   "names": [
+    "Car_CarbonDamage_OnSessionRestart"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.carbon_damage_register_impact_callback",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 81 EC 40 01 00 00 C5 78 29 BC 24 30 01 00 00",
+   "match": "0x142f1b2b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f1b2b0",
+   "kind": "func_start",
+   "names": [
+    "Car_CarbonDamage_RegisterImpactCallback"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_deformation_load_node_graph",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 38 02 00 00 C5 78 29 84 24 20 02 00 00 C5 F8 29 BC 24 10 02 00 00 C5 F8 29 B4 24 00 02 00 00 48 89 D7",
+   "match": "0x144657290",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144657290",
+   "kind": "func_start",
+   "names": [
+    "Car_TyreDeformation_LoadNodeGraph"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_deformation_set_tyre",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 00 00 00 80 3D ?? ?? ?? ?? 00",
+   "match": "0x14465c950",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14465c950",
+   "kind": "func_start",
+   "names": [
+    "Car_TyreDeformation_SetTyre"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_deformation_check_particles",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 01 00 00 C5 79 7F BC 24 B0 01 00 00 C5 79 7F B4 24 A0 01 00 00",
+   "match": "0x14470bd80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14470bd80",
+   "kind": "func_start",
+   "names": [
+    "Car_TyreDeformation_CheckParticles"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.failsafe_limit_velocity",
+   "section": ".xtls",
+   "pattern": "56 48 81 EC A0 00 00 00 C5 78 29 94 24 90 00 00 00",
+   "match": "0x144677780",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144677780",
+   "kind": "func_start",
+   "names": [
+    "Car_Failsafe_LimitVelocity"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.driver_variation_in_race_update",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 48 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 48 89 CE 48 8B 05",
+   "match": "0x1409af4c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1409af4c0",
+   "kind": "func_start",
+   "names": [
+    "Ai_DriverVariationInRace_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.difficulty_create_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 00 00 00 C5 F8 29 B4 24 80 00 00 00 48 89 CB 80 3D ?? ?? ?? ?? 01",
+   "match": "0x142417640",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142417640",
+   "kind": "func_start",
+   "names": [
+    "Game_Difficulty_CreateData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.difficulty_select_game_mode_data",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 00 00 00 48 89 D7 48 89 CE 48 8D 59 68",
+   "match": "0x142424d50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142424d50",
+   "kind": "func_start",
+   "names": [
+    "Game_Difficulty_SelectGameModeData"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.quali_pace_debug",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 00 00 00 C5 78 29 AC 24 E0 00 00 00 C5 78 29 A4 24 D0 00 00 00 C5 78 29 9C 24 C0 00 00 00 C5 78 29 94 24 B0 00 00 00 C5 78 29 8C 24 A0 00 00 00 C5 78 29 84 24 90 00 00 00 C5 F8 29 BC 24 80 00 00 00 C5 F8 29 74 24 70 C5 F8 57 C0",
+   "match": "0x1429805c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1429805c0",
+   "kind": "func_start",
+   "names": [
+    "Ai_QualiPace_Debug"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.suggested_gear_for_gate",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 28 05 00 00 C5 78 29 8C 24 10 05 00 00",
+   "match": "0x142f5bb50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f5bb50",
+   "kind": "func_start",
+   "names": [
+    "Ai_SuggestedGear_ForGate"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.weather_init_scenario",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 0B 00 00",
+   "match": "0x14461bea0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14461bea0",
+   "kind": "func_start",
+   "names": [
+    "Sess_Weather_InitScenario"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.weather_allocate_states",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 41 0F B6 C0 4C 8D 81 D8 26 00 00",
+   "match": "0x14461d090",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14461d090",
+   "kind": "func_start",
+   "names": [
+    "Sess_Weather_AllocateStates"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.weather_stitch_scenario",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 06 00 00 C5 78 29 B4 24 D0 06 00 00",
+   "match": "0x14461d300",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14461d300",
+   "kind": "func_start",
+   "names": [
+    "Sess_Weather_StitchScenario"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.time_of_day_randomise_transitions",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 02 00 00 C5 78 29 AC 24 F0 01 00 00",
+   "match": "0x14461ea90",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14461ea90",
+   "kind": "func_start",
+   "names": [
+    "Sess_TimeOfDay_RandomiseTransitions"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.race_start_reaction_time",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 70 C5 78 29 54 24 60 C5 78 29 4C 24 50 C5 78 29 44 24 40 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 4C 89 C7 48 89 CE",
+   "match": "0x1406527c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1406527c0",
+   "kind": "func_start",
+   "names": [
+    "Ai_RaceStart_ReactionTime"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.start_lights_init",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 48 89 CE 48 8B 81 F8 0B 00 00",
+   "match": "0x142cd4a50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142cd4a50",
+   "kind": "func_start",
+   "names": [
+    "Sess_StartLights_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.stat_event_drs_first_activation",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC F8 04 00 00 8B 5A 10",
+   "match": "0x14377a0f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14377a0f0",
+   "kind": "func_start",
+   "names": [
+    "Game_StatEvent_DrsFirstActivation"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.overtakes_add_watch",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 00 00 00 C5 F8 29 BC 24 80 00 00 00 C5 F8 29 74 24 70 48 89 CE 48 8D 81 40 01 00 00",
+   "match": "0x142521720",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142521720",
+   "kind": "func_start",
+   "names": [
+    "Game_Overtakes_AddWatch"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.crowd_system_on_session_enter",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 C5 F8 29 74 24 40 49 89 CD 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1413efef0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1413efef0",
+   "kind": "func_start",
+   "names": [
+    "Game_CrowdSystem_OnSessionEnter"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.crowd_excitement_zone_increase_excitement",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 C5 F8 29 74 24 50 44 89 C7 C5 F8 28 F1",
+   "match": "0x1413f1f30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1413f1f30",
+   "kind": "func_start",
+   "names": [
+    "Game_CrowdExcitementZone_IncreaseExcitement"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.crowd_excitement_zone_crowd_shocked",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 C5 F8 29 74 24 30 C5 F8 28 F2 89 D7 48 89 CB",
+   "match": "0x1413f2520",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1413f2520",
+   "kind": "func_start",
+   "names": [
+    "Game_CrowdExcitementZone_CrowdShocked"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.crowd_excitement_raise_for_vehicle",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 C5 F8 29 74 24 30 80 79 30 00",
+   "match": "0x1413f3ae0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1413f3ae0",
+   "kind": "func_start",
+   "names": [
+    "Game_CrowdExcitement_RaiseForVehicle"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.crowd_system_on_session_loaded",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 78 C5 F8 29 7C 24 60 C5 F8 29 74 24 50 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1413ef8c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1413ef8c0",
+   "kind": "func_start",
+   "names": [
+    "Game_CrowdSystem_OnSessionLoaded"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.crowd_system_on_session_restart",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 50 C5 F8 29 7C 24 40 C5 F8 29 74 24 30 48 89 CE 80 3D ?? ?? ?? ?? 01 75 5F B8 C1 00 00 00",
+   "match": "0x1413f0800",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1413f0800",
+   "kind": "func_start",
+   "names": [
+    "Game_CrowdSystem_OnSessionRestart"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "render.skidmarks_init",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 0D 00 00 C5 78 29 8C 24 70 0D 00 00",
+   "match": "0x144711290",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144711290",
+   "kind": "func_start",
+   "names": [
+    "Render_Skidmarks_Init"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "render.skidmarks_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 03 00 00 C5 78 29 BC 24 F0 02 00 00 C5 78 29 B4 24 E0 02 00 00 C5 78 29 AC 24 D0 02 00 00 C5 78 29 A4 24 C0 02 00 00 C5 78 29 9C 24 B0 02 00 00 C5 78 29 94 24 A0 02 00 00 C5 78 29 8C 24 90 02 00 00 C5 78 29 84 24 80 02 00 00 C5 F8 29 BC 24 70 02 00 00 C5 F8 29 B4 24 60 02 00 00 48 8B 79 18",
+   "match": "0x14471f650",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14471f650",
+   "kind": "func_start",
+   "names": [
+    "Render_Skidmarks_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_stop_logic_set_transition",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 39 91 38 01 00 00",
+   "match": "0x1403b9510",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403b9510",
+   "kind": "func_start",
+   "names": [
+    "Game_PitStopLogic_SetTransition"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_stop_logic_change_state",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 48 48 89 CE 48 8B 89 40 01 00 00",
+   "match": "0x1403b9960",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403b9960",
+   "kind": "func_start",
+   "names": [
+    "Game_PitStopLogic_ChangeState"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_stop_logic_state_in_garage",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 55 53 48 83 EC 40 48 89 CE 80 BA 48 01 00 00 00",
+   "match": "0x1403ba320",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403ba320",
+   "kind": "func_start",
+   "names": [
+    "Game_PitStopLogic_StateInGarage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_stop_logic_state_job_complete",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 30 48 89 D6 48 83 BA 68 01 00 00 00",
+   "match": "0x1403bb360",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1403bb360",
+   "kind": "func_start",
+   "names": [
+    "Game_PitStopLogic_StateJobComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_change_to_next_compound",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 38 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01 75 65 B8 34 00 00 00",
+   "match": "0x142e94040",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142e94040",
+   "kind": "func_start",
+   "names": [
+    "Car_Tyre_ChangeToNextCompound"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_activate_compounds",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 34 00 00 00 48 8D 0D ?? ?? ?? ?? 66 0F 1F 84 00 00 00 00 00 8B 14 81 85 D2 74 4C 81 FA 66 1B F8 43 74 2E 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 34 75 C5 EB 16 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 49 89 F0 E8 ?? ?? ?? ?? 48 89 F1",
+   "match": "0x142e96390",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142e96390",
+   "kind": "func_start",
+   "names": [
+    "Car_Tyre_ActivateCompounds"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_cache_wing_damage",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 68 B8 34 00 00 00 48 8D 0D ?? ?? ?? ?? 66 0F 1F 84 00 00 00 00 00 8B 14 81 85 D2 74 4C 81 FA 66 1B F8 43 74 2E 83 C0 19 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 34 75 C5 EB 16 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 49 89 F0 E8 ?? ?? ?? ?? 48 8B 46 20",
+   "match": "0x142e97060",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142e97060",
+   "kind": "func_start",
+   "names": [
+    "Car_Tyre_CacheWingDamage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_set_wear_factor",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 02 00 00 C5 F8 29 B4 24 80 02 00 00 66 44 89 44 24 34",
+   "match": "0x142ea2300",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142ea2300",
+   "kind": "func_start",
+   "names": [
+    "Car_Tyre_SetWearFactor"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.marshal_zone_check_flags",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 18 01 00 00 C5 79 29 94 24 00 01 00 00 C5 78 29 8C 24 F0 00 00 00 C5 78 29 84 24 E0 00 00 00",
+   "match": "0x14357ce30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14357ce30",
+   "kind": "func_start",
+   "names": [
+    "Sess_MarshalZone_CheckFlags"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.marshal_lights_set",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 88 00 00 00 C5 78 29 54 24 70 C5 78 29 4C 24 60 C5 78 29 44 24 50 C5 F8 29 7C 24 40 C5 F8 29 74 24 30 48 89 CE 8B 05",
+   "match": "0x142c77470",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142c77470",
+   "kind": "func_start",
+   "names": [
+    "Sess_MarshalLights_Set"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.marshal_lights_update_zone_shader",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 40 48 89 D6 48 89 CF 80 3D ?? ?? ?? ?? 01 75 5B B8 17 01 00 00",
+   "match": "0x142c786b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142c786b0",
+   "kind": "func_start",
+   "names": [
+    "Sess_MarshalLights_UpdateZoneShader"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.auto_reset_to_track_start_timer",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC D8 01 00 00 C5 78 29 BC 24 C0 01 00 00 C5 78 29 B4 24 B0 01 00 00 C5 78 29 AC 24 A0 01 00 00 C5 78 29 A4 24 90 01 00 00 C5 78 29 9C 24 80 01 00 00 C5 78 29 94 24 70 01 00 00 C5 78 29 8C 24 60 01 00 00 C5 78 29 84 24 50 01 00 00 C5 F8 29 BC 24 40 01 00 00 C5 F8 29 B4 24 30 01 00 00 48 89 54 24 68",
+   "match": "0x142f01210",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f01210",
+   "kind": "func_start",
+   "names": [
+    "Game_AutoResetToTrack_StartTimer"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.safety_rating_on_early_quit",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 48 C5 F8 29 74 24 30 89 D7 48 89 CE C5 FA 10 71 48",
+   "match": "0x142c6d630",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142c6d630",
+   "kind": "func_start",
+   "names": [
+    "Game_SafetyRating_OnEarlyQuit"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.safety_rating_on_match_complete",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 C5 F8 29 74 24 50 80 B9 88 03 00 00 00",
+   "match": "0x142c6f690",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142c6f690",
+   "kind": "func_start",
+   "names": [
+    "Game_SafetyRating_OnMatchComplete"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.red_flag_simulate_unlap_laps",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 38 02 00 00 C5 78 29 8C 24 20 02 00 00",
+   "match": "0x142f65cf0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f65cf0",
+   "kind": "func_start",
+   "names": [
+    "Sess_RedFlag_SimulateUnlapLaps"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.grid_setup_setup_starting_grid",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 B8 A8 2F 00 00",
+   "match": "0x141210160",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141210160",
+   "kind": "func_start",
+   "names": [
+    "Game_GridSetup_SetupStartingGrid"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.grid_setup_driver_based_grid",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 78 07 00 00 4C 89 C5",
+   "match": "0x141210610",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141210610",
+   "kind": "func_start",
+   "names": [
+    "Game_GridSetup_DriverBasedGrid"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.vehicle_placement_handle_grid_request",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 68 44 89 C3 48 89 CE",
+   "match": "0x142f61f80",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f61f80",
+   "kind": "func_start",
+   "names": [
+    "Sess_VehiclePlacement_HandleGridRequest"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.vehicle_placement_broadcast_grid",
+   "section": ".xtls",
+   "pattern": "56 53 48 83 EC 68 83 79 08 01 0F 8F ?? ?? ?? ?? 89 D3 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x142f63a70",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f63a70",
+   "kind": "func_start",
+   "names": [
+    "Sess_VehiclePlacement_BroadcastGrid"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.setup_apply_tuning",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 70 C5 78 29 44 24 60 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 48 8B 41 28",
+   "match": "0x140c11550",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140c11550",
+   "kind": "func_start",
+   "names": [
+    "Car_Setup_ApplyTuning"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tuning_set_chassis_z_com",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 58 C5 F8 29 7C 24 40 C5 F8 29 74 24 30 89 D7 40 F6 C7 08",
+   "match": "0x144676d40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144676d40",
+   "kind": "func_start",
+   "names": [
+    "Car_Tuning_SetChassisZCom"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tuning_set_engine_braking_and_radiator",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 C5 78 29 4C 24 50 C5 78 29 44 24 40 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 F6 C2 10",
+   "match": "0x1446878d0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446878d0",
+   "kind": "func_start",
+   "names": [
+    "Car_Tuning_SetEngineBrakingAndRadiator"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tuning_set_final_drive",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 68 C5 78 29 4C 24 50 C5 78 29 44 24 40 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 89 D7",
+   "match": "0x1446a4c20",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446a4c20",
+   "kind": "func_start",
+   "names": [
+    "Car_Tuning_SetFinalDrive"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tuning_set_suspension",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 68 C5 78 29 4C 24 50 C5 78 29 44 24 40 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 F7 C2 00 20 00 00",
+   "match": "0x1446a7be0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446a7be0",
+   "kind": "func_start",
+   "names": [
+    "Car_Tuning_SetSuspension"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.setup_on_value_changed",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 08 01 00 00 C5 F8 29 B4 24 F0 00 00 00 83 7A 08 02",
+   "match": "0x140c1e690",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140c1e690",
+   "kind": "func_start",
+   "names": [
+    "Car_Setup_OnValueChanged"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.upgrades_calc_non_linear_mass",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 60 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 48 8B 99 38 1A 00 00",
+   "match": "0x143535480",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143535480",
+   "kind": "func_start",
+   "names": [
+    "Car_Upgrades_CalcNonLinearMass"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.pad_assist_load_steering_splines",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 28 01 00 00 49 89 D4 48 89 CE 4C 8D 41 10",
+   "match": "0x1446cb880",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446cb880",
+   "kind": "func_start",
+   "names": [
+    "Car_PadAssist_LoadSteeringSplines"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.pad_assist_drift_assist",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC A0 00 00 00 C5 78 29 AC 24 90 00 00 00",
+   "match": "0x1446cd9a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446cd9a0",
+   "kind": "func_start",
+   "names": [
+    "Car_PadAssist_DriftAssist"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.f1_data_feed_place_car",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC A0 01 00 00 C5 78 29 AC 24 90 01 00 00",
+   "match": "0x142c209f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142c209f0",
+   "kind": "func_start",
+   "names": [
+    "Game_F1DataFeed_PlaceCar"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.f1_data_feed_skip_stream_line",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 B8 D8 53 00 00",
+   "match": "0x142c29190",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142c29190",
+   "kind": "func_start",
+   "names": [
+    "Game_F1DataFeed_SkipStreamLine"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.tyre_selection_set_current_tyres",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 01 00 00 C5 78 29 BC 24 90 01 00 00 C5 78 29 B4 24 80 01 00 00 C5 78 29 AC 24 70 01 00 00 C5 78 29 A4 24 60 01 00 00 C5 78 29 9C 24 50 01 00 00 C5 78 29 94 24 40 01 00 00 C5 78 29 8C 24 30 01 00 00 C5 78 29 84 24 20 01 00 00 C5 F8 29 BC 24 10 01 00 00 C5 F8 29 B4 24 00 01 00 00 44 89 C7",
+   "match": "0x142e9eda0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142e9eda0",
+   "kind": "func_start",
+   "names": [
+    "Car_TyreSelection_SetCurrentTyres"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.puncture_add",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 28 4C 89 C7 89 D3",
+   "match": "0x14464e200",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14464e200",
+   "kind": "func_start",
+   "names": [
+    "Car_Puncture_Add"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.puncture_remove",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 30 4C 89 C7 89 D3",
+   "match": "0x14464e3a0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14464e3a0",
+   "kind": "func_start",
+   "names": [
+    "Car_Puncture_Remove"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.canned_events_perform_accident",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 98 01 00 00 C5 79 29 9C 24 80 01 00 00",
+   "match": "0x1409bc6c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1409bc6c0",
+   "kind": "func_start",
+   "names": [
+    "Ai_CannedEvents_PerformAccident"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.canned_events_pressure_lock_up",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 C5 78 29 B4 24 B0 00 00 00 C5 78 29 AC 24 A0 00 00 00 C5 78 29 A4 24 90 00 00 00 C5 78 29 9C 24 80 00 00 00 C5 78 29 54 24 70 C5 78 29 4C 24 60 C5 78 29 44 24 50 C5 F8 29 7C 24 40 C5 F8 29 74 24 30 C5 F8 28 F3",
+   "match": "0x1409bf490",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1409bf490",
+   "kind": "func_start",
+   "names": [
+    "Ai_CannedEvents_PressureLockUp"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.canned_events_perform_accident_2",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 78 C5 78 29 44 24 60 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 48 8B 81 D0 00 00 00",
+   "match": "0x1409c1460",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1409c1460",
+   "kind": "func_start",
+   "names": [
+    "Ai_CannedEvents_PerformAccident_2"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_on_lap_changed",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 58 C5 F8 29 7C 24 40 C5 F9 29 74 24 30",
+   "match": "0x142f223c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f223c0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCar_OnLapChanged"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_change_state",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 83 79 30 02",
+   "match": "0x143607d40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143607d40",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCar_ChangeState"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_vehicle_transition",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC C8 00 00 00 C5 78 29 AC 24 B0 00 00 00 C5 78 29 A4 24 A0 00 00 00 C5 78 29 9C 24 90 00 00 00 C5 78 29 94 24 80 00 00 00 C5 78 29 4C 24 70 C5 78 29 44 24 60 C5 F8 29 7C 24 50 C5 F8 29 74 24 40 C5 FB 10 42 08",
+   "match": "0x1436082f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1436082f0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCar_VehicleTransition"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_intersection_time",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC E8 00 00 00 C5 78 29 A4 24 D0 00 00 00 C5 78 29 9C 24 C0 00 00 00 C5 78 29 94 24 B0 00 00 00 C5 78 29 8C 24 A0 00 00 00 C5 78 29 84 24 90 00 00 00 C5 F8 29 BC 24 80 00 00 00 C5 F8 29 74 24 70 48 89 D7",
+   "match": "0x143645750",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143645750",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCar_IntersectionTime"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_deployment_pre_session_restart",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 5F B8 6D 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA C2 C1 8A C4 74 32 85 D2 74 41 83 C0 13 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 6D 75 C5 EB 13 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 F1 48 83 C4 20 5E E9 ?? ?? ?? ?? CC CC CC 56 48 83 EC 20",
+   "match": "0x143608ed0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143608ed0",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarDeployment_PreSessionRestart"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.safety_car_deployment_on_session_restart",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 20 48 89 CE 80 3D ?? ?? ?? ?? 01 75 5F B8 6D 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 00 8B 14 81 81 FA C2 C1 8A C4 74 32 85 D2 74 41 83 C0 13 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 6D 75 C5 EB 13 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 F1 48 83 C4 20 5E E9 ?? ?? ?? ?? CC CC CC E9",
+   "match": "0x143608f50",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143608f50",
+   "kind": "func_start",
+   "names": [
+    "Sess_SafetyCarDeployment_OnSessionRestart"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_hold_in_pit_box",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC C8 00 00 00 C5 78 29 84 24 B0 00 00 00",
+   "match": "0x1434bd850",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434bd850",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_HoldInPitBox"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_hold_in_garage",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 53 48 81 EC D0 00 00 00 C5 F8 29 B4 24 C0 00 00 00 44 0F B6 FA",
+   "match": "0x1434be090",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434be090",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_HoldInGarage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.damage_set_component_damage",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 58 C5 F8 29 7C 24 40 C5 F8 29 74 24 30 89 D7",
+   "match": "0x144660cd0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144660cd0",
+   "kind": "func_start",
+   "names": [
+    "Car_Damage_SetComponentDamage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "car.collision_car_to_car",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 68 01 00 00 C5 78 29 AC 24 50 01 00 00 C5 78 29 A4 24 40 01 00 00 C5 78 29 9C 24 30 01 00 00 C5 78 29 94 24 20 01 00 00 C5 78 29 8C 24 10 01 00 00 C5 78 29 84 24 00 01 00 00 C5 F8 29 BC 24 F0 00 00 00 C5 F8 29 B4 24 E0 00 00 00 80 3D ?? ?? ?? ?? 00",
+   "match": "0x14467c280",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14467c280",
+   "kind": "func_start",
+   "names": [
+    "Car_Collision_CarToCar"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "render.on_weather_quality_changed",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 53 48 83 EC 48 C5 F8 29 74 24 30 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x14015aa00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14015aa00",
+   "kind": "func_start",
+   "names": [
+    "Render_OnWeatherQualityChanged"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.retirement_sequence_play_terminal_damage",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 81 EC 80 01 00 00 48 89 CE 48 8B B9 88 0C 00 00",
+   "match": "0x142d8a0b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d8a0b0",
+   "kind": "func_start",
+   "names": [
+    "Sess_RetirementSequence_PlayTerminalDamage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.rivalry_start",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 44 89 CB 48 89 D6",
+   "match": "0x141249ce0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141249ce0",
+   "kind": "func_start",
+   "names": [
+    "Game_Rivalry_Start"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.rivalry_head_to_head_quali",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 81 EC A0 00 00 00 48 89 D7 48 89 CE 0F B7 41 7A",
+   "match": "0x1412631f0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1412631f0",
+   "kind": "func_start",
+   "names": [
+    "Game_Rivalry_HeadToHeadQuali"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.rivalry_head_to_head_race",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 81 EC B0 00 00 00 48 89 D7 48 89 CE 0F B7 41 7A",
+   "match": "0x1412636e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1412636e0",
+   "kind": "func_start",
+   "names": [
+    "Game_Rivalry_HeadToHeadRace"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_handle_enter_pit_box",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC 08 01 00 00 C5 78 29 84 24 F0 00 00 00 C5 F8 29 BC 24 E0 00 00 00 C5 F8 29 B4 24 D0 00 00 00 89 D3",
+   "match": "0x1434b7520",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434b7520",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_HandleEnterPitBox"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_set_crew_ready",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 28 80 7A 1C 01",
+   "match": "0x1434b8270",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434b8270",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_SetCrewReady"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_illegal_pit_entry",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 20 0F B6 FA",
+   "match": "0x1434bceb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434bceb0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_IllegalPitEntry"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_vehicle_exiting",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 38 89 D3 48 89 CE 48 8B 81 70 02 00 00",
+   "match": "0x1434bf980",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434bf980",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_VehicleExiting"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_exit_control_release",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 28 48 89 CE 48 8B 89 A8 02 00 00 48 8B 41 28 48 8B 49 30 B3 FF 48 39 C8 74 2D 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 4C 39 40 08 74 0B 48 83 C0 10 48 39 C8 75 F1 EB 0E 48 8B 00 48 8B 40 58 0F B6 98 E8 00 00 00 80 3D ?? ?? ?? ?? 01 0F B6 FB 0F 85 ?? ?? ?? ?? B8 72 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 44 00 00 8B 14 81 85 D2 74 76 81 FA 0E 88 73 48 74 2E 83 C0 11 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 72 75 C5 EB 40 48 89 F8 48 C1 E0 04 48 8B 44 06 68 48 63 40 04 48 83 F8 10 77 0D 48 8D 0D ?? ?? ?? ?? 4C 8B 0C C1 EB 07 4C 8D 0D ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 89 F8 E8 ?? ?? ?? ?? 48 8B 8E B0 02 00 00",
+   "match": "0x1434cbcc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434cbcc0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_ExitControlRelease"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_enter_control_release",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 28 48 89 CE 48 8B 89 A8 02 00 00 48 8B 41 28 48 8B 49 30 B3 FF 48 39 C8 74 2D 66 66 66 66 66 2E 0F 1F 84 00 00 00 00 00 4C 39 40 08 74 0B 48 83 C0 10 48 39 C8 75 F1 EB 0E 48 8B 00 48 8B 40 58 0F B6 98 E8 00 00 00 80 3D ?? ?? ?? ?? 01 0F B6 FB 0F 85 ?? ?? ?? ?? B8 72 00 00 00 48 8D 0D ?? ?? ?? ?? 0F 1F 44 00 00 8B 14 81 85 D2 74 76 81 FA 0E 88 73 48 74 2E 83 C0 11 48 69 D0 43 43 66 5F 48 C1 EA 20 41 89 C0 41 29 D0 41 D1 E8 41 01 D0 41 C1 E8 08 41 69 D0 75 01 00 00 29 D0 83 F8 72 75 C5 EB 40 48 89 F8 48 C1 E0 04 48 8B 44 06 68 48 63 40 04 48 83 F8 10 77 0D 48 8D 0D ?? ?? ?? ?? 4C 8B 0C C1 EB 07 4C 8D 0D ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 41 89 F8 E8 ?? ?? ?? ?? 49 89 FE",
+   "match": "0x1434cbf30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434cbf30",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_EnterControlRelease"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_on_garage_crew_message",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 30 48 89 D7 48 89 CE 44 0F B6 4A 10",
+   "match": "0x1434cebe0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434cebe0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_OnGarageCrewMessage"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_vehicle_entering",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 20 89 D3 48 89 CF",
+   "match": "0x1434cf7c0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434cf7c0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_VehicleEntering"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_reset_car_to_track",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 48 8B 81 78 02 00 00",
+   "match": "0x1434cfaa0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434cfaa0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_ResetCarToTrack"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_vehicle_entering_internal",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 48 89 D3 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1434cfc30",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434cfc30",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_VehicleEnteringInternal"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_enter_limit_zone",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 54 56 57 55 53 48 83 EC 50 89 D3 48 89 CF 80 3D ?? ?? ?? ?? 01",
+   "match": "0x1434d0340",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434d0340",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_EnterLimitZone"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_exit_limit_zone",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 48 89 D3 48 89 CE",
+   "match": "0x1434d07b0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1434d07b0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_ExitLimitZone"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.pit_lane_set_do_practice_pit_stop",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 20 48 89 CE E8 ?? ?? ?? ?? 84 C0",
+   "match": "0x141793ac0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141793ac0",
+   "kind": "func_start",
+   "names": [
+    "Game_PitLane_SetDoPracticePitStop"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.lap_times_on_new_sector",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC C8 00 00 00 0F B6 72 10",
+   "match": "0x142f2d360",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f2d360",
+   "kind": "func_start",
+   "names": [
+    "Sess_LapTimes_OnNewSector"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.lap_times_report_split",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 83 EC 68 48 89 D7 48 89 CE 48 8B 41 78",
+   "match": "0x142f2ef60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142f2ef60",
+   "kind": "func_start",
+   "names": [
+    "Sess_LapTimes_ReportSplit"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.dynamic_objective_activate",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 50 C5 F9 29 74 24 40 48 89 CE 48 8B 01 48 8D 54 24 27",
+   "match": "0x14115d690",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14115d690",
+   "kind": "func_start",
+   "names": [
+    "Game_DynamicObjective_Activate"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.dynamic_objective_pass",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 C5 F9 29 74 24 50 80 79 18 01 0F 85 ?? ?? ?? ?? 48 89 CE 48 8B 01 FF 90 F8 00 00 00 84 C0 0F 85 ?? ?? ?? ?? C6 46 18 02",
+   "match": "0x14115dbe0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14115dbe0",
+   "kind": "func_start",
+   "names": [
+    "Game_DynamicObjective_Pass"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.dynamic_objective_fail",
+   "section": ".xtls",
+   "pattern": "56 57 53 48 83 EC 60 C5 F9 29 74 24 50 80 79 18 01 0F 85 ?? ?? ?? ?? 48 89 CE 48 8B 01 FF 90 F8 00 00 00 84 C0 0F 85 ?? ?? ?? ?? C6 46 18 03",
+   "match": "0x14115dfc0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x14115dfc0",
+   "kind": "func_start",
+   "names": [
+    "Game_DynamicObjective_Fail"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "game.dynamic_objective_on_car_to_car_collision",
+   "section": ".xtls",
+   "pattern": "56 48 83 EC 40 80 79 18 01 0F 85 ?? ?? ?? ?? 48 89 CE",
+   "match": "0x141193310",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x141193310",
+   "kind": "func_start",
+   "names": [
+    "Game_DynamicObjective_OnCarToCarCollision"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
