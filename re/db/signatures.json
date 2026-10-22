@@ -12420,7 +12420,7 @@
    "target": "0x1446a8870",
    "kind": "func_start",
    "names": [
-    "Car_Parse_SuspensionSystem"
+    "Car_Write_SuspensionSystem"
    ],
    "verified": [
     {
@@ -16236,7 +16236,7 @@
    "target": "0x144686830",
    "kind": "func_start",
    "names": [
-    "Car_Parse_Engine"
+    "Car_Write_Engine"
    ],
    "verified": [
     {
@@ -16260,7 +16260,7 @@
    "target": "0x144685680",
    "kind": "func_start",
    "names": [
-    "Car_Override_Engine"
+    "Car_Read_Engine"
    ],
    "verified": [
     {
@@ -16284,7 +16284,7 @@
    "target": "0x1446a2610",
    "kind": "func_start",
    "names": [
-    "Car_Parse_GearBox"
+    "Car_Write_GearBox"
    ],
    "verified": [
     {
@@ -16308,7 +16308,7 @@
    "target": "0x1446a39a0",
    "kind": "func_start",
    "names": [
-    "Car_Override_GearBox"
+    "Car_Read_GearBox"
    ],
    "verified": [
     {
@@ -16332,7 +16332,7 @@
    "target": "0x1446c73f0",
    "kind": "func_start",
    "names": [
-    "Car_Parse_F1Aero"
+    "Car_Write_F1Aero"
    ],
    "verified": [
     {
@@ -16356,7 +16356,7 @@
    "target": "0x1446c8560",
    "kind": "func_start",
    "names": [
-    "Car_Override_F1Aero"
+    "Car_Read_F1Aero"
    ],
    "verified": [
     {
@@ -16380,7 +16380,7 @@
    "target": "0x1446cfcd0",
    "kind": "func_start",
    "names": [
-    "Car_Parse_EnergyRecovery"
+    "Car_Read_EnergyRecovery"
    ],
    "verified": [
     {
@@ -16404,7 +16404,7 @@
    "target": "0x1446cf6c0",
    "kind": "func_start",
    "names": [
-    "Car_Parse_EnergyRecoveryMode"
+    "Car_Write_EnergyRecovery"
    ],
    "verified": [
     {
@@ -16428,7 +16428,7 @@
    "target": "0x1446d4470",
    "kind": "func_start",
    "names": [
-    "Car_Parse_F1Tuning"
+    "Car_Write_F1Tuning"
    ],
    "verified": [
     {
@@ -16452,7 +16452,7 @@
    "target": "0x1446d1660",
    "kind": "func_start",
    "names": [
-    "Car_Override_F1Tuning"
+    "Car_Read_F1Tuning"
    ],
    "verified": [
     {
@@ -16476,7 +16476,7 @@
    "target": "0x14468e760",
    "kind": "func_start",
    "names": [
-    "Car_Parse_FuelTank"
+    "Car_Write_FuelTank"
    ],
    "verified": [
     {
@@ -16500,7 +16500,7 @@
    "target": "0x144674a30",
    "kind": "func_start",
    "names": [
-    "Car_Parse_BrakeECU"
+    "Car_Write_BrakeECU"
    ],
    "verified": [
     {
@@ -16524,7 +16524,7 @@
    "target": "0x14467cfd0",
    "kind": "func_start",
    "names": [
-    "Car_Parse_CoreAero"
+    "Car_Write_CoreAero"
    ],
    "verified": [
     {
@@ -16548,7 +16548,7 @@
    "target": "0x14467daa0",
    "kind": "func_start",
    "names": [
-    "Car_Parse_Differential"
+    "Car_Write_Differential"
    ],
    "verified": [
     {
@@ -16572,7 +16572,7 @@
    "target": "0x1446b6630",
    "kind": "func_start",
    "names": [
-    "Car_Parse_Turbo"
+    "Car_Write_Turbo"
    ],
    "verified": [
     {
@@ -16596,7 +16596,7 @@
    "target": "0x14464a7f0",
    "kind": "func_start",
    "names": [
-    "Car_Parse_ConvexHull"
+    "Car_Write_ConvexHull"
    ],
    "verified": [
     {
@@ -16620,7 +16620,7 @@
    "target": "0x144657040",
    "kind": "func_start",
    "names": [
-    "Car_Parse_F1TyreDamage"
+    "Car_Write_F1TyreDamage"
    ],
    "verified": [
     {
