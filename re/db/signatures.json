@@ -38399,6 +38399,30 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "car.powertrain_step",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 81 EC 88 01 00 00 C5 78 29 BC 24 70 01 00 00",
+   "match": "0x1446e2290",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x1446e2290",
+   "kind": "func_start",
+   "names": [
+    "Car_Powertrain_Step"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
