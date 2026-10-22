@@ -1655,8 +1655,11 @@ impl Shell {
         let (order, loaded) = self.ordered();
         let position = order[..loaded].iter().position(|a| a.manifest.id == id);
         let movable = self.movable(m);
-        let source = match m.source {
-            Source::Importer | Source::CopyPaste => format!("Converted from a {} mod", m.source.label()),
+        let source = match (m.source, man.origin.as_ref().and_then(|o| o.file.as_deref())) {
+            (Source::Importer | Source::CopyPaste, file) => {
+                let from = file.map(|f| format!(" · from {f}")).unwrap_or_default();
+                format!("Converted from a {} mod{from}", m.source.label())
+            }
             _ => m.source.label().to_owned(),
         };
         let close = (!inline).then(|| {
