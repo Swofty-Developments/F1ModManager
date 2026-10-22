@@ -11100,6 +11100,78 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "session.invalidate_lap_thunk",
+   "section": ".xtls",
+   "pattern": "E9 ?? ?? ?? ?? 69 53 0F 86 97 88 C4",
+   "match": "0x143572680",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143572680",
+   "kind": "func_start",
+   "names": [
+    "Sess_Invalidate_Lap_Thunk"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.issue_warning",
+   "section": ".xtls",
+   "pattern": "56 57 55 53 48 81 EC 88 00 00 00 44 89 C3 48 89 D7 48 89 CE 80 3D ?? ?? ?? ?? 01",
+   "match": "0x143572a00",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143572a00",
+   "kind": "func_start",
+   "names": [
+    "Sess_Issue_Warning"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.issue_time_penalty",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC B8 00 00 00 C5 F9 29 BC 24 A0 00 00 00",
+   "match": "0x143573b40",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143573b40",
+   "kind": "func_start",
+   "names": [
+    "Sess_Issue_TimePenalty"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-22",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
