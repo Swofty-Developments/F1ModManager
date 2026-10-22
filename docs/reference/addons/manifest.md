@@ -69,12 +69,12 @@ Your addon needs a `swofty.json` at its root. This is where you give it a name, 
 
 | Field | Type | Value |
 |---|---|---|
-| `tool` | string | `db-editor`, or the id of the addon that generated it, such as `teamsimplified.mods`. |
+| `tool` | string | `db-editor`, or the id of the addon that generated it, such as `teamsimplified.mods`. Simplified for Swofty sets `teamsimplified.mods/copy-paste` on a mod that leaves the shader packages alone. |
 | `tool_version` | string? | The tool's version. |
 | `file` | string? | The file name the addon was made from. |
 | `sha256` | string? | That file's SHA-256, in hex. |
 
-The **Addons** page shows the source as Built in, DB Editor, Simplified or Installed. A launcher before 1.3.0 rejects `category` and `origin`; set `"compat": { "launcher": ">=1.3.0" }` when you use them.
+The **Addons** page shows the source as Built in, DB Editor, Simplified, Copy & Paste or Installed. A launcher before 1.3.0 rejects `category` and `origin`; set `"compat": { "launcher": ">=1.3.0" }` when you use them.
 
 ## saves
 

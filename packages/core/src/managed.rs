@@ -13,6 +13,8 @@ use crate::{Error, Result, io_err};
 
 pub const ID: &str = "teamsimplified.mods";
 pub const NAME: &str = "Simplified for Swofty";
+/// `origin.tool` of an addon it made from a mod that leaves the shader packages alone.
+pub const COPY_PASTE_TOOL: &str = "teamsimplified.mods/copy-paste";
 pub const ASSET: &str = "teamsimplified.mods.swoftyaddon";
 pub const MANIFEST_ASSET: &str = MANIFEST_FILE;
 pub const LATEST_URL: &str =

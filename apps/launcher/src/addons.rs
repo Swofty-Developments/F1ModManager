@@ -1656,7 +1656,7 @@ impl Shell {
         let position = order[..loaded].iter().position(|a| a.manifest.id == id);
         let movable = self.movable(m);
         let source = match (&man.origin, m.source) {
-            (Some(o), Source::Importer) => match &o.file {
+            (Some(o), Source::Importer | Source::CopyPaste) => match &o.file {
                 Some(f) => format!("{} · from {f}", m.source.label()),
                 None => m.source.label().to_owned(),
             },

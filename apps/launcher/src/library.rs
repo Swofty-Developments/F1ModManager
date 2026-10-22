@@ -36,17 +36,25 @@ pub enum Source {
     Builtin,
     DbEditor,
     Importer,
+    CopyPaste,
     Installed,
 }
 
 impl Source {
-    pub const ALL: [Source; 4] = [Self::Builtin, Self::DbEditor, Self::Importer, Self::Installed];
+    pub const ALL: [Source; 5] = [
+        Self::Builtin,
+        Self::DbEditor,
+        Self::Importer,
+        Self::CopyPaste,
+        Self::Installed,
+    ];
 
     pub fn label(self) -> &'static str {
         match self {
             Self::Builtin => "Built in",
             Self::DbEditor => "DB Editor",
             Self::Importer => "Simplified",
+            Self::CopyPaste => "Copy & Paste",
             Self::Installed => "Installed",
         }
     }
@@ -59,6 +67,8 @@ impl Source {
             Self::DbEditor
         } else if tool == Some(swofty_core::managed::ID) {
             Self::Importer
+        } else if tool == Some(swofty_core::managed::COPY_PASTE_TOOL) {
+            Self::CopyPaste
         } else {
             Self::Installed
         }
@@ -400,6 +410,23 @@ mod tests {
         assert_eq!(ids(tracks_page(&other)), ["t.mod"]);
         assert_eq!(addons[1].category(), Some(Category::Tracks));
         assert_eq!(addons[0].category(), None);
+    }
+
+    #[test]
+    fn a_mod_made_by_simplified_for_swofty_is_tagged_by_its_tool() {
+        let root = std::env::temp_dir().join(format!("swofty-launcher-source-{}", std::process::id()));
+        let store = Store::new(&root);
+        let source = |tool: &str| {
+            let m = AddonManifest::parse(&format!(
+                r#"{{"schema_version":1,"id":"t.mod","name":"t","version":"1.0.0","author":"t","compat":{{"game":"f1_25","launcher":">=1.3.0"}},"origin":{{"tool":"{tool}"}}}}"#
+            ))
+            .unwrap();
+            Source::of(&store, &m, false)
+        };
+        assert_eq!(source(swofty_core::managed::ID), Source::Importer);
+        assert_eq!(source(swofty_core::managed::COPY_PASTE_TOOL), Source::CopyPaste);
+        assert_eq!(Source::CopyPaste.label(), "Copy & Paste");
+        assert_eq!(source("someone.else"), Source::Installed);
     }
 
     #[test]

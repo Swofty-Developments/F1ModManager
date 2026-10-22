@@ -26,7 +26,7 @@ Type in the search box on the left to search names, ids, authors and description
 |---|---|
 | Category | What the addon is for: Tracks, Liveries, Cars, Drivers & teams, Seasons, Database, Gameplay, UI, Audio, Tools, Other, or Uncategorised. Built-in addons show no category. |
 | Type | What it changes: Database, Archives, Text & UI, Files, Code |
-| Source | Built in, DB Editor, Simplified, Installed. Each row shows its source as a tag with the same name. |
+| Source | Built in, DB Editor, Simplified, Copy & Paste, Installed. Each row shows its source as a tag with the same name. Simplified for Swofty tags a mod that uses the shader packages Simplified, and one that doesn't Copy & Paste. |
 | State | On, Off, Has conflicts, Update available |
 
 Each value shows how many addons match. **Clear** removes every filter. An open panel closes when its addon no longer matches.
