@@ -73129,6 +73129,226 @@
     }
    ],
    "used_by": []
+  },
+  {
+   "id": "session.pre_race_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 41 55 41 54 56 57 55 53 48 81 EC A8 01 00 00 C5 F8 29 BC 24 90 01 00 00 C5 F8 29 B4 24 80 01 00 00 C5 F8 28 F2",
+   "match": "0x142d831e0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d831e0",
+   "kind": "func_start",
+   "names": [
+    "Sess_PreRace_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.grid_rundown_update",
+   "section": ".xtls",
+   "pattern": "E9 ?? ?? ?? ?? 96 CC E9 ?? ?? ?? ?? 0F 8C",
+   "match": "0x142d60cb0",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d60cb0",
+   "kind": "func_start",
+   "names": [
+    "Sess_GridRundown_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.in_game_pq_update",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 55 53 48 83 EC 68 C5 F8 29 74 24 50 C5 F9 28 F2",
+   "match": "0x142d68200",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142d68200",
+   "kind": "func_start",
+   "names": [
+    "Sess_InGamePQ_Update"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "ai.sc_delta_pace",
+   "section": ".xtls",
+   "pattern": "41 57 41 56 56 57 53 48 83 EC 50 C5 78 29 44 24 40 C5 F8 29 7C 24 30 C5 F8 29 74 24 20 0F B6 02",
+   "match": "0x140669790",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x140669790",
+   "kind": "func_start",
+   "names": [
+    "Ai_ScDeltaPace"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.sc_race_laps_remaining",
+   "section": ".xtls",
+   "pattern": "48 8D 0D ?? ?? ?? ?? 48 89 08 C5 F8 11 40 40 48 89 7C 24 20 4C 89 74 24 28 48 89 44 24 30 48 8D 54 24 20 48 89 D9 E8 ?? ?? ?? ?? 4C 8B 74 24 30 4D 85 F6 74 20 4C 8B 7C 24 28 4D 85 FF 74 16 49 8B 06 4C 89 F1 31 D2 FF 10 49 8B 07 4C 89 F9 4C 89 F2 FF 50 38 4C 8B 2D",
+   "match": "0x1435fc4b3",
+   "anchor": "0x3",
+   "resolve": {
+    "kind": "riprel",
+    "insn": "0x0",
+    "len": 7
+   },
+   "target": "0x145853f20",
+   "kind": "data",
+   "names": [
+    "vt_Sess_ScRaceLapsRemaining"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.sc_can_return",
+   "section": ".xtls",
+   "pattern": "48 8D 0D ?? ?? ?? ?? 48 89 08 C5 F8 11 40 50 C5 F8 11 40 40 48 C7 40 60 00 00 00 00",
+   "match": "0x1435f950c",
+   "anchor": "0x3",
+   "resolve": {
+    "kind": "riprel",
+    "insn": "0x0",
+    "len": 7
+   },
+   "target": "0x145851f90",
+   "kind": "data",
+   "names": [
+    "vt_Sess_ScCanReturn"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_is_practice_qualifying",
+   "section": ".xtls",
+   "pattern": "56 57 48 83 EC 28 48 89 CE 48 8B 05 ?? ?? ?? ?? 48 8B 80 88 00 00 00 48 85 C0 0F 84 ?? ?? ?? ?? 48 8B B8 60 02 00 00 48 85 FF 0F 84",
+   "match": "0x142a40710",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x142a40710",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_IsPracticeQualifying"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.rules_disqualify",
+   "section": ".xtls",
+   "pattern": "41 56 56 57 53 48 83 EC 48 C5 F9 29 74 24 30 80 FA FF",
+   "match": "0x143571440",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x143571440",
+   "kind": "func_start",
+   "names": [
+    "Sess_Rules_Disqualify"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
+  },
+  {
+   "id": "session.flow_parse_xml",
+   "section": ".xtls",
+   "pattern": "E9 ?? ?? ?? ?? 87 10 E0 47 D2 E9 35 12 F3 02 75",
+   "match": "0x144421c60",
+   "anchor": "0x0",
+   "resolve": {
+    "kind": "addr"
+   },
+   "target": "0x144421c60",
+   "kind": "func_start",
+   "names": [
+    "Sess_Flow_ParseXml"
+   ],
+   "verified": [
+    {
+     "build": "d873a1c8d2044cef",
+     "date": "2026-10-24",
+     "by": "vmknolle",
+     "how": "static"
+    }
+   ],
+   "used_by": []
   }
  ]
 }
