@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
-use super::webhook::{SendError, Stage, multipart, payload};
+use super::upload::{SendError, Stage, multipart, payload};
 use super::*;
 
 fn tmp(name: &str) -> PathBuf {
@@ -159,7 +159,7 @@ fn collects_the_logs_the_developers_need() {
         default["addons"]
             .as_array()
             .unwrap()
-            .contains(&json!({"id": "t.helper", "enabled": false}))
+            .contains(&json!({"id": "t.helper", "name": "Helper", "enabled": false}))
     );
     let summary = entry(&zip, "summary.txt");
     for want in [
@@ -462,10 +462,7 @@ fn serve(expect: usize, respond: Responder) -> (String, std::thread::JoinHandle<
         }
         got
     });
-    (
-        format!("http://127.0.0.1:{port}/api/webhooks/987654321098/TOKENtokenTOKEN"),
-        handle,
-    )
+    (format!("http://127.0.0.1:{port}/v1/logs"), handle)
 }
 
 fn collect_stages() -> (Arc<Mutex<Vec<Stage>>>, impl Fn(Stage)) {
@@ -480,16 +477,12 @@ fn posts_multipart_with_payload_json_and_the_zip() {
     let (store, game) = fake_data(&root);
     let bundle = Bundle::collect_with(&store, &report(&game), Limits::default(), "20261020-101010");
     let (url, server) = serve(1, Box::new(|_, _| (204, String::new())));
-    let hook = Webhook::new(Some(&url)).unwrap();
+    let hook = LogServer::new(Some(&url)).unwrap();
     let (stages, progress) = collect_stages();
     assert_eq!(hook.send(&bundle, &progress), Ok(1));
     let got = server.join().unwrap();
     assert_eq!(got.len(), 1);
-    assert!(
-        got[0]
-            .head
-            .starts_with("POST /api/webhooks/987654321098/TOKENtokenTOKEN HTTP/1.1")
-    );
+    assert!(got[0].head.starts_with("POST /v1/logs HTTP/1.1"));
     assert!(
         got[0]
             .header("content-type")
@@ -540,7 +533,7 @@ fn sends_parts_and_waits_out_rate_limits() {
             _ => (200, "{}".into()),
         }),
     );
-    let hook = Webhook::new(Some(&url)).unwrap();
+    let hook = LogServer::new(Some(&url)).unwrap();
     let (stages, progress) = collect_stages();
     let sent = hook.send_with(&bundle, 1 << 20, Duration::from_secs(30), &progress);
     assert_eq!(sent, Ok(3));
@@ -569,7 +562,7 @@ fn sends_parts_and_waits_out_rate_limits() {
 }
 
 #[test]
-fn halves_the_part_size_when_discord_says_too_big() {
+fn halves_the_part_size_when_the_server_says_too_big() {
     let bundle = noisy_bundle(&[700 << 10, 700 << 10]);
     let (url, server) = serve(
         4,
@@ -584,7 +577,7 @@ fn halves_the_part_size_when_discord_says_too_big() {
             }
         }),
     );
-    let hook = Webhook::new(Some(&url)).unwrap();
+    let hook = LogServer::new(Some(&url)).unwrap();
     let (_, progress) = collect_stages();
     assert_eq!(
         hook.send_with(&bundle, 4 << 20, Duration::from_secs(30), &progress),
@@ -595,7 +588,7 @@ fn halves_the_part_size_when_discord_says_too_big() {
     assert!(got[0].body.len() > 1_100_000 && got[1].body.len() > 1_100_000);
 
     let (url, server) = serve(1, Box::new(|_, _| (413, String::new())));
-    let hook = Webhook::new(Some(&url)).unwrap();
+    let hook = LogServer::new(Some(&url)).unwrap();
     assert_eq!(
         hook.send_with(&bundle, 1 << 20, Duration::from_secs(30), &progress),
         Err(SendError::TooBig)
@@ -604,56 +597,63 @@ fn halves_the_part_size_when_discord_says_too_big() {
 }
 
 #[test]
-fn never_shows_the_webhook_url_in_errors() {
-    let url = "http://127.0.0.1:1/api/webhooks/123456789012345/SuperSecretToken_abcdef";
-    let hook = Webhook::new(Some(url)).unwrap();
-    assert_eq!(format!("{hook:?}"), "Webhook([hidden])");
+fn reports_server_errors() {
+    let hook = LogServer::new(Some("http://127.0.0.1:1/v1/logs")).unwrap();
     let bundle = noisy_bundle(&[10]);
     let (_, progress) = collect_stages();
     let err = hook
         .send_with(&bundle, 1 << 20, Duration::from_secs(5), &progress)
         .unwrap_err();
-    let text = err.to_string();
     assert!(matches!(err, SendError::Unreachable(_)), "{err:?}");
-    assert!(text.starts_with("Couldn't reach Discord"), "{text}");
-    for secret in ["SuperSecretToken", "123456789012345", "/api/webhooks"] {
-        assert!(!text.contains(secret), "{text}");
-    }
-    assert_eq!(
-        hook.redact(&format!(
-            "error sending request for url ({url}): refused; token SuperSecretToken_abcdef"
-        )),
-        "error sending request for url ([webhook]): refused; token [webhook]"
+    assert!(
+        err.to_string().starts_with("Couldn't reach the log server"),
+        "{err}"
     );
 
     let (url, server) = serve(
         1,
-        Box::new(|_, g| {
-            let path = g.head.split(' ').nth(1).unwrap().to_owned();
+        Box::new(|_, _| {
             (
-                404,
-                json!({"message": format!("Unknown Webhook {path}"), "code": 10015}).to_string(),
+                429,
+                json!({"message": "too many logs sent from this network; try again later", "retry_after": 600.0})
+                    .to_string(),
             )
         }),
     );
-    let hook = Webhook::new(Some(&url)).unwrap();
+    let hook = LogServer::new(Some(&url)).unwrap();
+    let err = hook
+        .send_with(&bundle, 1 << 20, Duration::from_secs(5), &progress)
+        .unwrap_err();
+    server.join().unwrap();
+    assert_eq!(err, SendError::RateLimited);
+
+    let (url, server) = serve(
+        3,
+        Box::new(|_, _| {
+            (
+                503,
+                json!({"message": "sending logs is not set up on this server"}).to_string(),
+            )
+        }),
+    );
+    let hook = LogServer::new(Some(&url)).unwrap();
     let err = hook
         .send_with(&bundle, 1 << 20, Duration::from_secs(5), &progress)
         .unwrap_err();
     server.join().unwrap();
     assert_eq!(
         err.to_string(),
-        "Discord answered HTTP 404: Unknown Webhook /api/webhooks/[webhook]/[webhook]"
+        "The log server answered HTTP 503: sending logs is not set up on this server"
     );
 }
 
 #[test]
-fn disabled_without_a_webhook_at_build_time() {
-    assert!(Webhook::new(None).is_none());
-    assert!(Webhook::new(Some("")).is_none());
-    assert!(Webhook::new(Some("   ")).is_none());
-    assert!(Webhook::new(Some("not a url")).is_none());
-    if option_env!("SWOFTY_LOG_WEBHOOK").is_none() {
+fn disabled_without_a_log_server_at_build_time() {
+    assert!(LogServer::new(None).is_none());
+    assert!(LogServer::new(Some("")).is_none());
+    assert!(LogServer::new(Some("   ")).is_none());
+    assert!(LogServer::new(Some("not a url")).is_none());
+    if option_env!("SWOFTY_LOGS_URL").is_none() && std::env::var_os("SWOFTY_LOGS_URL").is_none() {
         assert!(!available());
         let (_, progress) = collect_stages();
         assert_eq!(send(&noisy_bundle(&[1]), &progress), Err(SendError::Unavailable));
@@ -671,6 +671,16 @@ fn checks_the_name_and_message() {
     assert!(check_name("").is_err());
     assert!(check_name(&"x".repeat(32)).is_ok());
     assert!(check_name(&"x".repeat(33)).is_err());
+    assert_eq!(
+        check_message("  it froze on the grid  "),
+        Ok("it froze on the grid".into())
+    );
+    assert!(check_message("   ").is_err());
+    assert_eq!(
+        check_message("  it broke  "),
+        Err("Describe what went wrong in at least 10 characters".into())
+    );
+    assert!(check_message(&"m".repeat(MESSAGE_MIN)).is_ok());
     assert!(check_message(&"m".repeat(1000)).is_ok());
     assert!(check_message(&"m".repeat(1001)).is_err());
     assert_eq!(utc_stamp(0), "19700101-000000");
@@ -818,23 +828,25 @@ fn bundles_the_running_games_logs_first_with_its_performance_summary() {
         "{summary}"
     );
     let addons = summary
-        .split_once("\nAddons\n  Active profile: default\n")
+        .split_once("\nAddons\n")
         .and_then(|(_, rest)| rest.split_once("\nFiles\n"))
         .map(|(block, _)| block)
         .unwrap_or_else(|| panic!("{summary}"));
-    let row = |id: &str| {
-        addons
-            .lines()
-            .find(|l| l.split_whitespace().next() == Some(id))
-            .unwrap_or_else(|| panic!("{id} missing from:\n{addons}"))
-    };
-    let helper = row("t.helper");
-    assert_eq!(
-        helper.split_whitespace().collect::<Vec<_>>(),
-        ["t.helper", "1.2.3", "off"]
+    let (on, off) = addons
+        .split_once("\n  Off:\n")
+        .unwrap_or_else(|| panic!("{addons}"));
+    assert!(
+        on.starts_with("  Active profile: default, 1 of 2 addons on\n"),
+        "{addons}"
     );
-    let core = row(crate::builtin::CORE_ID);
-    assert!(core.ends_with("on  built in"), "{core}");
+    assert!(
+        on.contains("     1. SwoftyMod ") && on.contains(&format!("({}), built in", crate::builtin::CORE_ID)),
+        "{addons}"
+    );
+    assert!(
+        off.contains("        Helper 1.2.3 (t.helper), installed\n"),
+        "{addons}"
+    );
     assert!(summary.find("\nPerformance\n") < summary.find("\nFiles\n"));
     std::fs::remove_dir_all(&root).ok();
 }
@@ -874,6 +886,36 @@ fn leaves_out_live_logs_the_newest_session_already_kept() {
     let bundle = Bundle::collect_with(&store, &report(&game), Limits::default(), "x");
     assert!(bundle.entries.iter().any(|e| e.path == "game/perf.log"));
     assert!(summary_of(&bundle).contains("From sessions/20261020-090000/perf.log\n"));
+    std::fs::remove_dir_all(&root).ok();
+}
+
+#[test]
+fn says_when_there_is_no_launch_or_game_session() {
+    let root = tmp("nosession");
+    let store = Store::new(root.join("data"));
+    put(&store.sessions_dir().join("latest.txt"), "x");
+    put(&store.sessions_dir().join("orphaned-logs/loader.log"), "orphan\n");
+    put(&store.root.join("state/offline.log"), "offline line\n");
+    let collect = || {
+        summary_of(&Bundle::collect_with(
+            &store,
+            &report(&root),
+            Limits::default(),
+            "x",
+        ))
+    };
+    let none = "\nGame sessions    none found: no launch log in state/ and no session in sessions/\n";
+    assert!(!has_session(&store));
+    assert!(collect().contains(none), "{}", collect());
+    for launch in LAUNCH_LOGS {
+        put(&store.root.join(launch), "launch line\n");
+        assert!(has_session(&store), "{launch}");
+        assert!(!collect().contains("Game sessions"), "{}", collect());
+        std::fs::remove_file(store.root.join(launch)).unwrap();
+    }
+    put(&store.sessions_dir().join("20261020-090000/exit_code"), "0");
+    assert!(has_session(&store));
+    assert!(!collect().contains("Game sessions"), "{}", collect());
     std::fs::remove_dir_all(&root).ok();
 }
 
@@ -1097,6 +1139,27 @@ fn says_when_the_mod_loader_never_attached() {
         summary.contains("\nMod loader\n  last launch: Mods did not load (version.dll)\n"),
         "{summary}"
     );
+    assert!(!summary.contains("  found: "), "{summary}");
+    let mut blocked = crate::quarantine::Report::new(
+        crate::quarantine::Stage::InGame,
+        vec!["version.dll".into()],
+        &game,
+    );
+    blocked.cause = Some(Box::new(crate::quarantine::Cause::SmartAppControl { seen: true }));
+    blocked.write(&store.root).unwrap();
+    let summary = summary_of(&Bundle::collect_with(
+        &store,
+        &report(&game),
+        Limits::default(),
+        "x",
+    ));
+    assert!(
+        summary.contains(
+            "\n  last launch: Mods did not load (version.dll)\n  found: Smart App Control blocked version.dll \
+             (the [loader] lines in state/wrapper-run.log say more)\n"
+        ),
+        "{summary}"
+    );
     std::fs::remove_dir_all(&root).ok();
 }
 
@@ -1223,5 +1286,91 @@ fn keeps_only_the_newest_bundles() {
         ])
     );
     assert!(prune(&root.join("missing"), 3, &old).is_empty());
+    std::fs::remove_dir_all(&root).ok();
+}
+
+#[test]
+fn lists_the_addons_by_name_in_load_order_with_their_source_and_settings() {
+    let root = tmp("addon-list");
+    let (store, game) = fake_data(&root);
+    put(
+        &store.addons_dir().join("mod.cars/swofty.json"),
+        r#"{"schema_version":1,"id":"mod.cars","name":"Cars › Classic","version":"1.0.0","author":"t","compat":{"game":"f1_25"},
+            "origin":{"tool":"teamsimplified.mods","file":"Cars.zip"}}"#,
+    );
+    put(
+        &store.addons_dir().join("t.grid/swofty.json"),
+        r#"{"schema_version":1,"id":"t.grid","name":"Grid","version":"0.2.0","author":"t","compat":{"game":"f1_25"},
+            "options":[{"id":"cars","type":"slider","label":"Cars","default":22,"min":22,"max":30,"step":1,"binds":"db"},
+                       {"id":"api_token","type":"choice","default":"a","values":["a","b"],"binds":"native"}]}"#,
+    );
+    put(
+        &store.root.join("profiles/default.json"),
+        r#"{"schema_version":1,"name":"default","addons":[{"id":"t.grid","enabled":true},{"id":"mod.cars","enabled":true},
+            {"id":"t.helper","enabled":false}],"options":{"t.grid":{"cars":26,"api_token":"b"}}}"#,
+    );
+    put(
+        &store.root.join("profiles/test.json"),
+        r#"{"schema_version":1,"name":"test","addons":[{"id":"mod.cars","enabled":true}]}"#,
+    );
+    let pairs = r#"{"profile":"default","built_at":1.0,"pairs":[{"winner":"t.grid","loser":"mod.cars","database":1,"resources":0,"files":0,"items":["tracks.Track_3.laps"]}]}"#;
+    put(&crate::conflicts::path(&store, "default"), pairs);
+    let bundle = Bundle::collect_with(&store, &report(&game), Limits::default(), "20261023-120000");
+    let summary = summary_of(&bundle);
+    let addons = summary
+        .split_once("\nAddons\n")
+        .and_then(|(_, rest)| rest.split_once("\nFiles\n"))
+        .map(|(block, _)| block)
+        .unwrap_or_else(|| panic!("{summary}"));
+    let on: Vec<&str> = addons
+        .lines()
+        .filter(|l| l.trim_start().starts_with(char::is_numeric))
+        .collect();
+    assert_eq!(on.len(), 3, "{addons}");
+    assert!(on[1].ends_with("2. Grid 0.2.0 (t.grid), installed"), "{addons}");
+    assert!(
+        on[2].ends_with("3. Cars › Classic 1.0.0 (mod.cars), imported from Cars.zip"),
+        "{addons}"
+    );
+    assert!(
+        addons.contains(
+            "(t.grid), installed\n          Cars: 26 (default 22)\n          api_token: [redacted] (default [redacted])\n"
+        ),
+        "{addons}"
+    );
+    assert!(
+        addons.contains("Off:\n        Helper 1.2.3 (t.helper), installed\n"),
+        "{addons}"
+    );
+    assert!(
+        addons.contains("Other profiles: vanilla (0 on), test (2 on)"),
+        "{addons}"
+    );
+    let zip = bundle.zip().unwrap();
+    assert_eq!(entry(&zip, "conflicts.json"), pairs);
+    let json: Value = serde_json::from_str(&entry(&zip, "addons.json")).unwrap();
+    let cars = json["installed"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|a| a["id"] == "mod.cars")
+        .unwrap();
+    assert_eq!(cars["source"], "imported from Cars.zip");
+    assert_eq!(cars["origin"]["file"], "Cars.zip");
+    let default = json["profiles"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|p| p["name"] == "default")
+        .unwrap();
+    let grid = default["addons"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|a| a["id"] == "t.grid")
+        .unwrap();
+    assert_eq!(grid["name"], "Grid");
+    assert_eq!(grid["options"]["cars"], 26);
+    assert_eq!(grid["options"]["api_token"], "[redacted]");
     std::fs::remove_dir_all(&root).ok();
 }

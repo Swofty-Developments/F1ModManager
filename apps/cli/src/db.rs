@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::path::PathBuf;
 use std::process::ExitCode;
 use std::sync::Arc;
@@ -5,7 +6,7 @@ use std::sync::Arc;
 use anyhow::{Result, anyhow, bail};
 use clap::Subcommand;
 use swofty_core::dbedit::package::{self, Package};
-use swofty_core::dbedit::{Catalog, Edits, NodeId, NodeKind, RowCopy, modules};
+use swofty_core::dbedit::{Catalog, Edits, NodeId, NodeKind, RowCopy, deps, modules};
 use swofty_core::manifest::Category;
 use swofty_core::store::Store;
 
@@ -52,14 +53,21 @@ pub enum DbCommand {
         author: Option<String>,
         #[arg(long)]
         description: Option<String>,
-        #[arg(long, value_parser = category, help = "One of tracks, liveries, cars, drivers-teams, seasons, database, gameplay, ui, audio, tools, other")]
-        category: Option<Category>,
+        #[arg(long, value_parser = category, help = "One of seasons, tracks, cars, helmets, uncategorised")]
+        category: Option<CategoryArg>,
     },
     #[command(about = "Search names, tables, keys, values and English text")]
     Search {
         query: String,
         #[arg(long, default_value_t = 30)]
         limit: usize,
+    },
+    #[command(
+        about = "List what a copy of a row does not bring along: rows of other tables labelled with the row's label or a name derived from it, and values that pick the row by label or stat_id"
+    )]
+    Deps {
+        #[arg(help = "The row, as a dotted or selector path")]
+        row: String,
     },
     #[command(about = "Show a key's value, or what a table, row or container holds")]
     Get {
@@ -148,9 +156,18 @@ fn row_line(r: &RowCopy) -> String {
     format!("{}: a copy of {from}", r.select())
 }
 
-fn category(s: &str) -> std::result::Result<Category, String> {
-    serde_json::from_value(serde_json::Value::String(s.to_owned()))
-        .map_err(|_| format!("{s} is not a category; see --help"))
+#[derive(Debug, Clone, Copy)]
+pub struct CategoryArg(Option<Category>);
+
+fn category(s: &str) -> std::result::Result<CategoryArg, String> {
+    if s == "uncategorised" {
+        return Ok(CategoryArg(None));
+    }
+    match serde_json::from_value(serde_json::Value::String(s.to_owned())) {
+        Ok(Category::Shaders) => Err("shaders is for shader packs, not DB Editor addons; see --help".into()),
+        Ok(c) => Ok(CategoryArg(Some(c))),
+        Err(_) => Err(format!("{s} is not a category; see --help")),
+    }
 }
 
 fn open(store: &Store, id: &str) -> Result<Package> {
@@ -289,7 +306,7 @@ pub fn command(store: &Store, profile: &str, game: Option<PathBuf>, cmd: DbComma
             category,
         } => {
             let mut p = open(store, &id)?;
-            if let Some(c) = category {
+            if let Some(CategoryArg(c)) = category {
                 p.set_category(c);
             }
             if name.is_some()
@@ -324,6 +341,16 @@ pub fn command(store: &Store, profile: &str, game: Option<PathBuf>, cmd: DbComma
             for h in catalog()?.search(&query, limit) {
                 println!("{:<10} {}  {}", format!("{:?}", h.kind), h.title, h.detail);
             }
+        }
+        DbCommand::Deps { row } => {
+            let cat = catalog()?;
+            let node = cat
+                .find(&row)
+                .ok_or_else(|| anyhow!("{row}: not in the game database"))?;
+            if !matches!(cat.node(node).kind, NodeKind::Row { .. }) {
+                bail!("{row}: not a row");
+            }
+            print_deps(&cat, node);
         }
         DbCommand::Get { path, addon } => {
             let edits = match &addon {
@@ -443,6 +470,90 @@ pub fn command(store: &Store, profile: &str, game: Option<PathBuf>, cmd: DbComma
         }
     }
     Ok(ExitCode::SUCCESS)
+}
+
+fn print_deps(cat: &Catalog, row: NodeId) {
+    let d = deps::deps(cat, row);
+    let mut hows: BTreeMap<&str, Vec<String>> = BTreeMap::new();
+    for n in &d.names {
+        hows.entry(n.value.as_str()).or_default().push(n.how());
+    }
+    println!("{}", cat.path(row));
+    println!("names the game can derive from the row:");
+    for (value, how) in &hows {
+        println!("  {value}: {}", how.join(", "));
+    }
+    let tag = |area: Option<&str>| area.map(|a| format!(" [{a}]")).unwrap_or_default();
+    if !d.rules.is_empty() {
+        println!("rows the game is known to look up for the row:");
+    }
+    for (rule, name, found) in &d.rules {
+        let by = match rule.field {
+            None => format!("labelled {name} ({})", rule.how()),
+            Some(field) => format!("whose {field} names {name}"),
+        };
+        let found = match found {
+            Some(row) => cat.path(*row),
+            None => "none".into(),
+        };
+        println!("  {} row {by}: {found}; {}", rule.table, rule.reader);
+    }
+    let mut keyed: BTreeMap<(bool, String, &str), (usize, Option<&str>)> = BTreeMap::new();
+    for k in d.keyed.iter().filter(|k| k.rule.is_none()) {
+        let tables = match k.tables.len() {
+            1 => cat.path(k.tables[0]),
+            _ => k.family.clone(),
+        };
+        let by_label = hows[k.name.value.as_str()]
+            .iter()
+            .any(|h| h.starts_with("the label"));
+        let n = keyed
+            .entry((!by_label, tables, k.name.value.as_str()))
+            .or_insert((0, k.area));
+        n.0 = n.0.max(k.tables.len());
+    }
+    let mut section = None;
+    for ((by_field, tables, value), (n, area)) in &keyed {
+        if section != Some(*by_field) {
+            section = Some(*by_field);
+            match by_field {
+                false => println!("rows of other tables labelled with the label or a name built from it:"),
+                true => println!(
+                    "rows of other tables labelled with a value of the row (a copy that changes it needs its own):"
+                ),
+            }
+        }
+        let tables = match n {
+            1 => tables.clone(),
+            n => format!("{tables} ({n} tables)"),
+        };
+        println!("  {tables}: {value} ({}){}", hows[value].join(", "), tag(*area));
+    }
+    if d.keyed.is_empty() {
+        println!("rows of other tables labelled with these names: none");
+    }
+    println!("values that pick the row:");
+    if d.references.is_empty() {
+        println!("  none");
+    }
+    for r in &d.references {
+        let by = match r.by {
+            deps::By::Label => "label",
+            deps::By::StatId => "stat_id",
+        };
+        println!("  by {by}: {} ({}){}", r.field, r.count, tag(r.area));
+    }
+    if d.unnamed > 0 {
+        println!(
+            "  {} value(s) under keys the catalogue does not name hold the label",
+            d.unnamed
+        );
+    }
+    if d.keyed.iter().any(|k| k.area.is_some()) || d.references.iter().any(|r| r.area.is_some()) {
+        println!(
+            "[area]: a table of a game area an add-row copy does not reach by default; the build lists its findings only with swofty build --side-data"
+        );
+    }
 }
 
 fn show(cat: &Catalog, edits: &Edits, node: NodeId) {

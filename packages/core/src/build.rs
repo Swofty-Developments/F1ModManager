@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
@@ -16,12 +16,12 @@ use crate::asset::{
     AssetOp, FileKind, FileOp, GroupOp, ItemOp, LangOp, Op, OpFile, Origin, Root, Source, TrackOp,
 };
 use crate::baseline::{Baseline, Objects, hex, sha256_file, sha256_opt};
-use crate::builtin::{CORE_ID, LOADER_ENV, loader_dir, loader_files};
+use crate::builtin::{CORE_DB, CORE_ID, LOADER_ENV, core_db_ops, loader_dir, loader_files};
 use crate::conflicts::Report;
-use crate::erpbuild::{ErpBuild, Resized, SliceMerge, reads, unsupported};
+use crate::erpbuild::{ErpBuild, Resized, SliceMerge, reads, unsupported, writes};
 use crate::install::{Game, LOADER_DIR, Plan};
 use crate::launcher::BuildCx;
-use crate::manifest::{AddonManifest, relative_inside};
+use crate::manifest::{AddonManifest, Strength, relative_inside};
 use crate::map::TrackPackage;
 use crate::owned;
 use crate::placed::Placed;
@@ -32,7 +32,9 @@ use crate::profile::Profile;
 use crate::registry::Host;
 use crate::resolver::resolve;
 use crate::runtime::{Prebuilt, Runtime, db_edits, overlay_fits};
-use crate::settings::{SessionMod, SessionSettings, SessionUi, render_ops, screen_file, screens};
+use crate::settings::{
+    SessionMod, SessionSettings, SessionUi, render_ops, render_text, screen_file, screens,
+};
 use crate::store::Store;
 use crate::ui::{ERPS as MENU_ERPS, READS as MENU_READS, ui_file};
 use crate::{Error, Result, io_err};
@@ -53,6 +55,8 @@ pub struct Built {
     pub plan: Plan,
     pub lines: Vec<String>,
     pub warnings: Vec<String>,
+    /// Every side-data finding of the add-row copies, tagged; see [`crate::dbedit::deps::Report`].
+    pub side_data: Vec<String>,
     pub settings: Option<SessionSettings>,
     pub conflicts: Vec<Conflict>,
     pub waiting: Vec<Op>,
@@ -164,6 +168,29 @@ pub fn source_dir(store: &Store, addon: &str, root: Root) -> PathBuf {
     }
 }
 
+/// The `.cube` a shader pack's settings pick, and its strength from 0 to 100.
+fn shader_look(m: &AddonManifest, p: &Profile) -> Result<(String, f64)> {
+    let s = m.shader.as_ref().expect("a shader pack");
+    let rel = render_text(&s.lut, m, p)?;
+    if !relative_inside(&rel) {
+        return Err(Error::Other(format!(
+            "{}: shader lut {rel} must be a relative path inside the addon",
+            m.name
+        )));
+    }
+    let strength = match &s.strength {
+        None => 100.0,
+        Some(Strength::Percent(v)) => *v,
+        Some(Strength::Option(t)) => render_text(t, m, p)?
+            .trim()
+            .parse::<f64>()
+            .ok()
+            .filter(|v| (0.0..=100.0).contains(v))
+            .ok_or_else(|| Error::Other(format!("{}: shader strength {t} is not from 0 to 100", m.name)))?,
+    };
+    Ok((rel, strength))
+}
+
 fn render_file(
     path: &Path,
     kind: FileKind,
@@ -190,6 +217,7 @@ fn package_ops(store: &Store, id: &str) -> Result<OpFile> {
         schema_version: ops.schema_version,
         fields: ops.fields,
         strict: ops.strict,
+        side_data: ops.side_data,
         ops: ops.ops.into_iter().map(AssetOp::Db).collect(),
     })
 }
@@ -441,9 +469,13 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
             .map(|f| f.erp.resources.into_iter().map(|r| r.name).collect())
             .unwrap_or_default()
     };
+    let mut lenient = packages.clone();
+    if let Some(core) = addons.get(CORE_ID) {
+        lenient.insert(CORE_ID.to_owned(), core.name.clone());
+    }
     let mut planner = Planner::new(&features, &config.runtime_assets)
         .build_only(&config.build_assets)
-        .lenient(packages.clone())
+        .lenient(lenient)
         .overlays(&overlay_names);
     if features != Features::default() {
         hasher.update(format!("runtime {features:?} {:?};", config.runtime_assets));
@@ -452,6 +484,48 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
         }
     }
     let mut runtime = Runtime::new(planner.features());
+    let mut experimental: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
+    for id in &resolved.order {
+        for f in &addons[id].experimental_features {
+            experimental.entry(f.name()).or_default().push(&addons[id].name);
+        }
+    }
+    for (feature, by) in &experimental {
+        runtime.enable(feature);
+        hasher.update(format!("feature {feature};"));
+        built.lines.push(format!(
+            "features: the experimental {feature} feature is on for {}",
+            by.join(", ")
+        ));
+    }
+    let looks: Vec<&AddonManifest> = resolved
+        .order
+        .iter()
+        .map(|id| &addons[id])
+        .filter(|m| m.shader.is_some())
+        .collect();
+    if let Some((m, earlier)) = looks.split_last() {
+        for e in earlier {
+            built.warnings.push(format!(
+                "{}: its look is not applied; one shader look applies at a time, and {} loads after it",
+                e.name, m.name
+            ));
+        }
+        let (rel, strength) = shader_look(m, &p)?;
+        let path = store.addons_dir().join(&m.id).join(&rel);
+        let text =
+            std::fs::read_to_string(&path).map_err(|e| Error::Other(format!("{}: {rel}: {e}", m.name)))?;
+        let cube = swofty_formats::cube::Cube::parse(&text)
+            .map_err(|e| Error::Other(format!("{}: {rel}: {e}", m.name)))?;
+        hasher.update(format!("shader {} {rel} {strength};", m.id));
+        hasher.update(text.as_bytes());
+        runtime.shader(cube.pack(), strength / 100.0, &m.name);
+        built.lines.push(format!(
+            "shaders: {} grades the picture with {rel} ({n}x{n}x{n}) at {strength}% strength",
+            m.name,
+            n = cube.size
+        ));
+    }
     for id in &resolved.order {
         let m = &addons[id];
         hasher.update(format!("{id}@{};", m.version));
@@ -473,6 +547,10 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
                     built.warnings.push(format!("{name}: package skipped: {e}"));
                 }
             }
+        }
+        if id == CORE_ID {
+            hasher.update(CORE_DB);
+            files.push((FileKind::Database, core_db_ops()));
         }
         for (kind, rel) in m.operations.op_files() {
             if package.is_some() && kind == FileKind::Database {
@@ -539,7 +617,31 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
         }
         for s in &m.operations.screens {
             let path = dir.join(&s.file);
-            hasher.update(std::fs::read(&path).map_err(io_err(&path))?);
+            let data = std::fs::read(&path).map_err(io_err(&path))?;
+            if swofty_formats::pkg::is_pkg(&data) {
+                let (cat, engine) = (crate::ui::catalog::stock(), crate::ui::catalog::engine());
+                let none = crate::ui::catalog::Scenes::default();
+                let resource = format!("{id}/{}", s.file);
+                let input = crate::ui::check::UiInput {
+                    resource: &resource,
+                    frag: "temp",
+                    data: &data,
+                    stock: None,
+                };
+                let report = crate::ui::check::ui_edit(&input, &none, cat, engine)?;
+                if !report.hard.is_empty() {
+                    let lines: Vec<String> = report.hard.iter().map(|h| h.to_string()).collect();
+                    return Err(Error::Other(format!(
+                        "{id}: screen {} breaks rules the game's UI loader enforces:\n  {}",
+                        s.name,
+                        lines.join("\n  ")
+                    )));
+                }
+                built
+                    .warnings
+                    .extend(report.warnings.iter().map(|w| format!("{id}: ui: {w}")));
+            }
+            hasher.update(&data);
         }
         let pending = m.operations.ui.len();
         if pending > 0 {
@@ -673,6 +775,14 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
             let name = addons.get(id).map_or(id.as_str(), |m| m.name.as_str());
             built.warnings.push(stock_removals_line(name, *n));
         }
+        let mut copies = planner.take_copies();
+        for c in &mut copies {
+            c.quiet = c.addon == CORE_ID;
+        }
+        let addon_name = |id: &str| addons.get(id).map_or(id, |m| m.name.as_str()).to_owned();
+        let side = crate::dbedit::deps::check(&db, &copies, &addon_name);
+        built.warnings.extend(side.warnings);
+        built.side_data = side.findings;
         if !added.is_empty() {
             let found = owned::owned_items(&db, &Gvdb::parse(&shipped)?, &added);
             built.lines.extend(found.lines);
@@ -818,11 +928,45 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
             }
         }
     }
-    let erp_ops = planner.take_erp();
+    let file_ops = planner.take_files();
+    let mut erp_ops = planner.take_erp();
+    let rank = |o: &Origin| {
+        resolved
+            .order
+            .iter()
+            .position(|id| *id == o.addon)
+            .unwrap_or(usize::MAX)
+    };
+    let puts = archive_puts(store, &file_ops, &erp_ops, &rank)?;
+    for (rel, put) in &puts {
+        planner.put_archive(rel, &put.origin);
+    }
+    erp_ops.retain_mut(|op| {
+        let rank = rank(&op.origin);
+        after_puts(op, &puts, rank)
+    });
     let mut mipmaps = BTreeMap::new();
+    let mut built_over = BTreeSet::new();
     if !erp_ops.is_empty() {
         let staged = built.plan.data.clone();
-        let base = |rel: &str| staged.get(rel).cloned().unwrap_or_else(|| resolve(rel));
+        let base = |rel: &str| {
+            staged
+                .get(rel)
+                .or_else(|| puts.get(rel).map(|p| &p.path))
+                .cloned()
+                .unwrap_or_else(|| resolve(rel))
+        };
+        for (rel, put) in &puts {
+            if erp_ops
+                .iter()
+                .any(|op| matches!(&op.op, AssetOp::Erp(e) if writes(e).contains(&rel.as_str())))
+            {
+                built.lines.push(format!(
+                    "erp: {rel}: later changes apply to the whole archive {} puts",
+                    put.origin
+                ));
+            }
+        }
         let mut erps = ErpBuild::new(&base);
         let runtime_route = planner.route(Kind::Erp) == Route::Runtime;
         // Every origin that writes, in load order: the later wins.
@@ -886,6 +1030,18 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
         for n in erps.take_notes() {
             built.lines.push(format!("erp: {n}"));
         }
+        let name = |origin: &str| match origin.split_once(" (") {
+            Some((id, item)) => match addons.get(id) {
+                Some(m) => format!("{} ({item}", m.name),
+                None => origin.to_owned(),
+            },
+            None => addons
+                .get(origin)
+                .map_or_else(|| origin.to_owned(), |m| m.name.clone()),
+        };
+        for w in erps.check_ui(&name)? {
+            built.warnings.push(format!("ui: {w}"));
+        }
         mipmaps = erps.take_mipmaps();
         if let Some(note) = planner.route_note(Kind::Erp) {
             built.lines.push(format!("erp: {note}"));
@@ -924,8 +1080,13 @@ pub(crate) fn build_as(store: &Store, profile: &str, game: &Game, checking: bool
             resized
         };
         built.warnings.extend(stock_holders(&game.dir, &resized));
+        built_over = puts
+            .keys()
+            .filter(|rel| built.plan.data.contains_key(*rel) && !staged.contains_key(*rel))
+            .cloned()
+            .collect();
     }
-    put_files(&mut built, store, game, mipmaps, planner.take_files())?;
+    put_files(&mut built, store, game, mipmaps, file_ops, &built_over)?;
     match loader_dir() {
         Some(dir) => {
             built.plan.loader = loader_files(&dir)?;
@@ -1164,6 +1325,61 @@ fn stage_erps(built: &mut Built, staged: &BTreeMap<String, PathBuf>, rels: Vec<S
     Ok(())
 }
 
+/// An archive a `file.put` replaces whole while ERP ops change it too: its last
+/// put in load order.
+struct ArchivePut {
+    rank: usize,
+    origin: Origin,
+    path: PathBuf,
+}
+
+fn archive_puts(
+    store: &Store,
+    files: &[Op],
+    erps: &[Op],
+    rank: &dyn Fn(&Origin) -> usize,
+) -> Result<BTreeMap<String, ArchivePut>> {
+    let changed: BTreeSet<&str> = erps
+        .iter()
+        .flat_map(|op| match &op.op {
+            AssetOp::Erp(e) => writes(e),
+            _ => Vec::new(),
+        })
+        .collect();
+    let mut puts = BTreeMap::new();
+    for op in files {
+        let AssetOp::File(FileOp::Put { source, target }) = &op.op else {
+            continue;
+        };
+        if changed.contains(target.as_str()) {
+            let path = source.resolve(&source_dir(store, &op.origin.addon, source.root))?;
+            puts.insert(
+                target.clone(),
+                ArchivePut {
+                    rank: rank(&op.origin),
+                    origin: op.origin.clone(),
+                    path,
+                },
+            );
+        }
+    }
+    Ok(puts)
+}
+
+/// Leaves out of `op` the archives a put replaces later in load order; false
+/// when none is left.
+fn after_puts(op: &mut Op, puts: &BTreeMap<String, ArchivePut>, rank: usize) -> bool {
+    let replaced = |erp: &str| puts.get(erp).is_some_and(|p| p.rank > rank);
+    match &mut op.op {
+        AssetOp::Erp(crate::ops::ErpOp::Overlay { erps, .. }) => {
+            erps.retain(|e| !replaced(e));
+            !erps.is_empty()
+        }
+        AssetOp::Erp(e) => !writes(e).into_iter().any(replaced),
+        _ => true,
+    }
+}
+
 fn index_of(path: &Path) -> Option<Vec<u8>> {
     use std::io::{Read, Seek, SeekFrom};
     let mut f = std::fs::File::open(path).ok()?;
@@ -1253,9 +1469,11 @@ fn put_files(
     game: &Game,
     mipmaps: BTreeMap<String, PathBuf>,
     ops: Vec<Op>,
+    built_over: &BTreeSet<String>,
 ) -> Result<()> {
     let mips = mipmaps.len();
-    let mut put = mipmaps;
+    let mut put: BTreeMap<String, (PathBuf, Option<Origin>)> =
+        mipmaps.into_iter().map(|(rel, src)| (rel, (src, None))).collect();
     for op in ops {
         let AssetOp::File(FileOp::Put { source, target }) = op.op else {
             continue;
@@ -1265,10 +1483,8 @@ fn put_files(
                 "{target} must be a relative path inside the game folder"
             )));
         }
-        put.insert(
-            target,
-            source.resolve(&source_dir(store, &op.origin.addon, source.root))?,
-        );
+        let src = source.resolve(&source_dir(store, &op.origin.addon, source.root))?;
+        put.insert(target, (src, Some(op.origin)));
     }
     if put.is_empty() {
         return Ok(());
@@ -1279,16 +1495,30 @@ fn put_files(
             || (game.dir.join(rel).is_file() && !left_over(store, game, rel))
     };
     let (mut replaced, mut added) = (0, 0);
-    for (rel, src) in put {
-        let into = if stock(&rel) {
+    for (rel, (src, origin)) in put {
+        let is_stock = stock(&rel);
+        if is_stock {
             replaced += 1;
-            &mut built.plan.data
         } else {
             added += 1;
-            &mut built.plan.added
+        }
+        if built_over.contains(&rel) {
+            if !is_stock && let Some(archive) = built.plan.data.remove(&rel) {
+                built.plan.added.insert(rel, archive);
+            }
+            continue;
+        }
+        let into = match is_stock {
+            true => &mut built.plan.data,
+            false => &mut built.plan.added,
         };
         if into.insert(rel.clone(), src).is_some() {
-            return Err(Error::Other(format!("{rel} is replaced twice")));
+            return Err(Error::Other(match origin {
+                Some(o) => format!(
+                    "{rel} is replaced twice: {o} puts the whole file, and an added track changes it too"
+                ),
+                None => format!("{rel} is replaced twice"),
+            }));
         }
     }
     built
@@ -1321,6 +1551,7 @@ pub fn build_menus(
             menus.strings.len()
         ));
     }
+    built.lines.extend(menus.lines);
     built.plan.data.extend(menus.erps);
     for (rel, src) in menus.screens {
         if built.plan.loader.insert(rel.clone(), src).is_some() {
@@ -1645,7 +1876,7 @@ mod tests {
         let dir = root.join("game");
         std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
         std::fs::write(dir.join(crate::GAME_EXE), "exe").unwrap();
-        std::fs::write(dir.join(GVDB), "db").unwrap();
+        std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
         let game = Game {
             identity: Identity::detect(&dir, Some(1)).unwrap(),
             dir,
@@ -2105,6 +2336,10 @@ mod tests {
     }
 
     fn archive(names: &[&str], byte: u8) -> Vec<u8> {
+        archive_of("UILayout", names, byte)
+    }
+
+    fn archive_of(kind: &str, names: &[&str], byte: u8) -> Vec<u8> {
         use swofty_formats::erp::{Erp, Fragment, HEADER_LEN, MAGIC, Resource, STORED};
         let mut header = [0u8; HEADER_LEN];
         header[..4].copy_from_slice(MAGIC);
@@ -2116,7 +2351,7 @@ mod tests {
                 .iter()
                 .map(|n| Resource {
                     name: (*n).into(),
-                    kind: swofty_formats::erp::kind("UILayout").unwrap(),
+                    kind: swofty_formats::erp::kind(kind).unwrap(),
                     unk: vec![0; 4],
                     fragments: vec![Fragment {
                         name: *b"temp",
@@ -2286,6 +2521,308 @@ mod tests {
         std::fs::remove_dir_all(&root).ok();
     }
 
+    // One addon puts `t.erp` whole and another replaces a resource in it with a
+    // bigger one; `edit_first` loads the edit before the put.
+    fn build_put_and_edit(name: &str, edit_first: bool) -> (Built, PathBuf, PathBuf) {
+        let root = std::env::temp_dir().join(format!("swofty-build-{name}-{}", std::process::id()));
+        std::fs::remove_dir_all(&root).ok();
+        let dir = root.join("game");
+        std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
+        std::fs::create_dir_all(dir.join("2025_asset_groups")).unwrap();
+        std::fs::write(dir.join(crate::GAME_EXE), "exe").unwrap();
+        std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
+        let erp = "2025_asset_groups/t.erp";
+        std::fs::write(
+            dir.join(erp),
+            archive_of("Data", &["eaid://t/a.idf", "eaid://t/b.idf"], 0),
+        )
+        .unwrap();
+        let game = Game {
+            identity: Identity::detect(&dir, Some(1)).unwrap(),
+            dir,
+            user_reg: None,
+        };
+        let store = Store::new(root.join("data"));
+        let pack = (
+            "t.pack",
+            format!(r#""files": [{{ "source": "whole.erp", "target": "{erp}" }}]"#),
+        );
+        let edit = ("t.edit", r#""assets": ["ops.json"]"#.to_owned());
+        let order = match edit_first {
+            true => [edit, pack],
+            false => [pack, edit],
+        };
+        for (id, operations) in order {
+            let src = root.join("src").join(id);
+            std::fs::create_dir_all(&src).unwrap();
+            std::fs::write(
+                src.join("swofty.json"),
+                format!(
+                    r#"{{ "schema_version": 1, "id": "{id}", "name": "{id}", "version": "1.0.0", "author": "t",
+                         "compat": {{ "game": "f1_25" }}, "operations": {{ {operations} }} }}"#
+                ),
+            )
+            .unwrap();
+            std::fs::write(
+                src.join("ops.json"),
+                format!(
+                    r#"{{ "schema_version": 1, "ops": [{{"op":"erp.replace-resource","erp":"{erp}","resource":"eaid://t/a.idf","source":"a.bin"}}] }}"#
+                ),
+            )
+            .unwrap();
+            std::fs::write(src.join("a.bin"), [9, 9]).unwrap();
+            std::fs::write(
+                src.join("whole.erp"),
+                archive_of("Data", &["eaid://t/a.idf", "eaid://t/b.idf", "eaid://t/c.idf"], 5),
+            )
+            .unwrap();
+            store.install_addon(&src).unwrap();
+            store
+                .update_profile("default", |p| p.set_enabled(id, true))
+                .unwrap();
+        }
+        let built = build(&store, "default", &game).unwrap();
+        let whole = store.addons_dir().join("t.pack").join("whole.erp");
+        (built, root, whole)
+    }
+
+    fn fragments(path: &Path) -> Vec<(String, Vec<u8>)> {
+        let f = swofty_formats::erp::ErpFile::open(path).unwrap();
+        f.erp
+            .resources
+            .iter()
+            .map(|r| (r.name.clone(), f.load(r).unwrap().fragments[0].raw.clone()))
+            .collect()
+    }
+
+    #[test]
+    fn a_later_resource_edit_applies_to_an_archive_put_whole() {
+        if loader_dir().is_some() {
+            return;
+        }
+        let (built, root, _) = build_put_and_edit("put-then-edit", false);
+        let erp = "2025_asset_groups/t.erp";
+        assert_eq!(
+            fragments(&built.plan.data[erp]),
+            [
+                ("eaid://t/a.idf".to_owned(), vec![9, 9]),
+                ("eaid://t/b.idf".to_owned(), vec![5]),
+                ("eaid://t/c.idf".to_owned(), vec![5]),
+            ]
+        );
+        assert!(!built.plan.added.contains_key(erp));
+        let pair = &built.report.pairs[0];
+        assert_eq!(
+            (pair.winner.as_str(), pair.loser.as_str(), pair.resources),
+            ("t.edit", "t.pack", 1)
+        );
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn an_archive_put_whole_replaces_earlier_resource_edits() {
+        if loader_dir().is_some() {
+            return;
+        }
+        let (built, root, whole) = build_put_and_edit("edit-then-put", true);
+        assert_eq!(built.plan.data["2025_asset_groups/t.erp"], whole);
+        let pair = &built.report.pairs[0];
+        assert_eq!(
+            (pair.winner.as_str(), pair.loser.as_str(), pair.resources),
+            ("t.pack", "t.edit", 1)
+        );
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn an_addon_turns_on_the_experimental_features_it_lists() {
+        if loader_dir().is_some() {
+            return;
+        }
+        let root = std::env::temp_dir().join(format!("swofty-build-features-{}", std::process::id()));
+        std::fs::remove_dir_all(&root).ok();
+        let dir = root.join("game");
+        std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
+        std::fs::write(dir.join(crate::GAME_EXE), "exe").unwrap();
+        std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
+        let game = Game {
+            identity: Identity::detect(&dir, Some(1)).unwrap(),
+            dir,
+            user_reg: None,
+        };
+        let store = Store::new(root.join("data"));
+        let src = root.join("src");
+        std::fs::create_dir_all(&src).unwrap();
+        std::fs::write(
+            src.join("swofty.json"),
+            r#"{ "schema_version": 1, "id": "t.hud", "name": "Race Control", "version": "1.0.0", "author": "t",
+                 "compat": { "game": "f1_25" }, "experimental_features": ["overlay"] }"#,
+        )
+        .unwrap();
+        store.install_addon(&src).unwrap();
+        let assets = |built: &Built| {
+            built
+                .plan
+                .loader
+                .get("swofty/assets.json")
+                .map(|p| serde_json::from_slice::<serde_json::Value>(&std::fs::read(p).unwrap()).unwrap())
+        };
+        let off = build(&store, "default", &game).unwrap();
+        assert_eq!(assets(&off), None);
+        store
+            .update_profile("default", |p| p.set_enabled("t.hud", true))
+            .unwrap();
+        let on = build(&store, "default", &game).unwrap();
+        assert_eq!(assets(&on).unwrap()["features"], serde_json::json!(["overlay"]));
+        assert!(
+            on.lines
+                .contains(&"features: the experimental overlay feature is on for Race Control".to_owned()),
+            "{:?}",
+            on.lines
+        );
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn a_shader_pack_grades_with_the_look_its_settings_pick() {
+        use swofty_formats::cube::Cube;
+        if loader_dir().is_some() {
+            return;
+        }
+        let root = std::env::temp_dir().join(format!("swofty-build-shaders-{}", std::process::id()));
+        std::fs::remove_dir_all(&root).ok();
+        let dir = root.join("game");
+        std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
+        std::fs::write(dir.join(crate::GAME_EXE), "exe").unwrap();
+        std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
+        let game = Game {
+            identity: Identity::detect(&dir, Some(1)).unwrap(),
+            dir,
+            user_reg: None,
+        };
+        let store = Store::new(root.join("data"));
+        let pack = |id: &str, name: &str, warm: &str| {
+            let src = root.join(id);
+            std::fs::create_dir_all(src.join("looks")).unwrap();
+            std::fs::write(
+                src.join("swofty.json"),
+                format!(
+                    r#"{{ "schema_version": 1, "id": "{id}", "name": "{name}", "version": "1.0.0", "author": "t",
+                     "category": "shaders", "experimental_features": ["shaders"], "compat": {{ "game": "f1_25" }},
+                     "options": [
+                       {{ "id": "look", "type": "choice", "default": "mono", "values": ["mono", "warm"], "binds": "db" }},
+                       {{ "id": "strength", "type": "slider", "min": 0, "max": 100, "step": 10, "default": 50,
+                         "binds": "db" }}
+                     ],
+                     "shader": {{ "lut": "looks/{{{{look}}}}.cube", "strength": "{{{{strength}}}}" }} }}"#
+                ),
+            )
+            .unwrap();
+            std::fs::write(src.join("looks/mono.cube"), Cube::identity(2).to_text()).unwrap();
+            std::fs::write(src.join("looks/warm.cube"), warm).unwrap();
+            store.install_addon(&src).unwrap()
+        };
+        let looks = pack("t.looks", "Looks", &Cube::identity(3).to_text());
+        store
+            .update_profile("default", |p| p.set_enabled("t.looks", true))
+            .unwrap();
+        let built = build(&store, "default", &game).unwrap();
+        let assets: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&built.plan.loader["swofty/assets.json"]).unwrap())
+                .unwrap();
+        assert_eq!(assets["features"], serde_json::json!(["shaders"]));
+        assert_eq!(
+            assets["shader"],
+            serde_json::json!({ "lut": "shaders/look.lut", "strength": 0.5, "addon": "Looks" })
+        );
+        let packed = std::fs::read(&built.plan.loader["swofty/shaders/look.lut"]).unwrap();
+        assert_eq!(Cube::unpack(&packed).unwrap().table, Cube::identity(2).table);
+        let line = |file: &str, size: usize, strength: u32| {
+            format!(
+                "shaders: Looks grades the picture with looks/{file} ({size}x{size}x{size}) at {strength}% strength"
+            )
+        };
+        assert!(
+            built.lines.contains(&line("mono.cube", 2, 50)),
+            "{:?}",
+            built.lines
+        );
+
+        store
+            .update_profile("default", |p| {
+                p.set_option(&looks, "look", "warm".into())?;
+                p.set_option(&looks, "strength", 100.into()).map(drop)
+            })
+            .unwrap();
+        let built = build(&store, "default", &game).unwrap();
+        assert!(
+            built.lines.contains(&line("warm.cube", 3, 100)),
+            "{:?}",
+            built.lines
+        );
+
+        let later = pack("t.later", "Later Looks", "LUT_3D_SIZE 2\n0 0 0\n");
+        store
+            .update_profile("default", |p| {
+                p.set_enabled("t.later", true)?;
+                p.set_option(&later, "look", "warm".into()).map(drop)
+            })
+            .unwrap();
+        let err = build(&store, "default", &game).unwrap_err().to_string();
+        assert!(
+            err.contains("Later Looks: looks/warm.cube: 1 colour line(s), but LUT_3D_SIZE 2 needs 8"),
+            "{err}"
+        );
+        store
+            .update_profile("default", |p| {
+                p.set_option(&later, "look", "mono".into()).map(drop)
+            })
+            .unwrap();
+        let built = build(&store, "default", &game).unwrap();
+        let skipped = "Looks: its look is not applied; one shader look applies at a time, and Later Looks loads after it";
+        assert!(
+            built.warnings.contains(&skipped.to_owned()),
+            "{:?}",
+            built.warnings
+        );
+        std::fs::remove_dir_all(&root).ok();
+    }
+
+    #[test]
+    fn the_template_shader_pack_builds() {
+        if loader_dir().is_some() {
+            return;
+        }
+        let root = std::env::temp_dir().join(format!("swofty-build-template-look-{}", std::process::id()));
+        std::fs::remove_dir_all(&root).ok();
+        let dir = root.join("game");
+        std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
+        std::fs::write(dir.join(crate::GAME_EXE), "exe").unwrap();
+        std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
+        let game = Game {
+            identity: Identity::detect(&dir, Some(1)).unwrap(),
+            dir,
+            user_reg: None,
+        };
+        let store = Store::new(root.join("data"));
+        let template = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../templates/shader-pack");
+        let m = store.install_addon(&template).unwrap();
+        store
+            .update_profile("default", |p| p.set_enabled(&m.id, true))
+            .unwrap();
+        for look in ["monochrome", "overcast", "noir"] {
+            store
+                .update_profile("default", |p| p.set_option(&m, "look", look.into()).map(drop))
+                .unwrap();
+            let built = build(&store, "default", &game).unwrap();
+            let line = format!(
+                "shaders: Monochrome Looks grades the picture with looks/{look}.cube (17x17x17) at 100% strength"
+            );
+            assert!(built.lines.contains(&line), "{:?}", built.lines);
+        }
+        std::fs::remove_dir_all(&root).ok();
+    }
+
     #[test]
     fn a_built_addon_installs_and_builds() {
         use crate::builder::AddonBuilder;
@@ -2315,7 +2852,7 @@ mod tests {
         std::fs::write(src.join("a.erp"), archive(&[uri], 9)).unwrap();
         std::fs::write(src.join("a.dds"), "dds").unwrap();
         let mut b = AddonBuilder::new("t.generated", "Generated", "t");
-        b.category = Some(Category::Gameplay);
+        b.category = Some(Category::Helmets);
         b.db(DbOp::PutRecord {
             key: "rules.laps".into(),
             tag: 0,
@@ -2333,7 +2870,7 @@ mod tests {
         b.write(&root.join("out")).unwrap();
         let store = Store::new(root.join("data"));
         let m = store.install_addon(&root.join("out")).unwrap();
-        assert_eq!(m.category, Some(Category::Gameplay));
+        assert_eq!(m.category, Some(Category::Helmets));
         store
             .update_profile("default", |p| p.set_enabled("t.generated", true))
             .unwrap();

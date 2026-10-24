@@ -37,10 +37,19 @@ fn game_dir(store: &Store, explicit: Option<PathBuf>) -> Result<PathBuf> {
         .context("F1 25 not found; pass --game, add the folder with swofty game add, or run swofty doctor")
 }
 
-pub fn build(store: &Store, profile: &str, game: Option<PathBuf>) -> Result<ExitCode> {
+pub fn build(store: &Store, profile: &str, game: Option<PathBuf>, side_data: bool) -> Result<ExitCode> {
     let g = self::game(store, game)?;
     let built = build_profile(store, profile, &g)?;
     report(profile, &built);
+    if side_data {
+        println!(
+            "side data of add-row copies ({} finding(s)):",
+            built.side_data.len()
+        );
+        for f in &built.side_data {
+            println!("  {f}");
+        }
+    }
     Ok(ExitCode::SUCCESS)
 }
 
@@ -383,7 +392,7 @@ mod tests {
         let dir = root.join("game");
         std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
         std::fs::write(dir.join(GAME_EXE), "exe").unwrap();
-        std::fs::write(dir.join(GVDB), "db").unwrap();
+        std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
         let game = Game {
             identity: Identity::detect(&dir, Some(1)).unwrap(),
             dir,
@@ -447,7 +456,7 @@ mod tests {
             let dir = root.join("game");
             std::fs::create_dir_all(dir.join("game_package/gamedatabases")).unwrap();
             std::fs::write(dir.join(GAME_EXE), "exe").unwrap();
-            std::fs::write(dir.join(GVDB), "db").unwrap();
+            std::fs::write(dir.join(GVDB), Gvdb { records: Vec::new() }.to_bytes()).unwrap();
             let manifest = AddonManifest::parse(
                 r#"{"schema_version":1,"id":"t.putter","name":"Putter","version":"1.0.0","author":"t","compat":{"game":"f1_25"}}"#,
             )

@@ -24,12 +24,12 @@ Type in the search box on the left to search names, ids, authors and description
 
 | Filter | Values |
 |---|---|
-| Category | What the addon is for: Tracks, Liveries, Cars, Drivers & teams, Seasons, Database, Gameplay, UI, Audio, Tools, Other, or Uncategorised. Built-in addons show no category. |
-| Type | What it changes: Database, Archives, Text & UI, Files, Code |
-| Source | Built in, DB Editor, Simplified, Installed. Each row shows its source as a tag with the same name. |
+| Category | What the addon is for: Seasons, Tracks, Cars, Helmets, Shaders, or Uncategorised. Built-in addons show no category. Shaders are [colour looks](/reference/addons/shader-packs) for the race. |
+| Type | What it changes: Database, Archives, Text & UI, Simplified, Files, Code. Simplified is a mod merged into the game's shader packages, as the Simplified Suite loads `.serps` mods. |
+| Source | Built in, DB Editor, Imported, Installed. Imported addons come from the [Simplified Importer](/using/mods). |
 | State | On, Off, Has conflicts, Update available |
 
-Each value shows how many addons match. **Clear** removes every filter. An open panel closes when its addon no longer matches.
+Under its name, each row shows the addon's category, its types and a tag with its source. An addon that turns on an experimental feature of the game's core, such as the [overlay](/reference/std/overlay) or a [shader pack](/reference/addons/shader-packs)'s look, also has a **Uses experimental features** tag, and its panel lists the features. Each value shows how many addons match. **Clear** removes every filter. An open panel closes when its addon no longer matches.
 
 On a window less than 760 pixels tall, the install cards shrink to one row.
 
@@ -78,7 +78,7 @@ Removing a DB Editor addon deletes its changes. To keep them, select **Export** 
 | **SwoftyMod** | Loads addons in game and adds **ADDON SETTINGS**. It's always on in modded profiles |
 | **Simplified for Swofty** | Team Simplified's addon: the [Simplified Importer](/using/mods). The launcher installs it, [keeps it up to date](/using/updating#simplified-for-swofty) and keeps it on |
 
-Each release also installs a few addons switched off, such as xanpavle's F1 25 RE-Optimization; see [Addons that ship with the launcher](/using/bundled-addons).
+Every other addon, including [Swofty's own](/using/swofty-addons), comes from the [Addon Browser](/using/addon-browser).
 
 ## From a terminal
 

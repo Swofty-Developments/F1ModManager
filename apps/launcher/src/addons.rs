@@ -24,25 +24,27 @@ use crate::shell::{Page, Shell};
 use crate::theme::{Palette, palette};
 
 const FADE: Duration = Duration::from_secs(4);
-const FILTERS_W: f32 = 226.;
+pub(crate) const FILTERS_W: f32 = 226.;
 const DETAIL_W: f32 = 380.;
 const SPLIT_AT: f32 = 1000.;
 const ITEMS_SHOWN: usize = 10;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-enum Type {
+pub(crate) enum Type {
     Database,
     Archives,
     Text,
+    Simplified,
     Files,
     Code,
 }
 
 impl Type {
-    const ALL: [Type; 5] = [
+    pub(crate) const ALL: [Type; 6] = [
         Self::Database,
         Self::Archives,
         Self::Text,
+        Self::Simplified,
         Self::Files,
         Self::Code,
     ];
@@ -52,19 +54,27 @@ impl Type {
             Kind::Database => Self::Database,
             Kind::Erp => Self::Archives,
             Kind::Text | Kind::Ui => Self::Text,
+            Kind::Simplified => Self::Simplified,
             Kind::Files => Self::Files,
             Kind::Native => Self::Code,
         }
     }
 
-    fn label(self) -> &'static str {
+    pub(crate) fn label(self) -> &'static str {
         match self {
             Self::Database => "Database",
             Self::Archives => "Archives",
             Self::Text => "Text & UI",
+            Self::Simplified => "Simplified",
             Self::Files => "Files",
             Self::Code => "Code",
         }
+    }
+
+    /// An addon's types in [`Type::ALL`] order, as "Database, Archives".
+    fn list(m: &AddonItem) -> String {
+        let types: BTreeSet<Type> = m.manifest.kind.iter().map(|k| Self::of(*k)).collect();
+        types.into_iter().map(Self::label).collect::<Vec<_>>().join(", ")
     }
 }
 
@@ -143,10 +153,22 @@ fn pinned_delta(addons: &[swofty_core::profile::ProfileAddon], id: &str, from: u
     to.max(floor) as isize - from as isize
 }
 
-/// The icon an addon without its own shows: a race track for tracks, else a box.
+/// The experimental features an addon turns on, as "Overlay".
+fn experimental_labels(m: &AddonItem) -> String {
+    m.manifest
+        .experimental_features
+        .iter()
+        .map(|f| f.label())
+        .collect::<Vec<_>>()
+        .join(", ")
+}
+
+/// The icon an addon without its own shows: a race track for tracks, a palette for shader
+/// packs, else a box.
 fn fallback_icon(m: &AddonItem, size: f32, p: Palette) -> Div {
     match m.category() {
         Some(Category::Tracks) => track_badge(size, p),
+        Some(Category::Shaders) => badge(IconName::Palette, size, p),
         _ => badge(IconName::Package, size, p),
     }
 }
@@ -346,7 +368,7 @@ fn item_group(item: &str) -> (String, String) {
     (format!("Files in {dir}"), file.to_owned())
 }
 
-fn ago(seconds: f64) -> String {
+pub(crate) fn ago(seconds: f64) -> String {
     let now = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .map_or(0., |d| d.as_secs_f64());
@@ -359,7 +381,7 @@ fn ago(seconds: f64) -> String {
     }
 }
 
-fn checkbox(on: bool, p: Palette) -> Div {
+pub(crate) fn checkbox(on: bool, p: Palette) -> Div {
     div()
         .size(px(14.))
         .flex_shrink_0()
@@ -377,6 +399,42 @@ fn checkbox(on: bool, p: Palette) -> Div {
                 d.border_color(p.border)
             }
         })
+}
+
+/// A row of a filter column: a checkbox, its label and how many it would show.
+pub(crate) fn facet_row(
+    id: impl Into<SharedString>,
+    on: bool,
+    text: impl Into<SharedString>,
+    count: usize,
+    p: Palette,
+) -> Stateful<Div> {
+    let id: SharedString = id.into();
+    let dim = count == 0 && !on;
+    h_flex()
+        .id(id)
+        .h(px(26.))
+        .px(px(6.))
+        .gap(px(8.))
+        .rounded(px(5.))
+        .cursor_pointer()
+        .hover(move |s| s.bg(p.hover))
+        .child(checkbox(on, p))
+        .child(
+            div()
+                .flex_1()
+                .min_w_0()
+                .truncate()
+                .text_size(px(13.))
+                .text_color(if dim { p.text_placeholder } else { p.text })
+                .child(text.into()),
+        )
+        .child(
+            div()
+                .text_size(px(12.))
+                .text_color(if on { p.text_muted } else { p.text_placeholder })
+                .child(count.to_string()),
+        )
 }
 
 fn stock_removals_text(n: usize) -> String {
@@ -408,7 +466,8 @@ impl Shell {
     }
 
     fn update_ready(&self, m: &AddonItem) -> bool {
-        m.manifest.id == swofty_core::managed::ID && self.updates.plan().addon.is_some()
+        (m.manifest.id == swofty_core::managed::ID && self.updates.plan().addon.is_some())
+            || self.catalog_update(&m.manifest.id).is_some()
     }
 
     fn pairs_of<'a>(&'a self, id: &'a str) -> impl Iterator<Item = &'a Pair> + 'a {
@@ -568,7 +627,7 @@ impl Shell {
         .detach();
     }
 
-    fn pick_addons(&mut self, folder: bool, window: &mut Window, cx: &mut Context<Self>) {
+    pub(crate) fn pick_addons(&mut self, folder: bool, window: &mut Window, cx: &mut Context<Self>) {
         let rx = cx.prompt_for_paths(PathPromptOptions {
             files: !folder,
             directories: folder,
@@ -604,14 +663,15 @@ impl Shell {
                 .spawn(async move {
                     addons
                         .iter()
-                        .map(|path| {
-                            store.install_addon(path).map_err(|e| {
-                                let name = path.file_name().map_or_else(
-                                    || path.display().to_string(),
-                                    |n| n.to_string_lossy().into_owned(),
-                                );
-                                format!("{name}: {e}")
-                            })
+                        .flat_map(|path| {
+                            let name = path.file_name().map_or_else(
+                                || path.display().to_string(),
+                                |n| n.to_string_lossy().into_owned(),
+                            );
+                            store
+                                .install_addons(path)
+                                .into_iter()
+                                .map(move |r| r.map_err(|e| format!("{name}: {e}")))
                         })
                         .collect::<Vec<_>>()
                 })
@@ -1045,11 +1105,31 @@ impl Shell {
                 })
                 .on_click(cx.listener(|this, _, _, cx| this.open_page(Page::Importer, cx))),
         );
+        let browser = card(
+            "install-browse",
+            IconName::PackageSearch,
+            p.warning,
+            "Looking for a Swofty Addon?",
+            "Browse addons published by the community",
+        )
+        .border_color(p.border_variant)
+        .child(
+            Button::new("go-browser")
+                .outline()
+                .small()
+                .label(if roomy {
+                    "Open Addon Browser"
+                } else {
+                    "Addon Browser"
+                })
+                .on_click(cx.listener(|this, _, _, cx| this.open_page(Page::Browser, cx))),
+        );
         h_flex()
             .px(px(GUTTER))
             .pb(px(if short { 12. } else { 18. }))
             .gap(px(if short { 10. } else { 14. }))
             .flex_shrink_0()
+            .child(browser)
             .child(addon)
             .child(importer)
     }
@@ -1150,31 +1230,7 @@ impl Shell {
 
     fn filter_row(&self, f: Facet, count: usize, p: Palette, cx: &mut Context<Self>) -> AnyElement {
         let on = self.addons.facets.contains(&f);
-        let dim = count == 0 && !on;
-        h_flex()
-            .id(SharedString::from(format!("filter-{f:?}")))
-            .h(px(26.))
-            .px(px(6.))
-            .gap(px(8.))
-            .rounded(px(5.))
-            .cursor_pointer()
-            .hover(move |s| s.bg(p.hover))
-            .child(checkbox(on, p))
-            .child(
-                div()
-                    .flex_1()
-                    .min_w_0()
-                    .truncate()
-                    .text_size(px(13.))
-                    .text_color(if dim { p.text_placeholder } else { p.text })
-                    .child(f.label()),
-            )
-            .child(
-                div()
-                    .text_size(px(12.))
-                    .text_color(if on { p.text_muted } else { p.text_placeholder })
-                    .child(count.to_string()),
-            )
+        facet_row(format!("filter-{f:?}"), on, f.label(), count, p)
             .on_click(cx.listener(move |this, _, _, cx| {
                 if !this.addons.facets.remove(&f) {
                     this.addons.facets.insert(f);
@@ -1418,6 +1474,7 @@ impl Shell {
             None if m.source == Source::Builtin => None,
             None => Some("Uncategorised"),
         };
+        let types = Type::list(m);
         let row = h_flex()
             .id(SharedString::from(format!("addon-{id}")))
             .relative()
@@ -1505,6 +1562,18 @@ impl Shell {
                                     })
                                     .child(c)
                             }))
+                            .when(!types.is_empty(), |d| {
+                                d.when(category.is_some(), |d| {
+                                    d.child(div().text_color(p.text_placeholder).child("·"))
+                                })
+                                .child(
+                                    div()
+                                        .min_w_0()
+                                        .truncate()
+                                        .text_color(p.text_placeholder)
+                                        .child(types),
+                                )
+                            })
                             .child(
                                 div()
                                     .h(px(16.))
@@ -1518,7 +1587,29 @@ impl Shell {
                                     .text_size(px(10.5))
                                     .text_color(p.text_muted)
                                     .child(m.source.label()),
-                            ),
+                            )
+                            .when(!man.experimental_features.is_empty(), |d| {
+                                let features = experimental_labels(m);
+                                d.child(
+                                    div()
+                                        .id(SharedString::from(format!("experimental-{id}")))
+                                        .h(px(16.))
+                                        .px(px(5.))
+                                        .flex()
+                                        .items_center()
+                                        .flex_shrink_0()
+                                        .rounded(px(3.))
+                                        .border_1()
+                                        .border_color(p.warning.opacity(0.6))
+                                        .text_size(px(10.5))
+                                        .text_color(p.warning)
+                                        .child("Uses experimental features")
+                                        .tooltip(move |window, cx| {
+                                            Tooltip::new(format!("Turns on {features} while it's on"))
+                                                .build(window, cx)
+                                        }),
+                                )
+                            }),
                     ),
             )
             .child(
@@ -1527,7 +1618,20 @@ impl Shell {
                     .gap(px(4.))
                     .justify_end()
                     .when(self.update_ready(m), |d| {
-                        d.child(pill(IconName::CircleArrowUp, "", p.accent))
+                        let to = self.catalog_update(&id).map(|u| format!("v{}", u.to.version));
+                        d.child(
+                            pill(IconName::CircleArrowUp, to.clone().unwrap_or_default(), p.accent)
+                                .id(SharedString::from(format!("update-{id}")))
+                                .tooltip(move |window, cx| {
+                                    Tooltip::new(match &to {
+                                        Some(v) => {
+                                            format!("{v} is available. Update addons from the play bar.")
+                                        }
+                                        None => "Update available".to_owned(),
+                                    })
+                                    .build(window, cx)
+                                }),
+                        )
                     })
                     .when(kept > 0, |d| {
                         d.child(
@@ -1740,6 +1844,13 @@ impl Shell {
                     p,
                 ))
             })
+            .when(!man.kind.is_empty(), |d| d.child(fact("Type", Type::list(m), p)))
+            .when(!man.experimental_features.is_empty(), |d| {
+                d.child(fact("Experimental features", experimental_labels(m), p))
+            })
+            .when_some(man.shader.as_ref(), |d, s| {
+                d.child(fact("Look", s.lut.clone(), p))
+            })
             .child(fact("Source", source, p))
             .child(fact(
                 "Game version",
@@ -1898,6 +2009,7 @@ impl Shell {
                 )
             })
             .child(facts)
+            .children(self.registry_section(id, p, cx))
             .child(what)
             .child(conflicts)
             .children(settings)

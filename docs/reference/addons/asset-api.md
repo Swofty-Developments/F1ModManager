@@ -45,7 +45,8 @@ Inside each file, the prefix on an op names its kind:
 | `erp.merge-slices` | `erp`, `resource`, `source` (an archive in the addon) | Write the slices of a texture array that differ from the game's over the array in `erp` ([Texture arrays](/reference/ops/erp#texture-arrays)) |
 | `erp.add-mipmaps` | `source`, `target` | Copy a mip file, or a folder of them, into the game folder |
 | `db.set`, `db.add-row` | As in [database operations](/reference/ops/database) | Change a field, or copy a row |
-| `db.remove-row`, `db.list-append`, `db.list-remove` | As in [database operations](/reference/ops/database) | Not built yet: a build with one fails |
+| `db.list-append`, `db.list-remove` | As in [database operations](/reference/ops/database) | Built |
+| `db.remove-row` | As in [database operations](/reference/ops/database) | Not built yet: a build with one fails |
 | `db.put-record` | `key` (a path, or `0x` and 16 hex digits), `type` (the tag), `value` (hex bytes) | Write one raw record |
 | `db.remove-record` | `key`, optional `allow_stock_removal` | Remove one record. A stock record stays unless `allow_stock_removal` is `true` ([Removing stock records](/reference/ops/database#removing-stock-records)) |
 | `lang.set` | `language` (a code, or `*` for every language), `key`, `value` | Set one string |
@@ -129,6 +130,8 @@ A later write wins, so load order matters when addons write to the same target. 
 | A database record | `db.set`, `db.put-record`, `db.remove-record` |
 | A string in a language | `lang.set` |
 | A game path | `file.put`, `erp.add-mipmaps` (its `target`) |
+
+A `file.put` of a whole archive writes every resource that ERP ops write in that archive. Ops from the addon that puts it, or from addons after it in load order, apply to the archive it puts. A put after them in load order replaces their changes.
 
 If one origin has already written to a target, replacing it counts as a conflict. That applies to `erp.put-resource`, `erp.replace-resource`, `erp.remove-resource`, `erp.overlay`, `erp.add-mipmaps`, `db.set`, `db.put-record`, `db.remove-record`, `lang.set` and `file.put`. By contrast, `erp.add-resource`, `erp.copy-resource`, `erp.patch-pkg`, `group.register` and added rows compose. After its stages, the build prints a line per addon with what it writes, then a warning per pair of addons in conflict, the winner first:
 

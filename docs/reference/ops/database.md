@@ -22,6 +22,8 @@ List the operation file in `operations.database` in your [manifest](/reference/a
 
 Values are strings. Write arrays as comma-separated values, such as `"0,-0.6,0"`.
 
+Next to `ops`, a file can hold `fields` ([Key names](#key-names)), `strict` ([The completeness check](#the-completeness-check)) and `side_data` ([Acknowledging findings](#acknowledging-findings)).
+
 ## Operations
 
 | Operation | Required fields | Purpose |
@@ -29,12 +31,14 @@ Values are strings. Write arrays as comma-separated values, such as `"0,-0.6,0"`
 | `set` | `select`, `field`, `value` or `value_from` | Change a field |
 | `add-row` | `table`, `from`, `set`; optional `copy`, `stat_id` | Copy a row with every key, then change its fields |
 | `remove-row` | `select` | Remove a row. Not built yet: a build with it fails |
-| `list-append` | `select`, `field`, `value` | Add a value to a list if missing. Not built yet |
-| `list-remove` | `select`, `field`, `value` | Remove a value from a list. Not built yet |
+| `list-append` | `select`, `field`, `value` | Add each comma-separated value to a list field if missing |
+| `list-remove` | `select`, `field`, `value` | Remove each comma-separated value from a list field |
 | `put-record` | `key`, `type`, `value` | Write one raw record. `key` is a path, which can use [selectors](#selecting-rows), or `0x` and 16 hex digits, `type` the record tag and `value` hex bytes |
 | `remove-record` | `key`; optional `allow_stock_removal` | Remove one record |
 
 For `set`, use `create: true` and a `type` tag to add a missing field. `value_from` copies a value from another database path. A `set` whose `select` matches no row, or whose field doesn't exist, fails the build. A `remove-record` whose key is already absent is a no-op, logged.
+
+`list-append` and `list-remove` treat the field as a comma-separated list and keep its order. Several addons can append to the same list without a conflict. A missing field fails the build.
 
 ### Removing stock records
 
@@ -109,6 +113,131 @@ A `stat_id` in `set` wins. A copy into a nested table, such as an entrant of an 
 
 An `unlockable_se_livery` row added to an `unlockable_content.unlockable_items.unlockable_item_list_<n>.folder_<m>` table, by `add-row` or by `put-record`, unlocks the new special livery. The build writes the row's ownership key, the djb2 hash of `eSELivery` and the row's `_metadata_`, to the `owned_items` block of `swofty/settings.json`, and `swofty_core.dll` reports that key as owned to the livery picker. A key that any stock database value also gives is left out with a warning.
 
+## What a copy does not bring along
+
+`add-row` copies the source row's keys. The game also finds data for a row by its label, by a name built from the label or from a field, or by its `stat_id`, in other tables and in game files. A copy under a new label gets none of that data. The game then reads stock defaults, a missing row or a missing resource for it, often without an error: the car runs, but on the wrong setup.
+
+| What the copy lacks | How the game finds it | Known case |
+|---|---|---|
+| Rows of another table labelled with the source's label | Its own label | Teams: `showroom.teams_history.team_history`, `f1_world.fan_zone.fz_choices_stings.FZChoicesStings` (`williams_26`) |
+| Rows of another table that name the source in a field | A field value or list of each row, every row read | Teams: `pit_lane.pit_times.team_pit_times`, by `team`. Game setup modes: `game_setup.branding.game_setup_branding` and `track_data.game_setup.TrackDataSet`, by `game_setup_modes` |
+| Rows labelled with a name built from the source | A folder name, the label plus a suffix, a field value | Vehicle packages: `car_setup.presets.vehicle_package_setups_N`, labelled with the package folder `f1_2025_vehicle_package`, the first folder of `resource_path` |
+| Values elsewhere that name the source | Other rows hold the source's label or `stat_id` | Vehicles: `entrants.entrant_lists.entrant_list_N.entrant_N.vehicle`, `showroom.vehicle_offsets.vehicle_offset_N.vehicle`, `showroom.vehicles_history.vehicle_history_N.vehicle`. Vehicle packages: `entrants.vehicles.vehicle_N.vehicle_package` |
+| Game files named after the source | Paths built from the label or a field | Vehicle packages: the car template's `CarPhysics2.baseVtfAsset` and `Tyres` defaults name `eaid://f1_2025_vehicle_package/...`. Vehicles: per-track AI data at `environment_package/tracks/<track>/ai/<ai_package_folder>/<asset_filename>/` |
+| Keys of the source the catalogue does not name | Paths the exe builds at run time | Car setup presets: 420 keys per row. Game setup modes: 11 keys under `championship_won_cutscene` and `tyre_regulations`, which the `swofty_f1` copy lacked until `addons/swoftymod/db/core.json` listed them in a `fields` list. Both are in the catalogue from launcher 1.4.0 |
+
+### Car setups of a vehicle package
+
+On session start the game finds a vehicle package's car setups with the row lookup `car_setup.presets.vehicle_package_setups[_metadata_=<package folder>]` (reader `0x140c04fd0`) and reads `<row>.<ai|player>.<variant>.<slider>`:
+
+- variants: `max_downforce`, `med_downforce`, `balanced`, `med_speed`, `max_speed`;
+- sliders: the 42 labels of `car_setup.sliders.slider_N`, such as `ballast`, `brake_bias`, `front_suspension_height` and `rear_suspension_height`.
+
+Each stock row holds these 420 keys and its `_metadata_`. A copy of `f1_2025` with the folder `cs_2019_vehicle_package` needs a preset row of its own:
+
+```json
+{ "op": "add-row", "table": "car_setup.presets",
+  "from": "car_setup.presets.vehicle_package_setups[_metadata_=f1_2025_vehicle_package]",
+  "set": { "_metadata_": "cs_2019_vehicle_package" } }
+```
+
+| Preset row for the copy | In game |
+|---|---|
+| None | The AI drives setups that ground the car: plank contacts, sparks, running wide |
+| `_metadata_` only | Loading the session crashes (a read at index -1) |
+| All 421 keys | The copy drives its source's setups |
+
+Launchers before 1.4.0 copy only the catalogued `_metadata_`; give the op a `fields` list of the 421 keys for them.
+
+### The side-data check
+
+After every addon's operations ran, the build checks each `add-row` whose copy has a new label, against the built database. A finding is one of three kinds:
+
+| Kind | What it is | In the build |
+|---|---|---|
+| Known lookup | A lookup a reverse-engineered reader makes, listed below | A warning per lookup and addon |
+| To review | A name or value match with no known reader | One warning per addon with the count |
+| Out of area | A match in a table of a game area the copy does not reach by default | Listed only |
+
+`swofty build --side-data` lists every finding after the warnings, tagged `[known]`, `[review]`, `[ignored]` or with its area, such as `[career]`. The warnings do not fail the build, even with `"strict": true`.
+
+#### Known lookups
+
+| Copy of | The game looks up | Reader | Without it |
+|---|---|---|---|
+| `entrants.vehicles.vehicle_packages.vehicle_package_N` | the `car_setup.presets.vehicle_package_setups` row labelled with folder 1 of `resource_path` | `Car_Load_SetupPreset` (`0x140c04fd0`) | The AI drives setups that ground the car |
+| `game_setup.game_setup_modes.game_setup_mode_N` | the `game_setup.branding.game_setup_branding` rows whose `game_setup_modes` list the mode | `0x142a12f80` | No branding: logos and flags such as `car_setup_available` and `mfd_enabled` |
+| `game_setup.game_setup_modes.game_setup_mode_N` | the `track_data.game_setup.TrackDataSet` rows whose `game_setup_modes` list the mode | `0x142e44b50` | No per-track data set |
+| `entrants.teams.team_N` | the `pit_lane.pit_times.team_pit_times` row whose `team` names the team | `0x1434c8bf0` (pit lane system) | Other pit stop times |
+
+A copy whose name for the lookup is the source's, such as a vehicle package copy that keeps its `resource_path`, finds the source's row and gets no finding.
+
+```text
+Classic Seasons: F1 2019: car_setup.presets.vehicle_package_setups has a row labelled f1_2025_vehicle_package and none labelled cs_2019_vehicle_package; f1_2025_vehicle_package is folder 1 of resource_path of the add-row vehicle package entrants.vehicles.vehicle_packages.vehicle_package[_metadata_=f1_2025], and Car_Load_SetupPreset (0x140c04fd0) reads the package's car setups from that row on session start: without it the AI drives setups that ground the car. Add a row per copy, such as an add-row into car_setup.presets.vehicle_package_setups from car_setup.presets.vehicle_package_setups[_metadata_=f1_2025_vehicle_package] that sets _metadata_
+```
+
+#### Matches to review
+
+1. The check lists the names the game can derive from the source row: the label, the label plus the table's row word (`f1_2025_vehicle_package`), identifier values of the row's fields (`asset_filename`, `ai_package_folder`), and the folders of path values that hold the label or a digit (`resource_path`). It keeps the names the copy changed.
+2. For each such name, it finds rows labelled with it in other tables, and reports each table that has no row labelled with one of the copy's names from the same fields. A copy that keeps a field value, such as `ai_package_folder`, still reaches the rows labelled with it, except when the source's label or label plus row word gives the same name.
+3. It finds values elsewhere that name the source by its label, or by its `stat_id` in an id field named after the source's table (`team_id`), and reports each field that never names the copy. When rows of other tables share the source's label, it counts only fields named after the source's table or whose catalogue meaning names it.
+
+It leaves out:
+
+- the table the copy went into, and rows under the source and the copy;
+- tables covered by a known lookup for the copy;
+- a field value that names another row, such as an entrant's `driver`, when the copy's value labels a row of a table where the source's value labels one too: that row's own copy is checked;
+- rows labelled with the label of another `add-row` source of the build in the same table, such as `entrants.vehicles.vehicle_packages.vehicle_package[_metadata_=f1_2025]` for an entrant list copied from `f1_2025`;
+- values inside copies the same addon made that still name the source, such as a package copy's `ai_package_folder`.
+
+It groups the findings per table or field and addon. The copies SwoftyMod adds get no findings.
+
+```text
+Classic Seasons: F1 2019: 23 side-data finding(s) to review, matched by name with no known reader: rows labelled with a source's name in animation.team_data.teamData, audio.audio_bundle_settings.audio_bundle_settings, beta.team_colours.teamColours and 15 more and none for the copy; values naming a source in 16 field(s) and none naming the copy. swofty build --side-data lists them; list reviewed ones in the op file's side_data.ignore
+```
+
+#### Game areas
+
+A match in a table under one of these prefixes is listed only, unless the addon made an `add-row` copy into a table of the same area:
+
+| Area | Table prefixes |
+|---|---|
+| `career` | `accolades`, `bank`, `career`, `challenge_career`, `driver_academies`, `driver_contracts`, `driver_market`, `emails`, `engine_management`, `facilities`, `invitational_events`, `news`, `personal_development`, `pit_crew_training`, `press_interviews`, `recognition`, `resource_points`, `rivals`, `specialist_manager`, `sponsors` |
+| `story mode` | `story_mode`, `driver_statistics.story_mode_driver_statistics` |
+| `F1 World` | `f1_world`, `second_worlds`, `f1cg`, `auction` |
+| `online` | `leaderboards`, `online_systems`, `entitlements`, `paddock_pass`, `options_system.options.multiplayer`, `options_system.context`, `options_system.restrictions` |
+| `front end` | `showroom`, `f1_life`, `videos` |
+| `customisation` | `customisation`, `unlockable_content` |
+| `unnamed` | top-level names the catalogue does not know, written `{<hash>}` |
+
+#### Acknowledging findings
+
+`side_data.ignore` at the top of an op file lists the tables and fields whose findings you reviewed, for the copies the file makes:
+
+```json
+{
+  "schema_version": 1,
+  "side_data": { "ignore": ["bank.*", "engine_management.driver_wear_rates.driver_wear_rate"] },
+  "ops": []
+}
+```
+
+A pattern is a dotted table path (`<container>.<row word>`) or field path, as the findings print them, with or without row numbers and `_N`; `*` matches any run of characters. `accolades.AccoladeDataGroup.driver_data.AccoladeDriver` and `accolades.AccoladeDataGroup_N.driver_data.AccoladeDriver_N` are the same pattern. A pattern covers known lookups too. Acknowledged findings are listed with `[ignored]`. A pattern that matches no finding gives a warning. An unknown key under `side_data`, or a pattern that is not a path, fails the build like other op-file errors.
+
+#### Before you copy
+
+`swofty db deps <row>` prints the same data for a stock row: the derived names, the known lookups with the row each finds, the rows of other tables labelled with each name, and the fields whose values pick the row, each tagged with its area:
+
+```sh
+swofty db deps "entrants.vehicles.vehicle_packages.vehicle_package[_metadata_=f1_2025]"
+```
+
+`cargo run -p swofty-core --example check_add_rows -- --game <F1 25 folder> --addon <addon folder>` prints the check for one addon with the completeness check.
+
+### Keys the catalogue does not name
+
+A key whose path only the exe builds stays out of the catalogue until `tools/gamedb/compositions.txt` lists it, and `add-row` then copies it without a `fields` list. `tools/gamedb/deepkeys.py` finds such keys under a row; see [Finding unnamed keys](/reference/gamedb/tools#finding-unnamed-keys).
+
 ## Selecting rows
 
 A path names a row by its index or finds it by a field. Any segment of the path can be a selector, `Name[field=value]`:
@@ -142,6 +271,20 @@ Adding a row also updates the table's `_instancecount_`. The game ignores rows b
 `add-row` needs the table's real path, written with row numbers or selectors. A `{hash}` placeholder can be used for `set`, but not for `add-row`.
 
 A mod made for an earlier game version can lower a count and leave stock rows above it. `add-row` writes the new row over those stock keys and the build prints `reuses N stock key(s) of a row above the table's count`. A key another addon wrote at the new row's number still fails the op with `already exists`.
+
+## Rows SwoftyMod adds
+
+SwoftyMod adds two rows labelled `swofty_f1`, copies of the stock `f1` rows, before any addon's operations run:
+
+- a game setup mode in `game_setup.game_setup_modes`, with `stat_id` 20 and the `swofty_f1` entrant setup mode;
+- an entrant setup mode in `entrants.entrant_setup_modes`, with empty `entrant_lists` and `selectable_entrant_lists`.
+
+Every stock list of game setup modes that holds `f1` also holds `swofty_f1`. A SwoftyMod change that does not apply to the database is skipped with a warning. An addon adds its entrant lists to the mode with `list-append`:
+
+```json
+{ "op": "list-append", "select": "entrants.entrant_setup_modes.entrant_setup_mode[_metadata_=swofty_f1]",
+  "field": "entrant_lists", "value": "my_entrant_list" }
+```
 
 ## Settings
 

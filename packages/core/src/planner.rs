@@ -7,6 +7,7 @@ use swofty_formats::gvdb::Gvdb;
 use crate::asset::{AssetOp, FileKind, FileOp, GroupOp, LangOp, Op, OpFile, Origin, Source};
 pub use crate::asset::{Features, Kind};
 use crate::conflicts::Changes;
+use crate::dbedit::deps::Copy;
 use crate::ops::{DbOps, DbReport, ErpOp, apply_db_ops_lenient, apply_db_ops_report};
 use crate::owned::{self, Added};
 use crate::rowkeys::{Names, RowKeys};
@@ -133,6 +134,7 @@ pub struct Planner<'a> {
     fields: BTreeMap<String, BTreeMap<String, Vec<String>>>,
     skipped: Vec<String>,
     stock_removals: BTreeMap<String, usize>,
+    copies: Vec<Copy>,
     lenient: BTreeMap<String, String>,
     touched: BTreeMap<String, Touched>,
     overlays: Option<&'a OverlayNames<'a>>,
@@ -220,6 +222,7 @@ impl<'a> Planner<'a> {
             fields: BTreeMap::new(),
             skipped: Vec::new(),
             stock_removals: BTreeMap::new(),
+            copies: Vec::new(),
             lenient: BTreeMap::new(),
             touched: BTreeMap::new(),
             overlays: None,
@@ -318,6 +321,7 @@ impl<'a> Planner<'a> {
                             schema_version: 1,
                             fields: BTreeMap::new(),
                             strict: false,
+                            side_data: Default::default(),
                             ops: vec![db],
                         },
                     )),
@@ -335,6 +339,7 @@ impl<'a> Planner<'a> {
                 schema_version: file.schema_version,
                 fields: file.fields,
                 strict: file.strict,
+                side_data: file.side_data,
                 ops: Vec::new(),
             };
             self.db.push((origin.clone(), ops));
@@ -507,6 +512,22 @@ impl<'a> Planner<'a> {
         self.write(target, origin, true);
     }
 
+    /// Records that `origin` puts the whole archive `erp` with a `file.put`: it
+    /// writes every resource other ops write in it, and load order decides.
+    pub fn put_archive(&mut self, erp: &str, origin: &Origin) {
+        let inside: Vec<Target> = self
+            .writers
+            .keys()
+            .filter(
+                |t| matches!(t, Target::Resource { erp: e, .. } | Target::Slice { erp: e, .. } if e == erp),
+            )
+            .cloned()
+            .collect();
+        for target in inside {
+            self.write(target, origin, true);
+        }
+    }
+
     pub fn features(&self) -> Vec<Kind> {
         self.features
             .experimental
@@ -567,6 +588,13 @@ impl<'a> Planner<'a> {
             if ours.stock_removals > 0 {
                 *self.stock_removals.entry(origin.addon.clone()).or_default() += ours.stock_removals;
             }
+            self.copies.extend(ours.added_rows.into_iter().map(|r| Copy {
+                addon: origin.addon.clone(),
+                from: r.from,
+                row: r.row,
+                ignore: ops.side_data.ignore.clone(),
+                quiet: false,
+            }));
             for key in replaced {
                 self.write(Target::Record(key), &origin, true);
             }
@@ -583,6 +611,11 @@ impl<'a> Planner<'a> {
     /// Per addon id, the removals of stock records the last `apply_db` left out.
     pub fn take_stock_removals(&mut self) -> BTreeMap<String, usize> {
         std::mem::take(&mut self.stock_removals)
+    }
+
+    /// The `add-row` copies the last `apply_db` made, in load order.
+    pub fn take_copies(&mut self) -> Vec<Copy> {
+        std::mem::take(&mut self.copies)
     }
 
     pub fn erp_ops(&self) -> &[Op] {

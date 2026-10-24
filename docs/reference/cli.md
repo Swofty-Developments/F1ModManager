@@ -10,7 +10,7 @@ swofty run
 
 Run this to launch F1 25 and follow its logs. Modded play is [offline](/reference/safety) only. When Steam is closed, `swofty run` starts it and waits up to 90 seconds for it to sign in; see [Steam](/reference/launch#steam).
 
-When you leave the game, you'll get a summary with the exit code and any crash details. `swofty run` exits once the session's game files are rolled back.
+When you leave the game, you'll get a summary with the exit code, how the game ended and any crash details. `swofty run` exits once the session's game files are rolled back.
 
 To stop following the logs while keeping the game running, press **Ctrl-C**. When Steam launched the game, `swofty run` exits right away. For a direct launch, it keeps waiting to roll the game files back when the game exits; press **Ctrl-C** again to leave now, and the next start rolls them back.
 
@@ -41,7 +41,7 @@ To read a finished session's summary, use `swofty logs [<session dir>]`. Leave o
 ### `swofty logs send`
 
 ```sh
-swofty logs send --name <username> [--message <text>] [--dry-run [<zip>]]
+swofty logs send --name <username> --message <text> [--dry-run [<zip>]]
 ```
 
 Sends your logs to the developers on Discord, like **Send Logs to Developers** in the launcher. [Send your logs to the developers](/using/send-logs) lists what the zip holds.
@@ -49,16 +49,18 @@ Sends your logs to the developers on Discord, like **Send Logs to Developers** i
 | Flag | Purpose |
 |---|---|
 | `--name <username>` | Your Discord username, 2 to 32 characters. Without it, the command uses the last username sent, from `config.json` `"discord_username"` |
-| `--message <text>` | What went wrong, up to 1000 characters |
+| `--message <text>` | What happened and what you were doing, 10 to 1000 characters. Needed unless `--dry-run` is given |
 | `--dry-run [<zip>]` | Write the zip to `<zip>` (a file or a folder; the current folder when left out), list its files, and send nothing |
 
-The command prints its progress and exits with an error when Discord can't be reached or refuses the upload, naming the HTTP status. A zip over 9 MB goes in several messages, labelled `part 1/3` and so on. Builds from source can't send; there, only `--dry-run` works.
+When the data folder has no launch log (`state/launcher-run.log`, `state/wrapper-run.log`) and no game session, the command warns that the logs show no game launch yet. The command prints its progress and exits with an error when Discord can't be reached or refuses the upload, naming the HTTP status. A zip over 9 MB goes in several messages, labelled `part 1/3` and so on. Builds from source can't send; there, only `--dry-run` works.
 
 Without `--dry-run`, the command keeps the zip in `$DATA/logs/swofty-logs-<username>-<time>.zip`, beside the launcher's, and removes all but the newest 10. After sending, it prints the zip's path and size. When sending fails, it prints the path before the error.
 
 ## `swofty build`
 
 Use `swofty build [--profile <name>]` when you want to prepare your profile's database and track files without starting the game. You'll find the output in `$DATA/cache/overlay/<profile>/<buildhash>/`: `swofty/settings.json` holds the session settings, and `plan.json` lists the game files to replace and add, along with their sources. Track archives, menu archives and car handling files are built in `$DATA/cache/maps`, `$DATA/cache/menus` and `$DATA/cache/ers`. Once the build succeeds, it removes older builds from those folders and your profile's overlay folder, keeping any that another profile's latest build uses.
+
+After the database operations, the build checks each `add-row` copy for the label-keyed side data it lacks and warns for the known lookups it misses, with one line per addon counting the matches to review. `--side-data` lists every finding; see [The side-data check](/reference/ops/database#the-side-data-check).
 
 The build also prepares addon ERP files and prints their warnings. Files with a `patch-pkg` edit other than `clone-entry` and `set-value` are skipped. Addon ERP operations work on the archives the track stages have already built; `add-mipmaps` files replace or add loose game files. If your build includes a `remove-resource`, it rewrites the archives even when `swofty_core` lists `erp` as `stable`. `file.put` operations and `operations.files` entries also replace or add loose game files. Other addon ERP and UI operations are currently skipped.
 
@@ -187,8 +189,8 @@ A `<path>` is a dotted path, a selector path such as `entrants.drivers.driver[_m
 The new row has every key of the source row, nested tables included, with `--field` set to `<to>`, its own `_metadata_` label, and its own `stat_id` in a table of stat ids.
 The build adds it after the table's last row, after the addons before this one.
 `swofty db set`, `revert` and `get --addon` take selector paths into a copied row, such as `driver_statistics.driver_statistics.DriverStatisticsHolder[driver=romain_grosjean].StatisticsDataSet[_metadata_=default].Statistic[_metadata_=pace].evolution`.
-A `<category>` is one of `tracks`, `liveries`, `cars`, `drivers-teams`, `seasons`, `database`, `gameplay`, `ui`, `audio`, `tools` and `other`.
-A new DB Editor addon has the category `database` and the origin tool `db-editor` in its `swofty.json`.
+A `<category>` is one of `seasons`, `tracks`, `cars`, `helmets` and `uncategorised`.
+A new DB Editor addon has no category and the origin tool `db-editor` in its `swofty.json`.
 `swofty db import` of a DB Editor addon zip creates a new addon with the zip's name, version, author, description, category and changes, and copies no other file.
 The new addon's id comes from its name.
 When that id is taken, the new addon gets a new id and a number after its name.

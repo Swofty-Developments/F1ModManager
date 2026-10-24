@@ -15,7 +15,40 @@ pub struct DbOps {
     pub fields: BTreeMap<String, Vec<String>>,
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub strict: bool,
+    #[serde(default, skip_serializing_if = "SideData::is_empty")]
+    pub side_data: SideData,
     pub ops: Vec<DbOp>,
+}
+
+/// The file's settings for the build's side-data check of its `add-row` copies.
+#[derive(Debug, Clone, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct SideData {
+    /// Tables and fields whose side-data findings were reviewed: dotted paths
+    /// with or without row numbers, `*` matching any run of characters.
+    #[serde(default, deserialize_with = "patterns", skip_serializing_if = "Vec::is_empty")]
+    pub ignore: Vec<String>,
+}
+
+impl SideData {
+    pub fn is_empty(&self) -> bool {
+        self.ignore.is_empty()
+    }
+}
+
+fn patterns<'de, D: serde::Deserializer<'de>>(d: D) -> std::result::Result<Vec<String>, D::Error> {
+    let v = Vec::<String>::deserialize(d)?;
+    for p in &v {
+        let ok = !p.is_empty()
+            && p.bytes()
+                .all(|b| b.is_ascii_alphanumeric() || b"_.*{}[]=-".contains(&b));
+        if !ok {
+            return Err(serde::de::Error::custom(format!(
+                "side_data.ignore: {p:?} is not a table or field path"
+            )));
+        }
+    }
+    Ok(v)
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq)]
@@ -38,6 +71,15 @@ pub struct DbReport {
     pub warnings: Vec<String>,
     /// `remove-record` ops left out because their key is a stock record.
     pub stock_removals: usize,
+    /// Each `add-row` applied, in order.
+    pub added_rows: Vec<AddedRow>,
+}
+
+/// An `add-row` applied: the source row's path and the new row's path.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct AddedRow {
+    pub from: String,
+    pub row: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -680,6 +722,24 @@ pub fn add_row_name<'a>(table: &str, from: &'a str) -> Option<&'a str> {
         })
 }
 
+fn list_items(value: &str) -> impl Iterator<Item = &str> {
+    value.split(',').map(str::trim).filter(|v| !v.is_empty())
+}
+
+fn edit_list(db: &mut Db, select: &str, field: &str, edit: impl FnOnce(&mut Vec<String>)) -> Result<()> {
+    let key = match field.contains('[') {
+        true => resolve_path(db, &format!("{select}.{field}"))?.key(""),
+        false => resolve_row(db, select)?.field(field),
+    };
+    let r = db
+        .get_mut(key)
+        .ok_or_else(|| Error::Resolve(format!("{select}.{field}: no such key")))?;
+    let mut items: Vec<String> = list_items(&r.text()).map(String::from).collect();
+    edit(&mut items);
+    r.value = items.join(",").into_bytes();
+    Ok(())
+}
+
 fn apply(db: &mut Db, op: &DbOp, names: &dyn FieldNames, cx: &mut Cx) -> Result<Option<u64>> {
     match op {
         DbOp::Set {
@@ -743,9 +803,24 @@ fn apply(db: &mut Db, op: &DbOp, names: &dyn FieldNames, cx: &mut Cx) -> Result<
             )?;
             Ok(None)
         }
-        DbOp::RemoveRow { .. } | DbOp::ListAppend { .. } | DbOp::ListRemove { .. } => Err(Error::Resolve(
-            "remove-row and list ops are not implemented yet".into(),
-        )),
+        DbOp::RemoveRow { .. } => Err(Error::Resolve("remove-row is not implemented yet".into())),
+        DbOp::ListAppend { select, field, value } => {
+            edit_list(db, select, field, |items| {
+                for v in list_items(value) {
+                    if !items.iter().any(|i| i == v) {
+                        items.push(v.to_string());
+                    }
+                }
+            })?;
+            Ok(None)
+        }
+        DbOp::ListRemove { select, field, value } => {
+            let drop: Vec<&str> = list_items(value).collect();
+            edit_list(db, select, field, |items| {
+                items.retain(|i| !drop.contains(&i.as_str()))
+            })?;
+            Ok(None)
+        }
         DbOp::PutRecord { key, tag, value } => {
             let value = hex_bytes(key, value)?;
             let k = resolve_key(db, key)?;
@@ -1037,6 +1112,10 @@ fn add_row(db: &mut Db, names: &dyn FieldNames, cx: &mut Cx, op: AddRow) -> Resu
             None => db.push(r),
         }
     }
+    cx.report.added_rows.push(AddedRow {
+        from: src_path.clone(),
+        row: dst_path.clone(),
+    });
     db.added_rows.insert(dst_path);
     let count = db
         .get_mut(fnv1a64(&count_path))
@@ -1095,6 +1174,29 @@ mod tests {
 
     fn ops(json: &str) -> DbOps {
         serde_json::from_str(json).unwrap()
+    }
+
+    #[test]
+    fn side_data_lists_ignore_patterns_and_rejects_the_rest() {
+        let file = ops(
+            r#"{"schema_version":1,"side_data":{"ignore":["bank.*","accolades.AccoladeDataGroup_N.driver_data.AccoladeDriver_N"]},"ops":[]}"#,
+        );
+        assert_eq!(file.side_data.ignore.len(), 2);
+        let parse = |json: &str| serde_json::from_str::<DbOps>(json).unwrap_err().to_string();
+        assert!(
+            parse(r#"{"schema_version":1,"side_data":{"ignored":[]},"ops":[]}"#)
+                .contains("unknown field `ignored`")
+        );
+        assert!(
+            parse(r#"{"schema_version":1,"side_data":{"ignore":["bank initial"]},"ops":[]}"#)
+                .contains("is not a table or field path")
+        );
+        assert!(
+            parse(r#"{"schema_version":1,"side_data":{"ignore":[""]},"ops":[]}"#)
+                .contains("side_data.ignore")
+        );
+        let roundtrip = serde_json::to_string(&ops(r#"{"schema_version":1,"ops":[]}"#)).unwrap();
+        assert!(!roundtrip.contains("side_data"), "{roundtrip}");
     }
 
     #[test]
@@ -1568,6 +1670,39 @@ mod tests {
     }
 
     #[test]
+    fn list_append_adds_missing_values_once_and_list_remove_takes_them_out() {
+        let mut db = db();
+        let append = |v: &str| {
+            ops(&format!(
+                r#"{{"schema_version":1,"ops":[{{"op":"list-append","select":"entrants.teams.team[_metadata_=mclaren_26]","field":"display_name_code","value":"{v}"}}]}}"#
+            ))
+        };
+        let key = fnv1a64("entrants.teams.team_0.display_name_code");
+        assert!(
+            apply_db_ops(&mut db, &append("YYY"), &names())
+                .unwrap()
+                .is_empty()
+        );
+        apply_db_ops(&mut db, &append("ZZZ, XXX"), &names()).unwrap();
+        apply_db_ops(&mut db, &append("YYY"), &names()).unwrap();
+        assert_eq!(db.get_key(key).unwrap().text(), "XXX,YYY,ZZZ");
+        let remove = ops(
+            r#"{"schema_version":1,"ops":[{"op":"list-remove","select":"entrants.teams.team_0","field":"display_name_code","value":"XXX,ZZZ"}]}"#,
+        );
+        assert!(apply_db_ops(&mut db, &remove, &names()).unwrap().is_empty());
+        assert_eq!(db.get_key(key).unwrap().text(), "YYY");
+    }
+
+    #[test]
+    fn list_ops_on_a_missing_key_fail() {
+        let mut db = db();
+        let ops = ops(
+            r#"{"schema_version":1,"ops":[{"op":"list-append","select":"entrants.teams.team_0","field":"nope","value":"a"}]}"#,
+        );
+        assert!(apply_db_ops(&mut db, &ops, &names()).is_err());
+    }
+
+    #[test]
     fn pkg_patch_parses_design_example() {
         let p: PkgPatch = serde_json::from_str(
             r#"{"schema_version":1,"targets":[{"erp":"2025_asset_groups/ui_package/flow_frontend.erp",
@@ -1694,6 +1829,15 @@ mod tests {
                 == "add-row modes.mode_2 (from modes.mode[_metadata_=f1]): stat_id 8 (the source's is 3)"),
             "{:?}",
             report.lines
+        );
+        let rows: Vec<(&str, &str)> = report
+            .added_rows
+            .iter()
+            .map(|r| (r.from.as_str(), r.row.as_str()))
+            .collect();
+        assert_eq!(
+            rows,
+            [("modes.mode_0", "modes.mode_2"), ("modes.mode_0", "modes.mode_3")]
         );
     }
 

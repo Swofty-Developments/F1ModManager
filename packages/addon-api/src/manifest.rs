@@ -29,6 +29,9 @@ pub struct AddonManifest {
     pub icon: Option<String>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub kind: Vec<Kind>,
+    /// Experimental engines of the core the addon uses; the build turns them on while it is on.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub experimental_features: Vec<ExperimentalFeature>,
     pub compat: Compat,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub requires: Vec<Requirement>,
@@ -45,57 +48,69 @@ pub struct AddonManifest {
     #[serde(default, skip_serializing_if = "Saves::is_unset")]
     pub saves: Saves,
     /// What the addon is for, for grouping and filtering; `kind` says what it touches.
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        deserialize_with = "Category::read",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub category: Option<Category>,
     /// The tool that generated the addon and the file it came from.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub origin: Option<Origin>,
+    /// A colour look applied to the game's picture, before the HUD draws.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub shader: Option<Shader>,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[serde(rename_all = "kebab-case")]
 pub enum Category {
-    Tracks,
-    Liveries,
-    Cars,
-    DriversTeams,
     Seasons,
-    Database,
-    Gameplay,
-    Ui,
-    Audio,
-    Tools,
-    Other,
+    Tracks,
+    #[serde(alias = "liveries")]
+    Cars,
+    Helmets,
+    Shaders,
 }
 
 impl Category {
-    pub const ALL: [Category; 11] = [
-        Self::Tracks,
-        Self::Liveries,
-        Self::Cars,
-        Self::DriversTeams,
+    pub const ALL: [Category; 5] = [
         Self::Seasons,
-        Self::Database,
-        Self::Gameplay,
-        Self::Ui,
-        Self::Audio,
-        Self::Tools,
-        Self::Other,
+        Self::Tracks,
+        Self::Cars,
+        Self::Helmets,
+        Self::Shaders,
+    ];
+
+    /// Categories from earlier launchers that read as none.
+    pub const RETIRED: [&str; 7] = [
+        "drivers-teams",
+        "database",
+        "gameplay",
+        "ui",
+        "audio",
+        "tools",
+        "other",
     ];
 
     pub fn label(self) -> &'static str {
         match self {
-            Self::Tracks => "Tracks",
-            Self::Liveries => "Liveries",
-            Self::Cars => "Cars",
-            Self::DriversTeams => "Drivers & teams",
             Self::Seasons => "Seasons",
-            Self::Database => "Database",
-            Self::Gameplay => "Gameplay",
-            Self::Ui => "UI",
-            Self::Audio => "Audio",
-            Self::Tools => "Tools",
-            Self::Other => "Other",
+            Self::Tracks => "Tracks",
+            Self::Cars => "Cars",
+            Self::Helmets => "Helmets",
+            Self::Shaders => "Shaders",
+        }
+    }
+
+    /// Reads an optional category, taking `liveries` as cars and a
+    /// [retired](Category::RETIRED) one as none.
+    pub fn read<'de, D: serde::Deserializer<'de>>(d: D) -> std::result::Result<Option<Self>, D::Error> {
+        use serde::de::IntoDeserializer;
+        match Option::<String>::deserialize(d)? {
+            Some(name) if Self::RETIRED.contains(&name.as_str()) => Ok(None),
+            Some(name) => Self::deserialize(name.into_deserializer()).map(Some),
+            None => Ok(None),
         }
     }
 }
@@ -169,6 +184,71 @@ pub enum Kind {
     Ui,
     Files,
     Native,
+    /// Merged into the game's shader packages, as the Simplified Suite loads `.serps` mods.
+    Simplified,
+}
+
+/// An experimental engine of the in-game core, named as its standard library page's
+/// Feature row names it, that an addon turns on by listing it.
+#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[serde(rename_all = "lowercase")]
+pub enum ExperimentalFeature {
+    /// Drawing over the game with `swofty/overlay.hpp`.
+    Overlay,
+    /// Grading the game's picture with a [`Shader`] look.
+    Shaders,
+}
+
+impl ExperimentalFeature {
+    /// Its name in `swofty/assets.json`.
+    pub fn name(self) -> &'static str {
+        match self {
+            Self::Overlay => "overlay",
+            Self::Shaders => "shaders",
+        }
+    }
+
+    pub fn label(self) -> &'static str {
+        match self {
+            Self::Overlay => "Overlay",
+            Self::Shaders => "Shaders",
+        }
+    }
+}
+
+/// A colour look: a `.cube` 3D LUT graded in display colour, as a screenshot is, applied to
+/// the game's picture after its tonemap and before the HUD.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct Shader {
+    /// The `.cube` file inside the addon. `{{id}}` names a `db` option, so a choice can pick
+    /// between looks.
+    pub lut: String,
+    /// How much of the look applies, from 0 to 100, or `{{id}}` naming a `db` slider over that
+    /// range. Defaults to 100.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub strength: Option<Strength>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[serde(untagged)]
+pub enum Strength {
+    Percent(f64),
+    Option(String),
+}
+
+/// The option ids a `{{id}}` template names, in order.
+pub fn placeholders(text: &str) -> Vec<&str> {
+    let mut out = Vec::new();
+    let mut rest = text;
+    while let Some(start) = rest.find("{{") {
+        let Some(end) = rest[start..].find("}}") else {
+            break;
+        };
+        out.push(rest[start + 2..start + end].trim());
+        rest = &rest[start + end + 2..];
+    }
+    out
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
@@ -432,6 +512,10 @@ impl AddonManifest {
         if let Some(p) = paths.into_iter().find(|p| !relative_inside(p)) {
             return fail(format!("{p} must be a relative path inside the addon"));
         }
+        if let Some(s) = &self.shader {
+            self.validate_shader(s)
+                .or_else(|e| fail(format!("shader: {e}")))?;
+        }
         if let Some(l) = &self.launcher {
             if l.program.is_empty() {
                 return fail("launcher.program names no program".into());
@@ -443,6 +527,48 @@ impl AddonManifest {
             }
         }
         Ok(())
+    }
+
+    fn validate_shader(&self, s: &Shader) -> std::result::Result<(), String> {
+        if !self.experimental_features.contains(&ExperimentalFeature::Shaders) {
+            return Err("list \"shaders\" in experimental_features to use it".into());
+        }
+        if !relative_inside(&s.lut) {
+            return Err(format!("lut {} must be a relative path inside the addon", s.lut));
+        }
+        if !s.lut.to_ascii_lowercase().ends_with(".cube") {
+            return Err(format!("lut {} must be a .cube file", s.lut));
+        }
+        if s.lut.matches("{{").count() != placeholders(&s.lut).len() {
+            return Err(format!("lut {} has an unclosed {{{{", s.lut));
+        }
+        let db_option = |id: &str, slider: bool| {
+            let o = self.options.iter().find(|o| o.id == id);
+            match o {
+                None => Err(format!("{{{{{id}}}}} names no option")),
+                Some(o) if o.binds != Binds::Db => Err(format!("option {id} must bind db")),
+                Some(o) if slider && o.kind != OptionType::Slider => {
+                    Err(format!("option {id} must be a slider"))
+                }
+                Some(o) if slider && (o.min.unwrap_or(0.) < 0. || o.max.unwrap_or(0.) > 100.) => {
+                    Err(format!("option {id} must stay within 0 to 100"))
+                }
+                Some(_) => Ok(()),
+            }
+        };
+        for id in placeholders(&s.lut) {
+            db_option(id, false)?;
+        }
+        match &s.strength {
+            Some(Strength::Percent(p)) if !(0.0..=100.0).contains(p) => {
+                Err(format!("strength {p} is not from 0 to 100"))
+            }
+            Some(Strength::Option(t)) => match placeholders(t)[..] {
+                [id] if t.trim().starts_with("{{") && t.trim().ends_with("}}") => db_option(id, true),
+                _ => Err(format!("strength {t:?} must be a number or one {{{{option}}}}")),
+            },
+            _ => Ok(()),
+        }
     }
 }
 
@@ -505,11 +631,13 @@ mod tests {
         assert_eq!(AddonManifest::parse(GRID24).unwrap().kind, [Kind::Database]);
         let m = AddonManifest::parse(&GRID24.replace(
             r#""kind": ["database"]"#,
-            r#""kind": ["database", "erp", "text", "ui", "files", "native"]"#,
+            r#""kind": ["database", "erp", "text", "ui", "files", "native", "simplified"]"#,
         ))
         .unwrap();
         assert_eq!(m.kind[2], Kind::Text);
+        assert_eq!(m.kind[6], Kind::Simplified);
         assert_eq!(serde_json::to_value(&m).unwrap()["kind"][2], "text");
+        assert_eq!(serde_json::to_value(&m).unwrap()["kind"][6], "simplified");
         assert!(
             AddonManifest::parse(&GRID24.replace(r#""kind": ["database"]"#, r#""kind": ["lang"]"#)).is_err()
         );
@@ -639,19 +767,19 @@ mod tests {
         assert!(json.get("category").is_none() && json.get("origin").is_none());
         let with = GRID24.replace(
             r#""author": "swofty","#,
-            r#""author": "swofty", "category": "drivers-teams",
+            r#""author": "swofty", "category": "helmets",
                "origin": { "tool": "teamsimplified.mods", "tool_version": "2.0.0", "file": "grid.zip", "sha256": "ab" },"#,
         );
         let m = AddonManifest::parse(&with).unwrap();
-        assert_eq!(m.category, Some(Category::DriversTeams));
-        assert_eq!(m.category.unwrap().label(), "Drivers & teams");
+        assert_eq!(m.category, Some(Category::Helmets));
+        assert_eq!(m.category.unwrap().label(), "Helmets");
         let origin = m.origin.as_ref().unwrap();
         assert_eq!(
             (origin.tool.as_str(), origin.file.as_deref()),
             ("teamsimplified.mods", Some("grid.zip"))
         );
         let json = serde_json::to_value(&m).unwrap();
-        assert_eq!(json["category"], "drivers-teams");
+        assert_eq!(json["category"], "helmets");
         assert_eq!(AddonManifest::parse(&json.to_string()).unwrap(), m);
         let bare = with.replace(
             r#", "tool_version": "2.0.0", "file": "grid.zip", "sha256": "ab""#,
@@ -673,6 +801,140 @@ mod tests {
             let bad = GRID24.replace(r#""author": "swofty","#, &format!(r#""author": "swofty", {bad}"#));
             assert!(AddonManifest::parse(&bad).is_err(), "{bad}");
         }
+    }
+
+    #[test]
+    fn earlier_categories_read_as_the_nearest_or_none() {
+        let read = |c: &str| {
+            let with = GRID24.replace(
+                r#""author": "swofty","#,
+                &format!(r#""author": "swofty", "category": {c},"#),
+            );
+            AddonManifest::parse(&with).unwrap().category
+        };
+        assert_eq!(read(r#""liveries""#), Some(Category::Cars));
+        assert_eq!(read(r#""tracks""#), Some(Category::Tracks));
+        assert_eq!(read("null"), None);
+        for c in Category::RETIRED {
+            assert_eq!(read(&format!("{c:?}")), None, "{c}");
+        }
+        let m = AddonManifest::parse(&GRID24.replace(
+            r#""author": "swofty","#,
+            r#""author": "swofty", "category": "liveries","#,
+        ))
+        .unwrap();
+        assert_eq!(serde_json::to_value(&m).unwrap()["category"], "cars");
+    }
+
+    #[test]
+    fn experimental_features_name_the_core_engines_an_addon_turns_on() {
+        let m = AddonManifest::parse(GRID24).unwrap();
+        assert!(m.experimental_features.is_empty());
+        assert!(
+            serde_json::to_value(&m)
+                .unwrap()
+                .get("experimental_features")
+                .is_none()
+        );
+        let with = |f: &str| {
+            GRID24.replace(
+                r#""author": "swofty","#,
+                &format!(r#""author": "swofty", "experimental_features": {f},"#),
+            )
+        };
+        let m = AddonManifest::parse(&with(r#"["overlay"]"#)).unwrap();
+        assert_eq!(m.experimental_features, [ExperimentalFeature::Overlay]);
+        let f = m.experimental_features[0];
+        assert_eq!((f.name(), f.label()), ("overlay", "Overlay"));
+        assert_eq!(
+            serde_json::to_value(&m).unwrap()["experimental_features"][0],
+            "overlay"
+        );
+        assert!(AddonManifest::parse(&with(r#"["hud"]"#)).is_err());
+        let m = AddonManifest::parse(&with(r#"["shaders"]"#)).unwrap();
+        let f = m.experimental_features[0];
+        assert_eq!((f.name(), f.label()), ("shaders", "Shaders"));
+    }
+
+    const LOOKS: &str = r#"{
+        "schema_version": 1, "id": "author.looks", "name": "Looks", "version": "1.0.0", "author": "a",
+        "category": "shaders", "experimental_features": ["shaders"], "compat": { "game": "f1_25" },
+        "options": [
+            { "id": "look", "type": "choice", "default": "mono", "values": ["mono", "noir"], "binds": "db" },
+            { "id": "strength", "type": "slider", "min": 0, "max": 100, "step": 10, "default": 100, "binds": "db" },
+            { "id": "live", "type": "toggle", "default": true, "binds": "native" }
+        ],
+        "shader": SHADER
+    }"#;
+
+    fn looks(shader: &str) -> std::result::Result<AddonManifest, String> {
+        AddonManifest::parse(&LOOKS.replace("SHADER", shader)).map_err(|e| e.to_string())
+    }
+
+    #[test]
+    fn a_shader_pack_names_its_lut_and_strength() {
+        let m = looks(r#"{ "lut": "looks/{{look}}.cube", "strength": "{{ strength }}" }"#).unwrap();
+        assert_eq!(m.category, Some(Category::Shaders));
+        assert_eq!(Category::Shaders.label(), "Shaders");
+        let s = m.shader.as_ref().unwrap();
+        assert_eq!(s.lut, "looks/{{look}}.cube");
+        assert_eq!(s.strength, Some(Strength::Option("{{ strength }}".into())));
+        assert_eq!(placeholders(&s.lut), ["look"]);
+        let m = looks(r#"{ "lut": "looks/mono.CUBE", "strength": 40 }"#).unwrap();
+        assert_eq!(m.shader.unwrap().strength, Some(Strength::Percent(40.0)));
+        assert_eq!(
+            looks(r#"{ "lut": "mono.cube" }"#)
+                .unwrap()
+                .shader
+                .unwrap()
+                .strength,
+            None
+        );
+    }
+
+    #[test]
+    fn a_shader_pack_is_checked_before_it_installs() {
+        let err = |shader: &str| looks(shader).unwrap_err();
+        let at = |msg: &str| format!("invalid manifest: author.looks: shader: {msg}");
+        assert_eq!(
+            err(r#"{ "lut": "mono.png" }"#),
+            at("lut mono.png must be a .cube file")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "../mono.cube" }"#),
+            at("lut ../mono.cube must be a relative path inside the addon")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "{{look.cube" }"#),
+            at("lut {{look.cube has an unclosed {{")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "{{shade}}.cube" }"#),
+            at("{{shade}} names no option")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "{{live}}.cube" }"#),
+            at("option live must bind db")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "a.cube", "strength": 150 }"#),
+            at("strength 150 is not from 0 to 100")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "a.cube", "strength": "{{look}}" }"#),
+            at("option look must be a slider")
+        );
+        assert_eq!(
+            err(r#"{ "lut": "a.cube", "strength": "x{{strength}}" }"#),
+            at(r#"strength "x{{strength}}" must be a number or one {{option}}"#)
+        );
+        let no_feature = LOOKS
+            .replace(r#""experimental_features": ["shaders"],"#, "")
+            .replace("SHADER", r#"{ "lut": "a.cube" }"#);
+        assert_eq!(
+            AddonManifest::parse(&no_feature).unwrap_err().to_string(),
+            at(r#"list "shaders" in experimental_features to use it"#)
+        );
     }
 
     #[test]

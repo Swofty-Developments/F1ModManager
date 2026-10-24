@@ -52,6 +52,11 @@ enum Command {
     Build {
         #[arg(long, help = GAME_HELP)]
         game: Option<PathBuf>,
+        #[arg(
+            long,
+            help = "Also list every side-data finding of add-row copies: known lookups, matches to review, matches in other game areas and acknowledged ones"
+        )]
+        side_data: bool,
     },
     #[command(about = "Show which addons override which in the profile's last build")]
     Conflicts {
@@ -242,10 +247,6 @@ fn migrate(store: &Store) {
         Ok(notes) => notes.iter().for_each(|n| eprintln!("swofty: {n}")),
         Err(e) => eprintln!("swofty: data migration failed: {e}"),
     }
-    match store.seed_bundled() {
-        Ok(notes) => notes.iter().for_each(|n| eprintln!("swofty: {n}")),
-        Err(e) => eprintln!("swofty: could not install the bundled addons: {e}"),
-    }
 }
 
 fn data_dir_arg(args: &[OsString]) -> Option<PathBuf> {
@@ -427,7 +428,7 @@ fn dispatch(store: &Store, cli: Cli) -> Result<ExitCode> {
     let profile = cli.profile.unwrap_or_else(|| store.active_profile());
     match cli.command {
         Command::Run(args) => run::run(&store, &profile, args),
-        Command::Build { game } => build::build(&store, &profile, game),
+        Command::Build { game, side_data } => build::build(&store, &profile, game, side_data),
         Command::Conflicts { check, game } => build::conflicts(&store, &profile, check, game),
         Command::Apply { game } => build::apply(&store, &profile, game),
         Command::Verify { game } => build::verify(&store, game),
@@ -523,10 +524,10 @@ fn addons(store: &Store, profile: &str, cmd: AddonsCommand) -> Result<()> {
             }
         }
         AddonsCommand::Install { path } => {
-            let m = store
-                .install_addon(&path)
-                .with_context(|| format!("installing {}", path.display()))?;
-            println!("installed {} {}", m.id, m.version);
+            for result in store.install_addons(&path) {
+                let m = result.with_context(|| format!("installing {}", path.display()))?;
+                println!("installed {} {}", m.id, m.version);
+            }
         }
         AddonsCommand::Enable { id }
         | AddonsCommand::Disable { id, .. }
@@ -866,7 +867,7 @@ mod tests {
         std::fs::create_dir_all(&out).unwrap();
         let args = send_logs::SendArgs {
             name: None,
-            message: Some("  it froze  ".into()),
+            message: Some("  it froze on the grid  ".into()),
             dry_run: Some(Some(out.clone())),
         };
         assert_eq!(send_logs::send(&store, args).unwrap(), ExitCode::SUCCESS);
@@ -890,16 +891,29 @@ mod tests {
             dry_run: Some(None),
         };
         assert!(send_logs::send(&store, bad).is_err());
+        let unsaid = send_logs::SendArgs {
+            name: None,
+            message: None,
+            dry_run: Some(Some(out.join("unsaid.zip"))),
+        };
+        assert_eq!(send_logs::send(&store, unsaid).unwrap(), ExitCode::SUCCESS);
+        assert!(out.join("unsaid.zip").is_file());
+        let sending = |message: Option<&str>| send_logs::SendArgs {
+            name: None,
+            message: message.map(Into::into),
+            dry_run: None,
+        };
+        let err = send_logs::send_to(&store, sending(None), None).unwrap_err();
+        assert!(err.to_string().contains("pass --message"), "{err}");
+        let err = send_logs::send_to(&store, sending(Some("  it froze ")), None).unwrap_err();
+        assert!(err.to_string().contains("at least 10 characters"), "{err}");
         std::fs::remove_dir_all(&root).ok();
     }
 
-    fn stub_webhook(code: u16) -> (String, std::thread::JoinHandle<usize>) {
+    fn stub_log_server(code: u16) -> (String, std::thread::JoinHandle<usize>) {
         use std::io::Read;
         let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
-        let url = format!(
-            "http://{}/api/webhooks/123456789012/stubTOKENstub",
-            listener.local_addr().unwrap()
-        );
+        let url = format!("http://{}/v1/logs", listener.local_addr().unwrap());
         let handle = std::thread::spawn(move || {
             let (mut stream, _) = listener.accept().unwrap();
             stream
@@ -955,12 +969,12 @@ mod tests {
         };
         let args = |name: &str| send_logs::SendArgs {
             name: Some(name.into()),
-            message: Some("it froze".into()),
+            message: Some("it froze on the grid".into()),
             dry_run: None,
         };
 
-        let (url, server) = stub_webhook(200);
-        let hook = swofty_core::send_logs::Webhook::new(Some(&url));
+        let (url, server) = stub_log_server(200);
+        let hook = swofty_core::send_logs::LogServer::new(Some(&url));
         assert_eq!(
             send_logs::send_to(&store, args("sender"), hook).unwrap(),
             ExitCode::SUCCESS
@@ -977,8 +991,8 @@ mod tests {
         assert!(zip_names(&zips[0]).contains(&"state/launcher-run.log".to_owned()));
         assert_eq!(store.config().discord_username.as_deref(), Some("sender"));
 
-        let (url, server) = stub_webhook(400);
-        let hook = swofty_core::send_logs::Webhook::new(Some(&url));
+        let (url, server) = stub_log_server(400);
+        let hook = swofty_core::send_logs::LogServer::new(Some(&url));
         let err = send_logs::send_to(&store, args("refused"), hook).unwrap_err();
         assert!(err.to_string().contains("HTTP 400"), "{err}");
         server.join().unwrap();
